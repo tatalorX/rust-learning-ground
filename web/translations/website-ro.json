@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "language": "Română",
+    "code": "ro",
+    "flag": "🇷🇴",
+    "direction": "ltr"
+  },
+  "nav": {
+    "home": "Acasă",
+    "exercises": "Exerciții",
+    "book": "Cartea",
+    "progress": "Progres",
+    "settings": "Setări",
+    "login": "Autentificare",
+    "logout": "Deconectare",
+    "register": "Înregistrare",
+    "profile": "Profil",
+    "about": "Despre Rust",
+    "leaderboard": "Clasament",
+    "school": "🏫 Școală"
+  },
+  "hero": {
+    "title": "Stăpânește Programarea Rust",
+    "subtitle": "De la începător la inginer de sisteme prin 320 de exerciții practice",
+    "startJourney": "Începe Călătoria",
+    "readBook": "📖 Citește Cartea",
+    "stats": {
+      "exercises": "Exerciții",
+      "chapters": "Capitole",
+      "languages": "Limbi"
+    },
+    "badge": "170+ Exerciții Interactive",
+    "startLearning": "Începe Învățarea",
+    "createAccount": "Crează Cont"
+  },
+  "features": {
+    "title": "De ce să înveți cu noi?",
+    "handsOn": {
+      "title": "🎯 Învățare Practică",
+      "desc": "320 de exerciții progresive de la Hello World la construirea de baze de date, protocoale de rețea și runtime-uri async"
+    },
+    "archetypes": {
+      "title": "🎭 Bazat pe Arhetipuri",
+      "desc": "Învață prin arhetipurile jungiene: Umbra (unsafe), Anima (memorie), Eroul (concurență)"
+    },
+    "surgical": {
+      "title": "🔬 Precizie Chirurgicală",
+      "desc": "Studii tehnice profunde despre stack frames, alocarea heap și anatomia pointerilor"
+    },
+    "fearless": {
+      "title": "⚡ Concurență fără Frică",
+      "desc": "Stăpânește programarea paralelă și async cu garanțiile de siguranță la compilare ale Rust"
+    },
+    "fast": {
+      "title": "⚡ Viteză Uluitoare",
+      "desc": "Rust este conceput pentru performanță. Cu abstracțiuni fără cost și fără runtime sau garbage collector, alimentează servicii critice la companii precum Mozilla, Dropbox și Cloudflare."
+    },
+    "safety": {
+      "title": "🛡️ Siguranță a Memoriei",
+      "desc": "Sistemul de ownership al Rust garantează siguranța memoriei fără garbage collector. Spune adio dereferențierilor nule, pointerilor suspendați și condițiilor de cursă la compilare."
+    },
+    "concurrency": {
+      "title": "🧫 Concurență fără Frică",
+      "desc": "Scrie cod concurent fără teama condițiilor de cursă. Sistemul de tipuri al Rust asigură siguranța thread-urilor, făcând programarea paralelă accesibilă și de încredere."
+    },
+    "tooling": {
+      "title": "📦 Instrumente Excelente",
+      "desc": "Cargo, managerul de pachete și sistemul de build al Rust, face managementul dependențelor și construirea proiectelor o briză. Combinat cu rustfmt, clippy și rust-analyzer, ai o experiență de dezvoltare de clasă mondială."
+    },
+    "community": {
+      "title": "🎓 Iubit de Dezvoltatori",
+      "desc": "Rust a fost votat 'cel mai iubit limbaj de programare' în Stack Overflow Developer Survey timp de mai mulți ani. Alătură-te unei comunități pasionate și primitoare de Rustaceans!"
+    },
+    "production": {
+      "title": "🚀 Gata pentru Producție",
+      "desc": "De la servere web la sisteme de operare, motoare de jocuri la platforme blockchain, Rust este folosit în producție de sute de companii din întreaga lume. Abilitățile tale Rust sunt la mare căutare."
+    }
+  },
+  "sections": {
+    "basics": "Bază (001-100)",
+    "advanced": "Avansat (101-150)",
+    "projects": "Proiecte (151-170)",
+    "realWorld": "Inginerie Reală (171-320)",
+    "systems": "Programare de Sisteme",
+    "networking": "Rețelistică",
+    "dataProcessing": "Procesare Date",
+    "concurrency": "Concurență",
+    "production": "Sisteme de Producție"
+  },
+  "exercise": {
+    "difficulty": "Dificultate",
+    "time": "Timp Estimat",
+    "status": "Status",
+    "completed": "Completat",
+    "inProgress": "În Desfășurare",
+    "notStarted": "Neînceput",
+    "start": "Începe Exercițiul",
+    "continue": "Continuă",
+    "retry": "Reîncearcă",
+    "submit": "Trimite Soluția",
+    "hint": "Arată Indiciul",
+    "solution": "Vezi Soluția",
+    "tests": "Rulează Testele",
+    "compiling": "Se compilează...",
+    "success": "Succes! Toate testele au trecut",
+    "failure": "Testele au eșuat. Încearcă din nou!",
+    "topics": "Subiecte",
+    "prerequisites": "Cerințe Preliminare"
+  },
+  "editor": {
+    "title": "Editor de Cod",
+    "run": "▶ Rulează",
+    "test": "🧪 Testează",
+    "reset": "↺ Resetează",
+    "format": "✨ Formatează",
+    "hint": "💡 Indiciu",
+    "solution": "👁 Soluție",
+    "console": "Output Consolă",
+    "testResults": "Rezultate Teste",
+    "placeholder": "// Scrie codul Rust aici..."
+  },
+  "auth": {
+    "loginTitle": "Bine ai Revenit",
+    "registerTitle": "Creează Cont",
+    "email": "Email",
+    "password": "Parolă",
+    "confirmPassword": "Confirmă Parola",
+    "username": "Nume Utilizator",
+    "forgotPassword": "Ai uitat parola?",
+    "noAccount": "Nu ai cont?",
+    "haveAccount": "Ai deja cont?",
+    "loginButton": "Autentificare",
+    "registerButton": "Creează Cont",
+    "signin": "Autentificare",
+    "signup": "Înregistrare"
+  },
+  "progress": {
+    "title": "Progresul Tău",
+    "overall": "Progres General",
+    "completed": "completat",
+    "streak": "Serie Curentă",
+    "days": "zile"
+  },
+  "book": {
+    "readOnline": "Citește Online",
+    "download": "Descarcă PDF",
+    "chapters": "Capitole",
+    "interludes": "Interludii",
+    "appendices": "Appendice"
+  },
+  "school": {
+    "dashboard": "Panou de Control",
+    "overview": "Prezentare Generală",
+    "classrooms": "Săli de Clasă",
+    "progress": "Progres",
+    "gamification": "Gamificare",
+    "ranks": "Ranguri & XP",
+    "titles": "Titluri",
+    "leaderboard": "Clasament",
+    "teacher": "Profesor",
+    "myClassrooms": "Sălile Mele",
+    "availableClassrooms": "Săli Disponibile",
+    "createClassroom": "Crează Sală",
+    "joinClassroom": "Alătură-te Sălii",
+    "createClassroomTitle": "Crează Sală Nouă",
+    "classroomName": "Numele Sălii",
+    "description": "Descriere",
+    "gradeLevel": "Nivel de Clasă",
+    "maxStudents": "Maxim Elevi",
+    "create": "Crează",
+    "cancel": "Anulează",
+    "join": "Alătură-te",
+    "classroomCode": "Cod Sală",
+    "enterCode": "Introdu codul sălii",
+    "overviewTitle": "Prezentare Generală",
+    "currentRank": "Rang Curent",
+    "toNextRank": "până la următorul rang",
+    "problemsSolved": "Probleme Rezolvate",
+    "currentStreak": "Serie Curentă",
+    "longestStreak": "Cea Mai Lungă Serie",
+    "treats": "Recompense",
+    "ranksTitle": "Ranguri & Progres",
+    "leaderboardTitle": "Clasament Global",
+    "current": "✓ Curent",
+    "problems": "probleme",
+    "classroomsITeach": "Săli Predate",
+    "joinedClassrooms": "Săli Alăturate",
+    "noClassrooms": "Nu te-ai alăturat nicio săli încă.",
+    "createFirst": "Crează Prima Ta Sală",
+    "joinFirst": "Alătură-te unei Săli",
+    "members": "membri",
+    "assignments": "Teme",
+    "dueDate": "Termen Limită",
+    "completed": "Finalizat",
+    "pending": "În Așteptare"
+  },
+  "footer": {
+    "copyright": "© 2024 Terenul de Învățare Rust",
+    "license": "Licențiat sub MIT",
+    "madeWith": "Făcut cu 🦀 și ❤️",
+    "title": "🦀 Rust Learning Ground",
+    "links": "Link-uri Rapide",
+    "resources": "Resurse",
+    "community": "Comunitate"
+  },
+  "language": {
+    "select": "Selectează Limba",
+    "primary": "Limbi Principale",
+    "secondary": "Traducere Automată"
+  },
+  "errors": {
+    "generic": "Ceva nu a mers bine",
+    "network": "Eroare de rețea. Verifică conexiunea.",
+    "server": "Eroare server. Încearcă mai târziu."
+  },
+  "stats": {
+    "xp": "XP Total",
+    "completed": "completat",
+    "streak": "Serie"
+  },
+  "joke": {
+    "title": "Gluma Zilei",
+    "loading": "Se încarcă gluma...",
+    "reveal": "Click pentru dezvăluire"
+  },
+  "why": {
+    "tag": "De Ce Rust?",
+    "title": "Limbajul Viitorului",
+    "subtitle": "Rust este un limbaj de programare sistem care rulează extrem de rapid, previne segfaults și garantează siguranța thread-urilor."
+  },
+  "example": {
+    "tag": "Exemplu",
+    "title": "Elegant și Expresiv",
+    "subtitle": "Rust combină controlul de nivel scăzut cu ergonomia de nivel înalt."
+  },
+  "filter": {
+    "all": "🎯 Toate",
+    "todo": "📝 De Făcut",
+    "solved": "✅ Rezolvate",
+    "projects": "📦 Proiecte"
+  },
+  "view": {
+    "normal": "Normal",
+    "compact": "Compact"
+  },
+  "section": {
+    "beginner": "Începător (001-050)",
+    "intermediate": "Intermediar (051-100)",
+    "advanced": "Algoritmi Avansați (101-150)",
+    "projects": "Proiecte Reale (151-170)",
+    "realworld": "Producție și Real (171-320)"
+  },
+  "legend": {
+    "exercise": "Exercițiu (1-150)",
+    "project": "Proiect (151-170)",
+    "solved": "Rezolvat"
+  },
+  "leaderboard": {
+    "tag": "Competiție",
+    "title": "Clasamente",
+    "subtitle": "Vezi cine stăpânește Rust cel mai rapid. Concurează pentru cele mai eficiente soluții!",
+    "top": "Top Învățăcei",
+    "efficient": "Cei mai Eficienți Algoritmi"
+  },
+  "modal": {
+    "category": "Categorie",
+    "difficulty": "Dificultate",
+    "time": "Timp Estimat",
+    "skills": "Abilități de Învățat",
+    "objective": "💡 Obiectiv de Învățare",
+    "fileLocation": "Locație Fișier:",
+    "cli": "Comandă CLI:",
+    "webEditor": "Deschide în Editor Web",
+    "vscode": "Deschide în VS Code",
+    "close": "Închide",
+    "prereqs": "💪 Bazat pe:",
+    "none": "Niciunul",
+    "esc": "Apasă ESC pentru închidere"
+  }
+}

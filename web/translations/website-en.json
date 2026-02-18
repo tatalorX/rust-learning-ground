@@ -1,0 +1,281 @@
+{
+  "meta": {
+    "language": "English",
+    "code": "en",
+    "flag": "🇬🇧",
+    "direction": "ltr"
+  },
+  "nav": {
+    "home": "Home",
+    "exercises": "Exercises",
+    "book": "The Book",
+    "progress": "Progress",
+    "settings": "Settings",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "profile": "Profile",
+    "about": "About Rust",
+    "leaderboard": "Leaderboard",
+    "school": "🏫 School"
+  },
+  "hero": {
+    "title": "Master Rust Programming",
+    "subtitle": "Learn Rust through hands-on practice. From basic syntax to advanced algorithms, build real skills with our progressive learning path.",
+    "badge": "170+ Interactive Exercises",
+    "startJourney": "Start Your Journey",
+    "readBook": "📖 Read The Book",
+    "startLearning": "Start Learning",
+    "createAccount": "Create Account",
+    "stats": {
+      "exercises": "Exercises",
+      "chapters": "Chapters",
+      "languages": "Languages"
+    }
+  },
+  "stats": {
+    "xp": "Total XP",
+    "completed": "Completed",
+    "streak": "Streak"
+  },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "registerTitle": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "username": "Username",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "loginButton": "Login",
+    "registerButton": "Create Account",
+    "signin": "Sign In",
+    "signup": "Sign Up"
+  },
+  "joke": {
+    "title": "Joke of the Day",
+    "loading": "Loading today's programming joke...",
+    "reveal": "Click to reveal punchline"
+  },
+  "why": {
+    "tag": "Why Rust?",
+    "title": "The Language of the Future",
+    "subtitle": "Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety."
+  },
+  "features": {
+    "title": "Why Learn With Us?",
+    "handsOn": {
+      "title": "🎯 Hands-On Learning",
+      "desc": "320 progressive exercises from Hello World to building databases, network protocols, and async runtimes"
+    },
+    "archetypes": {
+      "title": "🎭 Archetype-Based",
+      "desc": "Learn through Jungian archetypes: The Shadow (unsafe), The Anima (memory), The Hero (concurrency)"
+    },
+    "surgical": {
+      "title": "🔬 Surgical Precision",
+      "desc": "Deep technical interludes on stack frames, heap allocation, and pointer anatomy"
+    },
+    "fearless": {
+      "title": "⚡ Fearless Concurrency",
+      "desc": "Master parallel and async programming with Rust's compile-time safety guarantees"
+    },
+    "fast": {
+      "title": "🚀 Blazingly Fast",
+      "desc": "Rust is designed for performance. With zero-cost abstractions and no runtime or garbage collector, it powers critical services at companies like Mozilla, Dropbox, and Cloudflare."
+    },
+    "safety": {
+      "title": "🛡️ Memory Safety",
+      "desc": "Rust's ownership system guarantees memory safety without a garbage collector. Say goodbye to null pointer dereferences, dangling pointers, and data races at compile time."
+    },
+    "concurrency": {
+      "title": "⚡ Fearless Concurrency",
+      "desc": "Write concurrent code without the fear of data races. Rust's type system ensures thread safety, making parallel programming accessible and reliable."
+    },
+    "tooling": {
+      "title": "🛠️ Great Tooling",
+      "desc": "Cargo, Rust's package manager and build system, makes dependency management and building projects a breeze. Combined with rustfmt, clippy, and rust-analyzer, you have a world-class development experience."
+    },
+    "community": {
+      "title": "❤️ Loved by Developers",
+      "desc": "Rust has been voted the 'most loved programming language' in the Stack Overflow Developer Survey for multiple years. Join a passionate and welcoming community of Rustaceans!"
+    },
+    "production": {
+      "title": "✅ Production Ready",
+      "desc": "From web servers to operating systems, game engines to blockchain platforms, Rust is used in production by hundreds of companies worldwide. Your Rust skills are in high demand."
+    }
+  },
+  "example": {
+    "tag": "Example",
+    "title": "Elegant & Expressive",
+    "subtitle": "Rust combines low-level control with high-level ergonomics."
+  },
+  "progress": {
+    "title": "📊 Your Learning Progress",
+    "overall": "Overall Progress",
+    "completed": "completed",
+    "streak": "Current Streak",
+    "days": "days"
+  },
+  "filter": {
+    "all": "🎯 All",
+    "todo": "📝 To Do",
+    "solved": "✅ Solved",
+    "projects": "📦 Projects"
+  },
+  "view": {
+    "normal": "Normal",
+    "compact": "Compact"
+  },
+  "section": {
+    "beginner": "Beginner (001-050)",
+    "intermediate": "Intermediate (051-100)",
+    "advanced": "Advanced Algorithms (101-150)",
+    "projects": "Real-World Projects (151-170)",
+    "realworld": "Production & Real-World (171-320)"
+  },
+  "legend": {
+    "exercise": "Exercise (1-150)",
+    "project": "Project (151-170)",
+    "solved": "Solved"
+  },
+  "leaderboard": {
+    "tag": "Competition",
+    "title": "Leaderboards",
+    "subtitle": "See who's mastering Rust the fastest. Compete for the most efficient solutions!",
+    "top": "Top Learners",
+    "efficient": "Most Efficient Algorithms"
+  },
+  "modal": {
+    "category": "Category",
+    "difficulty": "Difficulty",
+    "time": "Est. Time",
+    "skills": "Skills You'll Learn",
+    "objective": "💡 Learning Objective",
+    "fileLocation": "File Location:",
+    "cli": "CLI Command:",
+    "webEditor": "Open in Web Editor",
+    "vscode": "Open in VS Code",
+    "close": "Close",
+    "prereqs": "💪 Build upon:",
+    "none": "None",
+    "esc": "Press ESC to close"
+  },
+  "sections": {
+    "basics": "Basics (001-100)",
+    "advanced": "Advanced (101-150)",
+    "projects": "Projects (151-170)",
+    "realWorld": "Real-World Engineering (171-320)",
+    "systems": "Systems Programming",
+    "networking": "Networking",
+    "dataProcessing": "Data Processing",
+    "concurrency": "Concurrency",
+    "production": "Production Systems"
+  },
+  "exercise": {
+    "difficulty": "Difficulty",
+    "time": "Estimated Time",
+    "status": "Status",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "notStarted": "Not Started",
+    "start": "Start Exercise",
+    "continue": "Continue",
+    "retry": "Retry",
+    "submit": "Submit Solution",
+    "hint": "Get Hint",
+    "solution": "View Solution",
+    "tests": "Run Tests",
+    "compiling": "Compiling...",
+    "success": "Success! All tests passed",
+    "failure": "Tests failed. Try again!",
+    "topics": "Topics",
+    "prerequisites": "Prerequisites"
+  },
+  "editor": {
+    "title": "Code Editor",
+    "run": "▶ Run",
+    "test": "🧪 Test",
+    "reset": "↺ Reset",
+    "format": "✨ Format",
+    "hint": "💡 Hint",
+    "solution": "👁 Solution",
+    "console": "Console Output",
+    "testResults": "Test Results",
+    "placeholder": "// Write your Rust code here..."
+  },
+  "book": {
+    "readOnline": "Read Online",
+    "download": "Download PDF",
+    "chapters": "Chapters",
+    "interludes": "Interludes",
+    "appendices": "Appendices"
+  },
+  "school": {
+    "dashboard": "Dashboard",
+    "overview": "Overview",
+    "classrooms": "Classrooms",
+    "progress": "Progress",
+    "gamification": "Gamification",
+    "ranks": "Ranks & XP",
+    "titles": "Titles",
+    "leaderboard": "Leaderboard",
+    "teacher": "Teacher",
+    "myClassrooms": "My Classrooms",
+    "availableClassrooms": "Available Classrooms",
+    "createClassroom": "Create Classroom",
+    "joinClassroom": "Join Classroom",
+    "createClassroomTitle": "Create New Classroom",
+    "classroomName": "Classroom Name",
+    "description": "Description",
+    "gradeLevel": "Grade Level",
+    "maxStudents": "Max Students",
+    "create": "Create",
+    "cancel": "Cancel",
+    "join": "Join",
+    "classroomCode": "Classroom Code",
+    "enterCode": "Enter classroom code",
+    "overviewTitle": "Dashboard Overview",
+    "currentRank": "Current Rank",
+    "toNextRank": "to next rank",
+    "problemsSolved": "Problems Solved",
+    "currentStreak": "Current Streak",
+    "longestStreak": "Longest Streak",
+    "treats": "Treats",
+    "ranksTitle": "Ranks & Progress",
+    "leaderboardTitle": "Global Leaderboard",
+    "current": "✓ Current",
+    "problems": "problems",
+    "classroomsITeach": "Classrooms I Teach",
+    "joinedClassrooms": "Joined Classrooms",
+    "noClassrooms": "You haven't joined any classrooms yet.",
+    "createFirst": "Create Your First Classroom",
+    "joinFirst": "Join a Classroom",
+    "members": "members",
+    "teacher": "Teacher",
+    "assignments": "Assignments",
+    "dueDate": "Due Date",
+    "completed": "Completed",
+    "pending": "Pending"
+  },
+  "footer": {
+    "copyright": "© 2024 Rust Learning Ground",
+    "license": "Licensed under MIT",
+    "madeWith": "Made with 🦀 and ❤️",
+    "title": "🦀 Rust Learning Ground",
+    "links": "Quick Links",
+    "resources": "Resources",
+    "community": "Community"
+  },
+  "language": {
+    "select": "Select Language",
+    "primary": "Primary Languages",
+    "secondary": "Auto-Translate"
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "network": "Network error. Please check your connection.",
+    "server": "Server error. Please try again later."
+  }
+}

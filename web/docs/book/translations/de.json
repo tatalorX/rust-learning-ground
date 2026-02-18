@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "language": "Deutsch",
+    "code": "de",
+    "flag": "🇩🇪",
+    "direction": "ltr"
+  },
+  "nav": {
+    "home": "Startseite",
+    "exercises": "Übungen",
+    "book": "Das Buch",
+    "toc": "Inhaltsverzeichnis",
+    "prev": "← Zurück",
+    "next": "Weiter →",
+    "backToContents": "← Zum Inhaltsverzeichnis"
+  },
+  "book": {
+    "title": "Das Buch von Rust",
+    "subtitle": "Eine Philosophische und Technische Reise durch die Systemprogrammierung",
+    "epigraph": "\"Wer nach außen schaut, träumt; wer nach innen schaut, erwacht.\" — C.G. Jung",
+    "progress": "Buchfortschritt",
+    "complete": "Vollständig",
+    "pages": "Seiten"
+  },
+  "parts": {
+    "partI": "Teil I: Die Archetypen",
+    "partITheme": "Jungsche Psychologie trifft Rust",
+    "partII": "Teil II: Chirurgische Präzision",
+    "partIITheme": "Die Anatomie der Berechnung",
+    "partIII": "Teil III: Kernel-Philosophie",
+    "partIIITheme": "Pragmatisches Systemdenken",
+    "partIV": "Teil IV: Kollektive Systeme",
+    "partIVTheme": "Asynchrone, Netzwerk- und verteilte Programmierung",
+    "partV": "Teil V: Meisterschaft",
+    "partVTheme": "Der Weg des Handwerkers"
+  },
+  "legend": {
+    "title": "Legende",
+    "archetype": "Archetyp-Box: Jungsche psychologische Einsicht",
+    "kernel": "Kernel-Weisheit: Pragmatische Systemeinsicht",
+    "surgical": "Chirurgische Notiz: Tiefe technische/anatomische Details"
+  },
+  "exercise": {
+    "exercises": "Übungen",
+    "projects": "Projekte",
+    "difficulty": "Schwierigkeit",
+    "time": "Zeit",
+    "minutes": "Minuten",
+    "start": "Übung Starten",
+    "submit": "Lösung Einreichen",
+    "hint": "Hinweis Anzeigen",
+    "solution": "Lösung Anzeigen"
+  },
+  "language": {
+    "select": "Sprache Auswählen",
+    "primary": "Hauptsprachen",
+    "secondary": "Automatische Übersetzung",
+    "autoTranslate": "Automatisch übersetzen in..."
+  },
+  "archetypes": {
+    "self": "Das Selbst",
+    "shadow": "Der Schatten",
+    "anima": "Die Anima",
+    "persona": "Die Persona",
+    "wiseOldMan": "Der Weise Alte Mann",
+    "greatMother": "Die Große Mutter",
+    "puerAeternus": "Puer Aeternus",
+    "trickster": "Der Trickster",
+    "divineChild": "Das Göttliche Kind",
+    "ruler": "Der Herrscher",
+    "explorer": "Der Forscher",
+    "detective": "Der Detektiv",
+    "sage": "Der Weise",
+    "artist": "Der Künstler",
+    "hero": "Der Held",
+    "integratedSelf": "Das Integrierte Selbst"
+  },
+  "footer": {
+    "copyright": "© 2024 Das Buch von Rust",
+    "license": "Lizenziert unter MIT",
+    "source": "Quellcode"
+  }
+}

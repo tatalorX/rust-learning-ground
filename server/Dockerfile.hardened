@@ -1,0 +1,70 @@
+# Dockerfile.hardened -- Multi-stage, minimal attack surface
+# Sovereign deployment: no unnecessary packages, non-root, read-only filesystem
+#
+# Build: podman build -f Dockerfile.hardened -t rust-learner:latest .
+# Run:   See compose.prod.yml
+
+# -- Stage 1: Build deps -------------------------------------------------------
+FROM python:3.12-slim AS builder
+
+WORKDIR /build
+COPY requirements.txt .
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+# -- Stage 2: Rust toolchain for sandboxed execution ----------------------------
+FROM rust:1.75-slim AS rust-toolchain
+
+# Pre-compile a dummy project to warm the cache
+RUN cargo new --bin warmup && cd warmup && cargo build --release
+
+# -- Stage 3: Final runtime -- smallest possible image -------------------------
+FROM debian:bookworm-slim AS runtime
+
+# Install only absolute minimums
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libssl3 ca-certificates python3 python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy Python runtime from builder
+COPY --from=builder /install /usr/local
+
+# Copy Rust toolchain (read-only bind mount in production, copy for portability)
+COPY --from=rust-toolchain /usr/local/cargo /opt/cargo
+COPY --from=rust-toolchain /usr/local/rustup /opt/rustup
+ENV CARGO_HOME=/opt/cargo RUSTUP_HOME=/opt/rustup PATH="/opt/cargo/bin:$PATH"
+
+# Create non-root user
+RUN groupadd -r rustlearner && useradd -r -g rustlearner -s /sbin/nologin rustlearner
+
+WORKDIR /app
+COPY --chown=rustlearner:rustlearner app/ ./app/
+COPY --chown=rustlearner:rustlearner run.py .
+COPY --chown=rustlearner:rustlearner requirements.txt .
+
+# Remove everything that shouldn't be in a production image
+RUN find /app -name "*.py[co]" -delete \
+    && find /app -name "__pycache__" -type d -exec rm -rf {} + \
+    && find /app -name "test_*.py" -delete \
+    && find /app -name "*.md" -delete
+
+# Create data directory
+RUN mkdir -p /app/data && chown -R rustlearner:rustlearner /app/data
+
+USER rustlearner
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
+    CMD python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v4/health')"
+
+# Security labels
+LABEL maintainer="Rust Learning Ground"
+LABEL security.scan="sovereign-hardened"
+LABEL version="4.0.0"
+LABEL org.opencontainers.image.title="Rust Learning Ground"
+LABEL org.opencontainers.image.description="Sovereign deployment - hardened container"
+
+CMD ["python3", "-m", "uvicorn", "app.main:app", \
+     "--host", "0.0.0.0", "--port", "8000", \
+     "--workers", "4", \
+     "--no-access-log"]

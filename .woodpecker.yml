@@ -1,0 +1,44 @@
+# .woodpecker.yml -- CI pipeline
+# Self-hosted CI/CD: Woodpecker + Gitea
+# Zero GitHub. Zero cloud. Your code, your pipeline.
+
+pipeline:
+  # -- Security: check for leaked secrets ------------------------------------
+  secret-scan:
+    image: docker.io/trufflesecurity/trufflehog:latest
+    commands:
+      - trufflehog filesystem . --fail
+
+  # -- Dependency audit ------------------------------------------------------
+  audit:
+    image: python:3.12-slim
+    commands:
+      - pip install pip-audit
+      - pip-audit -r server/requirements.txt
+
+  # -- Tests -----------------------------------------------------------------
+  test:
+    image: python:3.12-slim
+    commands:
+      - cd server
+      - pip install -r requirements.txt
+      - pytest tests/ -v --tb=short
+
+  # -- Build image (only on main branch) -------------------------------------
+  build:
+    image: docker.io/podman/stable
+    when:
+      branch: main
+    commands:
+      - podman build -f server/Dockerfile.hardened -t gitea.yourdomain.com/james/rust-learner:${CI_COMMIT_SHA}
+      - podman push gitea.yourdomain.com/james/rust-learner:${CI_COMMIT_SHA}
+
+  # -- Deploy ----------------------------------------------------------------
+  deploy:
+    image: docker.io/alpine/ssh
+    when:
+      branch: main
+    secrets: [deploy_ssh_key]
+    commands:
+      - echo "$DEPLOY_SSH_KEY" > /tmp/key && chmod 600 /tmp/key
+      - ssh -i /tmp/key deploy@yourvps.com "cd /opt/rust-learner && git pull && podman-compose -f compose.prod.yml up -d --build"

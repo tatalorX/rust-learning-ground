@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "language": "Italiano",
+    "code": "it",
+    "flag": "🇮🇹",
+    "direction": "ltr"
+  },
+  "nav": {
+    "home": "Home",
+    "exercises": "Esercizi",
+    "book": "Il Libro",
+    "toc": "Indice",
+    "prev": "← Precedente",
+    "next": "Successivo →",
+    "backToContents": "← Torna all'Indice"
+  },
+  "book": {
+    "title": "Il Libro di Rust",
+    "subtitle": "Un Viaggio Filosofico e Tecnico nella Programmazione di Sistemi",
+    "epigraph": "\"Chi guarda fuori, sogna; chi guarda dentro, si sveglia.\" — C.G. Jung",
+    "progress": "Progresso Libro",
+    "complete": "Completato",
+    "pages": "pagine"
+  },
+  "parts": {
+    "partI": "Parte I: Gli Archetipi",
+    "partITheme": "La Psicologia Junghiana incontra Rust",
+    "partII": "Parte II: Precisione Chirurgica",
+    "partIITheme": "L'anatomia della computazione",
+    "partIII": "Parte III: Filosofia del Kernel",
+    "partIIITheme": "Pensiero sistemico pragmatico",
+    "partIV": "Parte IV: Sistemi Collettivi",
+    "partIVTheme": "Programmazione asincrona, di rete e distribuita",
+    "partV": "Parte V: Maestria",
+    "partVTheme": "Il percorso dell'artigiano"
+  },
+  "legend": {
+    "title": "Legenda",
+    "archetype": "Box Archetipo: Introspezione psicologica Jungiana",
+    "kernel": "Saggezza Kernel: Introspezione pragmatica sui sistemi",
+    "surgical": "Nota Chirurgica: Dettaglio tecnico/anatomico approfondito"
+  },
+  "exercise": {
+    "exercises": "Esercizi",
+    "projects": "Progetti",
+    "difficulty": "Difficoltà",
+    "time": "Tempo",
+    "minutes": "minuti",
+    "start": "Inizia Esercizio",
+    "submit": "Invia Soluzione",
+    "hint": "Mostra Suggerimento",
+    "solution": "Vedi Soluzione"
+  },
+  "language": {
+    "select": "Seleziona Lingua",
+    "primary": "Lingue Principali",
+    "secondary": "Traduzione Automatica",
+    "autoTranslate": "Traduci automaticamente in..."
+  },
+  "archetypes": {
+    "self": "Il Sé",
+    "shadow": "L'Ombra",
+    "anima": "L'Anima",
+    "persona": "La Persona",
+    "wiseOldMan": "Savio",
+    "greatMother": "Grande Madre",
+    "puerAeternus": "Puer Aeternus",
+    "trickster": "Il Truffatore",
+    "divineChild": "Bambino Divino",
+    "ruler": "Il Governante",
+    "explorer": "L'Esploratore",
+    "detective": "Il Detective",
+    "sage": "Il Saggio",
+    "artist": "L'Artista",
+    "hero": "L'Eroe",
+    "integratedSelf": "Il Sé Integrato"
+  },
+  "footer": {
+    "copyright": "© 2024 Il Libro di Rust",
+    "license": "Licenza MIT",
+    "source": "Codice Sorgente"
+  }
+}

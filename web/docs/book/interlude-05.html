@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interlude V: Optimization - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #641e16 0%, #c0392b 100%);
+            color: white;
+            padding: 80px 40px 60px;
+        }
+        
+        .interlude-label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-title {
+            font-size: 2.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-blood);
+            background: linear-gradient(135deg, #fdedec 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #641e16;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-blood);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-blood);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        .surgical-note {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .surgical-note-title {
+            color: var(--accent-blood);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-blood);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="chapter-13.html">← Chapter 13</a>
+            <a href="chapter-14.html">Chapter 14 →</a>
+        </div>
+        <div class="interlude-label">Interlude V</div>
+        <h1 class="chapter-title">Optimization</h1>
+        <p class="chapter-subtitle">When to optimize, how to measure, and the tools of the performance engineer</p>
+    </header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"Premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%. A good programmer will not be lulled into complacency by such reasoning."</p>
+            <p class="epigraph-author">— Donald Knuth</p>
+        </div>
+        
+        <p class="drop-cap">The surgeon does not cut without diagnosis. The performance engineer does not optimize without measurement. This interlude provides the diagnostic tools—the stethoscope and scalpel of performance work.</p>
+        
+        <h2>The Measurement Tools</h2>
+        
+        <h3>Criterion.rs — Statistical Benchmarking</h3>
+        
+        <pre><code>use criterion::{black_box, criterion_group, criterion_main, Criterion};
+
+fn fibonacci(n: u64) -> u64 {
+    match n {
+        0 => 1,
+        1 => 1,
+        n => fibonacci(n - 1) + fibonacci(n - 2),
+    }
+}
+
+fn criterion_benchmark(c: &amp;mut Criterion) {
+    c.bench_function("fib 20", |b| {
+        b.iter(|| fibonacci(black_box(20)))
+    });
+}
+
+criterion_group!(benches, criterion_benchmark);
+criterion_main!(benches);</code></pre>
+        
+        <h3>perf — Linux Profiling</h3>
+        
+        <pre><code># Compile with debug symbols and frame pointers
+$ RUSTFLAGS="-C force-frame-pointers=yes" cargo build --release
+
+# Record performance data
+$ perf record --call-graph=dwarf ./target/release/myapp
+
+# Generate flamegraph
+$ perf script | inferno-collapse-perf | inferno-flamegraph > flame.svg</code></pre>
+        
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: Reading Flamegraphs</div>
+            <p>A flamegraph shows where your program spends time. The x-axis is not time—it is population. The wider a function, the more time it consumes. The y-axis is stack depth. Look for plateaus—these are functions consuming significant time. Look for spikes—these are deep call chains that may indicate inefficiency.</p>
+        </div>
+        
+        <h2>Optimization Techniques</h2>
+        
+        <h3>1. Avoid Allocations</h3>
+        <pre><code>// Slow: allocates a Vec
+let sum: i32 = (0..1000).collect::&lt;Vec&lt;_&gt;&gt;().iter().sum();
+
+// Fast: no allocation
+let sum: i32 = (0..1000).sum();</code></pre>
+        
+        <h3>2. Use Release Mode</h3>
+        <pre><code># Debug mode: fast compile, slow runtime
+$ cargo run
+
+# Release mode: slow compile, fast runtime
+$ cargo run --release</code></pre>
+        
+        <h3>3. Profile-Guided Optimization (PGO)</h3>
+        <pre><code># Build with instrumentation
+$ RUSTFLAGS="-C profile-generate=/tmp/pgo" cargo build --release
+
+# Run representative workload
+$ ./target/release/myapp
+
+# Build optimized binary
+$ RUSTFLAGS="-C profile-use=/tmp/pgo" cargo build --release</code></pre>
+        
+        <p>Go to Exercises 300-320 for performance optimization challenges.</p>
+        
+        <footer class="chapter-footer">
+            <a href="chapter-13.html" class="nav-button">← Chapter 13</a>
+            <span style="color: var(--text-muted);">Interlude V of V</span>
+            <a href="chapter-14.html" class="nav-button">Chapter 14 →</a>
+        </footer>
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+</body>
+</html>

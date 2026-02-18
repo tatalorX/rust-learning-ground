@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "exercises": "Exercices",
+    "rustBook": "Livre Rust",
+    "events": "Événements",
+    "leaderboard": "Classement",
+    "achievements": "Réalisations",
+    "documentation": "Documentation",
+    "settings": "Paramètres",
+    "profile": "Profil"
+  },
+  "home": {
+    "hero": {
+      "badge": "Maîtrisez Rust avec la pratique",
+      "title": "Apprenez",
+      "titleHighlight": "Programmation Rust",
+      "subtitle": "La Bonne Façon",
+      "description": "Exercices interactifs, retour instantané et une expérience d'apprentissage ludique conçue pour les développeurs modernes. Commencez votre voyage avec Rust aujourd'hui.",
+      "startLearning": "Commencer à Apprendre",
+      "createAccount": "Créer un Compte"
+    },
+    "features": {
+      "exercises": {
+        "title": "300+ Exercices",
+        "description": "Des bases aux motifs avancés"
+      },
+      "feedback": {
+        "title": "Retour Instantané",
+        "description": "Exécutez et testez votre code instantanément"
+      },
+      "streak": {
+        "title": "Système de Série",
+        "description": "Construisez la constance avec des objectifs quotidiens"
+      },
+      "achievements": {
+        "title": "Réalisations",
+        "description": "Débloquez des badges en progressant"
+      }
+    },
+    "editor": {
+      "title": "Éditeur de Code Interactif",
+      "description": "Écrivez du code Rust directement dans votre navigateur avec notre éditeur Monaco. Compilation instantanée, messages d'erreur clairs et exécution fluide.",
+      "features": [
+        "Coloration syntaxique pour Rust",
+        "Auto-complétion et suggestions",
+        "Détection d'erreurs en temps réel",
+        "Exécution de code en un clic"
+      ],
+      "tryExercise": "Essayer l'Exercice 1"
+    },
+    "whyRust": {
+      "title": "Pourquoi Apprendre Rust ?",
+      "description": "Rust est le langage de programmation le plus apprécié, combinant les performances de C++ avec la sécurité mémoire et l'expérience moderne de développeur.",
+      "features": [
+        {
+          "title": "Sécurité Mémoire",
+          "description": "Pas de segfaults, garanti par le compilateur"
+        },
+        {
+          "title": "Haute Performance",
+          "description": "Comparable à C et C++"
+        },
+        {
+          "title": "Outils Modernes",
+          "description": "Cargo, crates.io et plus"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Prêt à Commencer Votre Voyage ?",
+      "description": "Rejoignez des milliers de développeurs apprenant Rust de la bonne façon.",
+      "button": "Commencer à Apprendre Gratuitement"
+    }
+  },
+  "exercises": {
+    "title": "Exercices",
+    "subtitle": "exercices disponibles",
+    "completed": "complété",
+    "difficulty": {
+      "beginner": "Débutant",
+      "easy": "Facile",
+      "medium": "Moyen",
+      "hard": "Difficile",
+      "expert": "Expert"
+    },
+    "status": {
+      "completed": "Terminé",
+      "inProgress": "En Cours",
+      "notStarted": "Non Commencé"
+    },
+    "filters": {
+      "search": "Rechercher des exercices...",
+      "difficulty": "Difficulté",
+      "category": "Catégorie",
+      "all": "Tous"
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "retry": "Réessayer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "submit": "Soumettre",
+    "run": "Exécuter",
+    "reset": "Réinitialiser",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "continue": "Continuer",
+    "back": "Retour",
+    "close": "Fermer",
+    "open": "Ouvrir",
+    "success": "Succès",
+    "warning": "Avertissement",
+    "info": "Information"
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Déconnexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "username": "Nom d'utilisateur",
+    "forgotPassword": "Mot de passe oublié ?",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "hasAccount": "Vous avez déjà un compte ?"
+  },
+  "gamification": {
+    "xp": "PX",
+    "level": "Niveau",
+    "streak": "Série",
+    "streakDays": "jours de série",
+    "focusSessions": "Sessions de Concentration"
+  }
+}

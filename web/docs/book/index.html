@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="The Book of Rust - Complete programming guide">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>The Book of Rust - Table of Contents</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --bg-card: #ffffff;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --text-light: #95a5a6;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-rust: #a0522d;
+            --accent-blue: #3498db;
+            --border: #d5d8dc;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.8;
+            font-size: 18px;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .book-header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #16213e 100%);
+            color: white;
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .book-title {
+            font-size: clamp(2em, 5vw, 3.5em);
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        .book-subtitle {
+            font-size: clamp(1.1em, 2.5vw, 1.4em);
+            opacity: 0.8;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .book-meta {
+            font-size: 0.95em;
+            opacity: 0.6;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-link:hover { opacity: 1; }
+        
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-dark);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: var(--shadow);
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+        
+        .sidebar-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .toc-list {
+            list-style: none;
+        }
+        
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        
+        .toc-list a {
+            color: var(--text-ink);
+            text-decoration: none;
+            display: block;
+            padding: 10px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.95em;
+        }
+        
+        .toc-list a:hover {
+            background: #f0f0f0;
+            color: var(--accent-blood);
+        }
+        
+        .toc-list .chapter-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            color: var(--accent-gold);
+            margin-right: 8px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .intro-text {
+            font-size: 1.15em;
+            line-height: 1.9;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+        }
+        
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 40px 0 20px;
+            color: var(--bg-dark);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        
+        /* Chapter Grid */
+        .chapter-grid {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .chapter-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 24px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .chapter-card:hover {
+            background: white;
+            box-shadow: var(--shadow-hover);
+            border-color: var(--border);
+            transform: translateY(-2px);
+        }
+        
+        .chapter-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blood), var(--accent-rust));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 1.1em;
+            flex-shrink: 0;
+        }
+        
+        .chapter-info h3 {
+            font-size: 1.25em;
+            margin-bottom: 6px;
+            color: var(--bg-dark);
+        }
+        
+        .chapter-info p {
+            font-size: 0.95em;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        
+        .chapter-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8em;
+            color: var(--text-light);
+        }
+        
+        .chapter-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        /* Appendices */
+        .appendix-list {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .appendix-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+        
+        .appendix-card:hover {
+            background: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .appendix-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-blue);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        /* Footer */
+        .book-footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            font-size: 0.9em;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px 15px;
+            }
+            
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -300px;
+                width: 280px;
+                height: 100vh;
+                z-index: 999;
+                border-radius: 0;
+                overflow-y: auto;
+                transition: left 0.3s ease;
+            }
+            
+            .sidebar.open {
+                left: 0;
+            }
+            
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 998;
+            }
+            
+            .overlay.open {
+                display: block;
+            }
+            
+            .main-content {
+                padding: 24px;
+            }
+            
+            .chapter-card {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .chapter-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9em;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .book-header {
+                padding: 50px 15px 30px;
+            }
+            
+            .book-title {
+                font-size: 1.8em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .chapter-card {
+                padding: 16px;
+            }
+            
+            .chapter-info h3 {
+                font-size: 1.1em;
+            }
+            
+            .chapter-meta {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+    <div class="overlay" onclick="toggleMenu()"></div>
+    
+    <header class="book-header">
+        <a href="/" class="back-link">← Back to Learning Ground</a>
+        <h1 class="book-title">📚 The Book of Rust</h1>
+        <p class="book-subtitle">A Journey Through Systems Programming</p>
+        <p class="book-meta">Complete Edition with 18 Chapters, 5 Interludes & 4 Appendices</p>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-title">Table of Contents</div>
+            <nav>
+                <ul class="toc-list">
+                    <li><a href="chapter-01.html"><span class="chapter-num">I</span>The Call to Individuation</a></li>
+                    <li><a href="chapter-02.html"><span class="chapter-num">II</span>The Ownership Covenant</a></li>
+                    <li><a href="chapter-03.html"><span class="chapter-num">III</span>The Structs of Society</a></li>
+                    <li><a href="chapter-04.html"><span class="chapter-num">IV</span>The Enum of Consciousness</a></li>
+                    <li><a href="chapter-05.html"><span class="chapter-num">V</span>The Pattern of Patterns</a></li>
+                    <li><a href="chapter-06.html"><span class="chapter-num">VI</span>The Traits of Character</a></li>
+                    <li><a href="chapter-07.html"><span class="chapter-num">VII</span>The Collections of Knowledge</a></li>
+                    <li><a href="chapter-08.html"><span class="chapter-num">VIII</span>The Error of Our Ways</a></li>
+                    <li><a href="chapter-09.html"><span class="chapter-num">IX</span>The Generic Truth</a></li>
+                    <li><a href="chapter-10.html"><span class="chapter-num">X</span>The Lifetime of Meaning</a></li>
+                    <li><a href="chapter-11.html"><span class="chapter-num">XI</span>The Smart Pointer</a></li>
+                    <li><a href="chapter-12.html"><span class="chapter-num">XII</span>The Concurrency of Souls</a></li>
+                    <li><a href="chapter-13.html"><span class="chapter-num">XIII</span>The Unsafe Edge</a></li>
+                    <li><a href="chapter-14.html"><span class="chapter-num">XIV</span>The Macro Pattern</a></li>
+                    <li><a href="chapter-15.html"><span class="chapter-num">XV</span>The Async Awakening</a></li>
+                    <li><a href="chapter-16.html"><span class="chapter-num">XVI</span>The Web of Meaning</a></li>
+                    <li><a href="chapter-17.html"><span class="chapter-num">XVII</span>The Systems Within</a></li>
+                    <li><a href="chapter-18.html"><span class="chapter-num">XVIII</span>The Final Integration</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <p class="intro-text">
+                Welcome to The Book of Rust — a comprehensive journey through systems programming 
+                that combines technical depth with philosophical insight. Each chapter builds upon 
+                the last, guiding you from basic concepts to advanced mastery.
+            </p>
+            
+            <h2 class="section-title">📖 Main Chapters</h2>
+            <div class="chapter-grid">
+                <a href="chapter-01.html" class="chapter-card">
+                    <div class="chapter-icon">I</div>
+                    <div class="chapter-info">
+                        <h3>The Call to Individuation</h3>
+                        <p>Introduction to Rust's philosophy, installation, and your first program. Understanding what makes Rust unique.</p>
+                        <div class="chapter-meta">
+                            <span>📄 45 min read</span>
+                            <span>🎯 Beginner</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="chapter-02.html" class="chapter-card">
+                    <div class="chapter-icon">II</div>
+                    <div class="chapter-info">
+                        <h3>The Ownership Covenant</h3>
+                        <p>Deep dive into Rust's ownership system, borrowing, and references. The cornerstone of Rust's memory safety.</p>
+                        <div class="chapter-meta">
+                            <span>📄 60 min read</span>
+                            <span>🎯 Beginner</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="chapter-03.html" class="chapter-card">
+                    <div class="chapter-icon">III</div>
+                    <div class="chapter-info">
+                        <h3>The Structs of Society</h3>
+                        <p>Custom data types, structs, methods, and encapsulation. Building your own types.</p>
+                        <div class="chapter-meta">
+                            <span>📄 50 min read</span>
+                            <span>🎯 Beginner</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="chapter-04.html" class="chapter-card">
+                    <div class="chapter-icon">IV</div>
+                    <div class="chapter-info">
+                        <h3>The Enum of Consciousness</h3>
+                        <p>Enums, pattern matching, and the Option/Result types. Handling multiple possibilities.</p>
+                        <div class="chapter-meta">
+                            <span>📄 55 min read</span>
+                            <span>🎯 Beginner</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="chapter-05.html" class="chapter-card">
+                    <div class="chapter-icon">V</div>
+                    <div class="chapter-info">
+                        <h3>The Pattern of Patterns</h3>
+                        <p>Advanced pattern matching, destructuring, and control flow. The match expression in depth.</p>
+                        <div class="chapter-meta">
+                            <span>📄 40 min read</span>
+                            <span>🎯 Intermediate</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="chapter-06.html" class="chapter-card">
+                    <div class="chapter-icon">VI</div>
+                    <div class="chapter-info">
+                        <h3>The Traits of Character</h3>
+                        <p>Traits, interfaces, and generic programming. Defining shared behavior across types.</p>
+                        <div class="chapter-meta">
+                            <span>📄 65 min read</span>
+                            <span>🎯 Intermediate</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <h2 class="section-title" style="margin-top: 50px;">📚 Appendices</h2>
+            <div class="appendix-list">
+                <a href="appendix-a.html" class="appendix-card">
+                    <div class="appendix-icon">A</div>
+                    <div>
+                        <strong>Appendix A:</strong> Keywords & Reserved Words
+                    </div>
+                </a>
+                <a href="appendix-b.html" class="appendix-card">
+                    <div class="appendix-icon">B</div>
+                    <div>
+                        <strong>Appendix B:</strong> Operators & Symbols
+                    </div>
+                </a>
+                <a href="appendix-c.html" class="appendix-card">
+                    <div class="appendix-icon">C</div>
+                    <div>
+                        <strong>Appendix C:</strong> Derivable Traits
+                    </div>
+                </a>
+                <a href="appendix-d.html" class="appendix-card">
+                    <div class="appendix-icon">D</div>
+                    <div>
+                        <strong>Appendix D:</strong> Useful Development Tools
+                    </div>
+                </a>
+            </div>
+        </main>
+    </div>
+    
+    <footer class="book-footer">
+        <p>📖 The Book of Rust — Written with care for learners everywhere</p>
+        <p style="margin-top: 10px; opacity: 0.7;">© 2026 Rust Learning Ground</p>
+    </footer>
+    
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.querySelector('.overlay').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

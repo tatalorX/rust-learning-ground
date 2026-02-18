@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "language": "پښتو",
+    "code": "ps",
+    "flag": "🇵🇸",
+    "direction": "rtl"
+  },
+  "nav": {
+    "home": "کور",
+    "exercises": "مشقونه",
+    "book": "کتاب",
+    "toc": "مینځپانګه",
+    "prev": "→ مخکیني",
+    "next": "راتلونکی ←",
+    "backToContents": "→ بېرته مینځپانګې ته"
+  },
+  "book": {
+    "title": "د Rust کتاب",
+    "subtitle": "د سیسټم پروګرامینګ فلسفي او تخنیکي سفر",
+    "epigraph": "\"هر څوک چې بهر ته وګوري، خوب ویني؛ هر څوک چې دننه ته وګوري، ویښیږي.\" — کارل جونګ",
+    "progress": "د کتاب پرمختګ",
+    "complete": "بشپړ",
+    "pages": "مخونه"
+  },
+  "parts": {
+    "partI": "برخه I: ارچیټایپس",
+    "partITheme": "د جونګ رواني پوهنه Rust سره",
+    "partII": "برخه II: جراحي دقت",
+    "partIITheme": "د محاسبې آناتومي",
+    "partIII": "برخه III: د کرنل فلسفه",
+    "partIIITheme": "پراګماتیک سیسټم فکر",
+    "partIV": "برخه IV: ډلېیز سیسټمونه",
+    "partIVTheme": " async، شبکه او ویشل شوی پروګرامینګ",
+    "partV": "برخه V: مهارت",
+    "partVTheme": "د استاد لاره"
+  },
+  "legend": {
+    "title": "لارښود",
+    "archetype": "د ارچیټایپ بکس: د جونګ رواني پوهنه بینش",
+    "kernel": "د کرنل حکمت: د سیسټمونو عملي بینش",
+    "surgical": "جراحي یادداشت: ژور تخنیکي/آناتومیک توضیحات"
+  },
+  "exercise": {
+    "exercises": "مشقونه",
+    "projects": "پروژې",
+    "difficulty": "سختی",
+    "time": "وخت",
+    "minutes": "دقیقې",
+    "start": "مشق پیل کړئ",
+    "submit": "حل ولېږئ",
+    "hint": "لارښود وښیئ",
+    "solution": "حل وګورئ"
+  },
+  "language": {
+    "select": "ژبه وټاکئ",
+    "primary": "اصلي ژبې",
+    "secondary": "خپلکار ژباړه",
+    "autoTranslate": "خپلکار ژباړه..."
+  },
+  "archetypes": {
+    "self": "ځان",
+    "shadow": "سیوری",
+    "anima": "انیما",
+    "persona": "پرسونا",
+    "wiseOldMan": "عقلمند زاړه سړی",
+    "greatMother": "لویه مور",
+    "puerAeternus": "تګی ځوان",
+    "trickster": "ټرکسټر",
+    "divineChild": "الهی ماشوم",
+    "ruler": "حاکم",
+    "explorer": "سپړونکی",
+    "detective": "پلټونکی",
+    "sage": "حکیم",
+    "artist": "هنرمند",
+    "hero": " اتل",
+    "integratedSelf": "یوځای شوی ځان"
+  },
+  "footer": {
+    "copyright": "© ۲۰۲۴ د Rust د زده‌کړې ډګه",
+    "license": "د MIT لایسنس لاندې",
+    "source": "سرچینه کوډ"
+  }
+}

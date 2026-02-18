@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "home": "Home",
+    "exercises": "Exercises",
+    "rustBook": "Rust Book",
+    "events": "Events",
+    "leaderboard": "Leaderboard",
+    "achievements": "Achievements",
+    "documentation": "Docs",
+    "settings": "Settings",
+    "profile": "Profile"
+  },
+  "home": {
+    "hero": {
+      "badge": "Master Rust through practice",
+      "title": "Learn",
+      "titleHighlight": "Rust Programming",
+      "subtitle": "The Right Way",
+      "description": "Interactive exercises, instant feedback, and a gamified learning experience designed for modern developers. Start your Rust journey today.",
+      "startLearning": "Start Learning",
+      "createAccount": "Create Account"
+    },
+    "features": {
+      "exercises": {
+        "title": "300+ Exercises",
+        "description": "From basics to advanced patterns"
+      },
+      "feedback": {
+        "title": "Instant Feedback",
+        "description": "Run and test your code instantly"
+      },
+      "streak": {
+        "title": "Streak System",
+        "description": "Build consistency with daily goals"
+      },
+      "achievements": {
+        "title": "Achievements",
+        "description": "Unlock badges as you progress"
+      }
+    },
+    "editor": {
+      "title": "Interactive Code Editor",
+      "description": "Write Rust code directly in your browser with our Monaco-powered editor. Instant compilation, clear error messages, and seamless execution.",
+      "features": [
+        "Syntax highlighting for Rust",
+        "Auto-completion and hints",
+        "Real-time error detection",
+        "One-click code execution"
+      ],
+      "tryExercise": "Try Exercise 1"
+    },
+    "whyRust": {
+      "title": "Why Learn Rust?",
+      "description": "Rust is the most loved programming language, combining C++ performance with memory safety and modern developer experience.",
+      "features": [
+        {
+          "title": "Memory Safety",
+          "description": "No segfaults, guaranteed by the compiler"
+        },
+        {
+          "title": "High Performance",
+          "description": "Comparable to C and C++"
+        },
+        {
+          "title": "Modern Tooling",
+          "description": "Cargo, crates.io, and more"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to Start Your Journey?",
+      "description": "Join thousands of developers learning Rust the right way.",
+      "button": "Start Learning Free"
+    }
+  },
+  "exercises": {
+    "title": "Exercises",
+    "subtitle": "exercises available",
+    "completed": "completed",
+    "difficulty": {
+      "beginner": "Beginner",
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "expert": "Expert"
+    },
+    "status": {
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "notStarted": "Not Started"
+    },
+    "filters": {
+      "search": "Search exercises...",
+      "difficulty": "Difficulty",
+      "category": "Category",
+      "all": "All"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "submit": "Submit",
+    "run": "Run",
+    "reset": "Reset",
+    "next": "Next",
+    "previous": "Previous",
+    "continue": "Continue",
+    "back": "Back",
+    "close": "Close",
+    "open": "Open",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "gamification": {
+    "xp": "XP",
+    "level": "Level",
+    "streak": "Streak",
+    "streakDays": "day streak",
+    "focusSessions": "Focus Sessions"
+  }
+}

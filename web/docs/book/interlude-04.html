@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interlude IV: Async Internals - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #641e16 0%, #c0392b 100%);
+            color: white;
+            padding: 80px 40px 60px;
+        }
+        
+        .interlude-label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-title {
+            font-size: 2.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-blood);
+            background: linear-gradient(135deg, #fdedec 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #641e16;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-blood);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-blood);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        .surgical-note {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .surgical-note-title {
+            color: var(--accent-blood);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .memory-diagram {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-blood);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="chapter-11.html">← Chapter 11</a>
+            <a href="chapter-12.html">Chapter 12 →</a>
+        </div>
+        <div class="interlude-label">Interlude IV</div>
+        <h1 class="chapter-title">Async Internals</h1>
+        <p class="chapter-subtitle">A surgical dissection of futures, wakers, and the async state machine</p>
+    </header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"Async/await is not magic—it is a state machine. Understanding the state machine is understanding async Rust."</p>
+        </div>
+        
+        <p class="drop-cap">The <code>async</code> and <code>await</code> keywords hide a sophisticated machinery. When you write an async function, the compiler transforms it into a <strong>state machine</strong>—a struct that implements the <code>Future</code> trait. This interlude dissects that machinery.</p>
+        
+        <h2>The Future Trait</h2>
+        
+        <p>At its core, async Rust is built on a simple trait:</p>
+        
+        <pre><code>pub trait Future {
+    type Output;
+    fn poll(self: Pin&lt;&mut Self&gt;, cx: &mut Context&lt;'_&gt;) 
+        -> Poll&lt;Self::Output&gt;;
+}</code></pre>
+        
+        <p>A Future represents a value that may not be ready yet. The <code>poll</code> method checks if the value is ready:</p>
+        
+        <ul style="margin: 20px 0 20px 30px;">
+            <li>Returns <code>Poll::Ready(T)</code> if the value is available</li>
+            <li>Returns <code>Poll::Pending</code> if the value is not yet available</li>
+        </ul>
+        
+        <h2>Async as State Machine</h2>
+        
+        <p>Consider this async function:</p>
+        
+        <pre><code>async fn fetch_data() -> String {
+    println!("Starting");
+    let response = make_request().await;
+    println!("Got response");
+    let data = parse(response).await;
+    println!("Done");
+    data
+}</code></pre>
+        
+        <p>The compiler transforms this into an enum representing the states:</p>
+        
+        <div class="memory-diagram">
+Async State Machine:
+
+enum FetchDataFuture {
+    Start,
+    WaitingForRequest { request: RequestFuture },
+    WaitingForParse { parse: ParseFuture },
+    Done,
+}
+
+impl Future for FetchDataFuture {
+    fn poll(mut self: Pin&lt;&mut Self&gt;, cx: &mut Context) -> Poll&lt;String&gt; {
+        loop {
+            match *self {
+                Start => {
+                    println!("Starting");
+                    let request = make_request();
+                    *self = WaitingForRequest { request };
+                }
+                WaitingForRequest { ref mut request } => {
+                    match request.poll(cx) {
+                        Poll::Ready(response) => {
+                            println!("Got response");
+                            let parse = parse(response);
+                            *self = WaitingForParse { parse };
+                        }
+                        Poll::Pending => return Poll::Pending,
+                    }
+                }
+                // ... more states
+            }
+        }
+    }
+}
+        </div>
+        
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: Pin and Self-Referential Structs</div>
+            <p>Async futures are often self-referential—the state machine contains pointers to its own data. <code>Pin</code> guarantees that the future will not move in memory, making these self-references valid. Without Pin, the async machinery would be unsound.</p>
+        </div>
+        
+        <h2>The Waker</h2>
+        
+        <p>When a future returns <code>Poll::Pending</code>, it must arrange to be polled again later. This is done through the <code>Waker</code>:</p>
+        
+        <pre><code>fn poll(self: Pin&lt;&mut Self&gt;, cx: &mut Context) -> Poll&lt;Self::Output&gt; {
+    if self.is_ready() {
+        Poll::Ready(self.value)
+    } else {
+        // Register waker to be called when ready
+        self.register_waker(cx.waker());
+        Poll::Pending
+    }
+}</code></pre>
+        
+        <p>The waker is a callback that the runtime will invoke when the future should be polled again. This enables efficient async I/O without blocking threads.</p>
+        
+        <h2>The Runtime</h2>
+        
+        <p>Async Rust requires a runtime to execute futures. Popular choices include:</p>
+        
+        <ul style="margin: 20px 0 20px 30px;">
+            <li><strong>Tokio</strong> — Full-featured async runtime for production</li>
+            <li><strong>async-std</strong> — Standard library-like async primitives</li>
+            <li><strong>smol</strong> — Small, portable async runtime</li>
+        </ul>
+        
+        <p>The runtime provides:</p>
+        <ul style="margin: 20px 0 20px 30px;">
+            <li>A reactor for async I/O events</li>
+            <li>An executor to poll futures</li>
+            <li>Timers and other async primitives</li>
+        </ul>
+        
+        <p>Go to Exercises 250-270 to practice async programming patterns.</p>
+        
+        <footer class="chapter-footer">
+            <a href="chapter-11.html" class="nav-button">← Chapter 11</a>
+            <span style="color: var(--text-muted);">Interlude IV of V</span>
+            <a href="chapter-12.html" class="nav-button">Chapter 12 →</a>
+        </footer>
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+</body>
+</html>

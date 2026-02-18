@@ -1,0 +1,42 @@
+                    GNU AFFERO GENERAL PUBLIC LICENSE
+                       Version 3, 19 November 2007
+
+Copyright (c) 2024-2026 The Book of Rust Contributors
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+AGPL-3.0 -- Affero General Public License v3.0
+
+This means: anyone who deploys this software as a network service
+must release their modifications under the same license.
+Corporate capture requires open-sourcing back.
+Sovereignty propagates.
+
+---
+
+Content License for "The Book of Rust"
+
+The written content of "The Book of Rust" (found in web/docs/book/) is licensed
+under the Creative Commons Attribution-ShareAlike 4.0 International License.
+
+To view a copy of this license, visit:
+https://creativecommons.org/licenses/by-sa/4.0/
+
+or send a letter to:
+Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+Attribution should be given to:
+"The Book of Rust - A Philosophical and Technical Journey Through Systems Programming"

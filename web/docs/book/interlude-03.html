@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interlude III: Pointer Anatomy - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #641e16 0%, #c0392b 100%);
+            color: white;
+            padding: 80px 40px 60px;
+        }
+        
+        .interlude-label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-title {
+            font-size: 2.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-blood);
+            background: linear-gradient(135deg, #fdedec 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #641e16;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-blood);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-blood);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        .surgical-note {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .surgical-note-title {
+            color: var(--accent-blood);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .memory-diagram {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-blood);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="chapter-06.html">← Chapter 6</a>
+            <a href="chapter-07.html">Chapter 7 →</a>
+        </div>
+        <div class="interlude-label">Interlude III</div>
+        <h1 class="chapter-title">Pointer Anatomy</h1>
+        <p class="chapter-subtitle">A surgical dissection of references, raw pointers, and the memory they navigate</p>
+    </header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"The pointer is the most powerful and dangerous tool in systems programming. It is the scalpel that can heal or harm, the compass that can guide or mislead. Understanding its anatomy is not optional—it is essential."</p>
+        </div>
+        
+        <p class="drop-cap">In the previous interludes, we examined memory regions—the stack and the heap. Now we turn to the instruments that navigate these regions: <strong>pointers</strong>. A pointer is not merely an address. It is a contract, a capability, a responsibility encoded in bits.</p>
+        
+        <h2>The Reference: The Safe Navigator</h2>
+        
+        <p>Rust's primary pointer type is the <strong>reference</strong>: <code>&T</code> and <code>&mut T</code>. Unlike raw pointers in C, references carry guarantees:</p>
+        
+        <ul style="margin: 20px 0 20px 30px;">
+            <li>They are always valid (non-null, aligned, pointing to live data)</li>
+            <li>They follow the borrowing rules (exclusive mutable, shared immutable)</li>
+            <li>They have lifetimes tracked by the compiler</li>
+        </ul>
+        
+        <div class="memory-diagram">
+Reference Layout in Memory (64-bit):
+┌────────────────────────────────────────┐
+│  Reference &T                          │
+│  ┌────────────────────────────────┐    │
+│  │  64-bit address                │    │
+│  │  0x00007f8a_4c20_1000          │    │
+│  └────────────────────────────────┘    │
+│                                        │
+│  Size: 8 bytes (machine word)          │
+│  Alignment: 8 bytes                    │
+│  Nullable: No (references never null)  │
+└────────────────────────────────────────┘
+        </div>
+        
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: Reference Internals</div>
+            <p>Under the hood, a reference is just a machine word containing an address. But the compiler treats it differently from raw pointers:</p>
+            <ul style="margin: 15px 0 0 25px;">
+                <li>References use <strong>non-null pointer optimization</strong>—Option&lt;&T&gt; is the same size as &T</li>
+                <li>The compiler assumes references are properly aligned and inserts no alignment checks</li>
+                <li>Dereferencing is a simple load instruction—no runtime cost for safety</li>
+            </ul>
+        </div>
+        
+        <h2>Raw Pointers: The Unsafe Scalpel</h2>
+        
+        <p>When you need to bypass Rust's safety guarantees, you use <strong>raw pointers</strong>: <code>*const T</code> and <code>*mut T</code>. These are C-style pointers—just addresses with no guarantees.</p>
+        
+        <pre><code>let mut value = 42;
+
+// Create raw pointers
+let r1 = &amp;value as *const i32;  // Immutable raw pointer
+let r2 = &amp;mut value as *mut i32; // Mutable raw pointer
+
+// Dereferencing is unsafe
+unsafe {
+    println!("r1 points to: {}", *r1);
+    *r2 = 100;  // Can mutate through r2
+}</code></pre>
+        
+        <p>Raw pointers are used for:</p>
+        <ul style="margin: 20px 0 20px 30px;">
+            <li>FFI (interfacing with C libraries)</li>
+            <li>Building safe abstractions (Box, Vec, Rc)</li>
+            <li>Performance-critical code that needs to skip bounds checks</li>
+        </ul>
+        
+        <h2>Smart Pointers: Ownership Encoded</h2>
+        
+        <p>Rust provides several smart pointers that add semantics to raw addresses:</p>
+        
+        <h3>Box&lt;T&gt; — Heap Ownership</h3>
+        <pre><code>let b = Box::new(5);  // Allocates on heap, owns the memory
+// When b goes out of scope, memory is automatically freed</code></pre>
+        
+        <h3>Rc&lt;T&gt; — Shared Ownership</h3>
+        <pre><code>use std::rc::Rc;
+
+let data = Rc::new(5);
+let data2 = Rc::clone(&amp;data);  // Increments reference count
+// When last Rc is dropped, memory is freed</code></pre>
+        
+        <h3>Arc&lt;T&gt; — Thread-Safe Sharing</h3>
+        <pre><code>use std::sync::Arc;
+
+let data = Arc::new(5);
+let data2 = Arc::clone(&amp;data);  // Atomic reference counting
+// Safe to share between threads</code></pre>
+        
+        <div class="memory-diagram">
+Smart Pointer Memory Layout:
+
+Box&lt;T&gt;:
+┌─────────────────┐     ┌─────────────────┐
+│  ptr: *mut T    │────▶│  T on heap      │
+└─────────────────┘     └─────────────────┘
+Size: 1 word
+Ownership: Unique
+
+Rc&lt;T&gt;:
+┌─────────────────┐     ┌─────────────────┐
+│  ptr: *mut RcBox│────▶│  strong: usize  │
+│                 │     │  weak: usize    │
+└─────────────────┘     │  value: T       │
+Size: 1 word            └─────────────────┘
+Ownership: Shared
+
+Arc&lt;T&gt;:
+Same as Rc but strong/weak are AtomicUsize
+for thread-safe operations
+        </div>
+        
+        <h2>Fat Pointers: When Size Varies</h2>
+        
+        <p>Some pointers carry additional metadata and become <strong>fat pointers</strong> (2 words instead of 1):</p>
+        
+        <ul style="margin: 20px 0 20px 30px;">
+            <li><code>&dyn Trait</code> — vtable pointer + data pointer</li>
+            <li><code>&[T]</code> or <code>&str</code> — length + data pointer</li>
+        </ul>
+        
+        <div class="memory-diagram">
+Fat Pointer Layout (128 bits on 64-bit systems):
+
+&str (string slice):
+┌──────────────────┬──────────────────┐
+│  data: *const u8 │  len: usize      │
+│  64 bits         │  64 bits         │
+└──────────────────┴──────────────────┘
+Total: 16 bytes
+
+&dyn Display (trait object):
+┌──────────────────┬──────────────────┐
+│  data: *const () │  vtable: *const ()│
+│  64 bits         │  64 bits         │
+└──────────────────┴──────────────────┘
+Total: 16 bytes
+        </div>
+        
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: The Vtable</div>
+            <p>A vtable (virtual method table) is a structure containing function pointers for each method in a trait:</p>
+            <pre style="background: #2d3748; margin: 15px 0;">vtable for Display:
+┌──────────────────┐
+│  drop_in_place   │  // Destructor
+│  size            │  // Size of type
+│  align           │  // Alignment of type
+│  fmt             │  // Display::fmt method ptr
+└──────────────────┘</pre>
+            <p>When you call a method on a trait object, the compiler looks up the method pointer in the vtable and calls it. This is dynamic dispatch—runtime polymorphism.</p>
+        </div>
+        
+        <p>Go to Exercises 046-050 to practice pointer manipulation. Understand the anatomy before you wield the scalpel.</p>
+        
+        <footer class="chapter-footer">
+            <a href="chapter-06.html" class="nav-button">← Chapter 6</a>
+            <span style="color: var(--text-muted);">Interlude III of V</span>
+            <a href="chapter-07.html" class="nav-button">Chapter 7 →</a>
+        </footer>
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: The Puer Aeternus - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-puer: #f39c12;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #9a7d0a 0%, #f39c12 100%);
+            color: white;
+            padding: 80px 40px 60px;
+        }
+        
+        .chapter-number {
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-title {
+            font-size: 3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+            max-width: 700px;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-puer);
+            background: linear-gradient(135deg, #fcf3cf 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #9a7d0a;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-puer);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-puer);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(243, 156, 18, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: #d68910;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: #f8f8f2;
+        }
+        
+        .puer-box {
+            background: linear-gradient(135deg, #9a7d0a 0%, #f39c12 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(243, 156, 18, 0.3);
+        }
+        
+        .puer-title {
+            color: #fdebd0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .kernel-wisdom {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .kernel-wisdom-title {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-puer);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="interlude-03.html">← Interlude III</a>
+            <a href="chapter-08.html">Chapter 8 →</a>
+        </div>
+        <div class="chapter-number">Chapter Seven</div>
+        <h1 class="chapter-title">The Puer Aeternus: Iterators</h1>
+        <p class="chapter-subtitle">The eternal child plays endlessly through data—lazily, curiously, without storing what it touches</p>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"The puer is a divine child, a child god—he is the eternal boy, the youth who never ages, who remains forever on the threshold of adulthood yet never crosses it."</p>
+            <p class="epigraph-author">— C.G. Jung</p>
+        </div>
+        
+        <p class="drop-cap">There is a way of processing data that never settles, never commits, never grows old. It moves through collections like a child through a playground—touching everything, transforming everything, yet owning nothing. This is the <strong>iterator</strong>—the <em>puer aeternus</em> (eternal child) of Rust.</p>
+        
+        <p>Where a for loop with indexing feels like adult work—methodical, plodding, burdened by bookkeeping—the iterator is playful, lazy, infinitely composable. It does not fetch values until asked. It does not store intermediate results. It simply describes what could happen, letting the compiler optimize the actual execution.</p>
+        
+        <div class="puer-box">
+            <div class="puer-title">👶 The Puer Speaks</div>
+            <p>"Why collect things? Collections are heavy, burdensome, adult. I prefer to dance through your data—map here, filter there, take just a few, skip the rest. I am lazy, yes, but laziness is efficiency. I do only what is asked, when it is asked, and no more."</p>
+            <p style="margin-top: 15px;">"Play with me. Chain methods endlessly. I will not tire. I am eternal."</p>
+        </div>
+        
+        <h2>The Iterator Trait</h2>
+        
+        <p>At its core, an iterator is any type that implements the Iterator trait:</p>
+        
+        <pre><code>pub trait Iterator {
+    type Item;
+    fn next(&amp;mut self) -> Option&lt;Self::Item&gt;;
+}</code></pre>
+        
+        <p>That is it. The next method returns Some(item) while elements remain, then None when exhausted. This simplicity enables infinite power.</p>
+        
+        <h2>The Dance of Methods</h2>
+        
+        <p>Iterators shine when composed:</p>
+        
+        <pre><code>let result: Vec&lt;i32&gt; = (0..100)           // Start with a range
+    .filter(|x| x % 2 == 0)      // Keep only even numbers
+    .map(|x| x * x)              // Square each
+    .take(5)                     // Only take 5
+    .collect();                  // Gather into a Vec
+
+// Result: [0, 4, 16, 36, 64]
+// Only 5 elements were ever processed!</code></pre>
+        
+        <p>Notice: No intermediate vectors were created. The filter, map, and take operations fuse into a single loop. This is zero-cost abstraction—the playfulness of the puer with the efficiency of the adult.</p>
+        
+        <div class="kernel-wisdom">
+            <div class="kernel-wisdom-title">⚙️ Kernel Wisdom: Lazy Evaluation</div>
+            <p>"The kernel uses lazy evaluation extensively. Page tables are not populated until accessed. Filesystems cache on demand. Do not do work until you must—this is the path to efficiency."</p>
+        </div>
+        
+        <h2>Creating Custom Iterators</h2>
+        
+        <p>You can implement Iterator for your own types:</p>
+        
+        <pre><code>struct Fibonacci {
+    curr: u64,
+    next: u64,
+}
+
+impl Iterator for Fibonacci {
+    type Item = u64;
+    
+    fn next(&amp;mut self) -> Option&lt;Self::Item&gt; {
+        let current = self.curr;
+        self.curr = self.next;
+        self.next = current + self.curr;
+        Some(current)
+    }
+}
+
+// Infinite iterator!
+for n in Fibonacci::new().take(10) {
+    println!("{}", n);
+}</code></pre>
+        
+        <div class="puer-box">
+            <div class="puer-title">👶 The Puer's Gift</div>
+            <p>"I give you the ability to work with infinite sequences, to compose complex operations from simple ones, to write code that reads like poetry: filter, map, collect. I am the eternal child who never grows tired, never demands storage, never complains about the size of your data."</p>
+        </div>
+        
+        <p>Go to Exercises 055-065 to practice iterator patterns. Play with the methods. Chain them endlessly. Embrace the eternal child's approach to data.</p>
+        
+        <footer class="chapter-footer">
+            <a href="interlude-03.html" class="nav-button">← Interlude III</a>
+            <span style="color: var(--text-muted);">Chapter 7 of 18</span>
+            <a href="chapter-08.html" class="nav-button">Chapter 8 →</a>
+        </footer>
+    
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: Iterator Fusion</div>
+            <p>LLVM can fuse iterator chains into a single loop. Consider:</p>
+            <pre style="background: #2d3748; margin: 10px 0;"><code>// This Rust code:
+vec.iter().filter(|x| x > 0).map(|x| x * 2).sum()
+
+// Compiles to equivalent of:
+let mut sum = 0;
+for &x in vec.iter() {
+    if x > 0 {
+        sum += x * 2;
+    }
+}
+// No intermediate allocations, no virtual calls</code></pre>
+            <p>The <code>Iterator</code> trait methods are all inlined. The abstractions truly cost zero at runtime.</p>
+        </div>
+
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

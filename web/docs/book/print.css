@@ -1,0 +1,147 @@
+/**
+ * Print Styles for The Book of Rust
+ */
+
+@media print {
+  /* Hide interactive elements */
+  .nav-bar,
+  .nav-button,
+  .dark-mode-toggle,
+  .lang-switcher,
+  #google_translate_element,
+  .back-link,
+  .progress-bar {
+    display: none !important;
+  }
+
+  /* Reset backgrounds for printing */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .chapter-header {
+    background: none !important;
+    color: black !important;
+    padding: 20px 0 !important;
+    border-bottom: 2pt solid #333;
+  }
+
+  .content {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Ensure code blocks don't break across pages poorly */
+  pre {
+    background: #f5f5f5 !important;
+    color: black !important;
+    border: 1pt solid #ddd;
+    page-break-inside: avoid;
+    font-size: 10pt;
+  }
+
+  code {
+    background: #f5f5f5 !important;
+    color: black !important;
+  }
+
+  /* Box styling for print */
+  .kernel-wisdom,
+  .surgical-note,
+  .archetype-box,
+  .anima-box,
+  .persona-box,
+  .puer-box,
+  .trickster-box,
+  .divine-box,
+  .ruler-box,
+  .explorer-box,
+  .detective-box,
+  .sage-box,
+  .artist-box,
+  .hero-box,
+  .integration-box {
+    background: #f9f9f9 !important;
+    color: black !important;
+    border: 1pt solid #333 !important;
+    page-break-inside: avoid;
+  }
+
+  /* Page breaks */
+  h1 {
+    page-break-before: always;
+  }
+
+  h2, h3 {
+    page-break-after: avoid;
+  }
+
+  .glossary-term,
+  .reading-item,
+  .solution {
+    page-break-inside: avoid;
+  }
+
+  /* Links */
+  a {
+    color: black !important;
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    word-break: break-all;
+  }
+
+  /* Don't show URLs for internal links */
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+
+  /* Memory diagrams */
+  .memory-diagram {
+    background: white !important;
+    border: 1pt solid #333;
+    color: black !important;
+    font-size: 9pt;
+  }
+
+  /* Epigraphs */
+  .epigraph {
+    background: none !important;
+    border-left: 3pt solid #666;
+    font-style: italic;
+  }
+
+  /* Chapter footer */
+  .chapter-footer {
+    border-top: 1pt solid #333;
+    margin-top: 30pt;
+    padding-top: 10pt;
+  }
+
+  /* Page numbers in footer */
+  @page {
+    margin: 2cm;
+    @bottom-center {
+      content: counter(page);
+    }
+  }
+
+  /* Drop caps for print */
+  .drop-cap::first-letter {
+    font-size: 3em;
+  }
+
+  /* Legends */
+  .legend {
+    background: none !important;
+    border: 1pt solid #333;
+  }
+}

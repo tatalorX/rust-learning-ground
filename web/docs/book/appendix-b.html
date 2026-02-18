@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appendix B: Further Reading - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-rust: #a0522d;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #2d2d44 100%);
+            color: white;
+            padding: 60px 40px;
+        }
+        
+        .chapter-number {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-title {
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 40px;
+        }
+        
+        h2 {
+            font-size: 1.6em;
+            margin: 40px 0 20px;
+            color: var(--bg-dark);
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+        
+        .reading-item {
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-rust);
+        }
+        
+        .reading-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: var(--text-ink);
+            margin-bottom: 5px;
+        }
+        
+        .reading-author {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        
+        .reading-desc {
+            color: var(--text-ink);
+            font-size: 0.95em;
+        }
+        
+        .chapter-footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="appendix-a.html">← Appendix A</a>
+            <a href="appendix-c.html">Appendix C →</a>
+        </div>
+        <div class="chapter-number">Appendix B</div>
+        <h1 class="chapter-title">Further Reading</h1>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <h2>📚 Rust Programming</h2>
+        
+        <div class="reading-item">
+            <div class="reading-title">The Rust Programming Language (The Book)</div>
+            <div class="reading-author">Steve Klabnik and Carol Nichols</div>
+            <div class="reading-desc">The official Rust book. Available free at doc.rust-lang.org/book. The definitive introduction to Rust.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">Programming Rust</div>
+            <div class="reading-author">Jim Blandy, Jason Orendorff, and Leonora Tindall</div>
+            <div class="reading-desc">Comprehensive guide from O'Reilly. Deep coverage of systems programming concepts.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">Rust for Rustaceans</div>
+            <div class="reading-author">Jon Gjengset</div>
+            <div class="reading-desc">Advanced Rust for experienced programmers. Covers unsafe, macros, and async in depth.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">Rust Atomics and Locks</div>
+            <div class="reading-author">Mara Bos</div>
+            <div class="reading-desc">Deep dive into low-level concurrency, atomics, and memory ordering.</div>
+        </div>
+        
+        <h2>🧠 Psychology & Philosophy</h2>
+        
+        <div class="reading-item">
+            <div class="reading-title">The Archetypes and the Collective Unconscious</div>
+            <div class="reading-author">C.G. Jung</div>
+            <div class="reading-desc">The foundational work on archetypal psychology. Essential for understanding the psychological framework of this book.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">Man and His Symbols</div>
+            <div class="reading-author">C.G. Jung</div>
+            <div class="reading-desc">Accessible introduction to Jungian psychology and symbolism.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">The Hero with a Thousand Faces</div>
+            <div class="reading-author">Joseph Campbell</div>
+            <div class="reading-desc">The monomyth—the hero's journey that mirrors the programmer's path.</div>
+        </div>
+        
+        <h2>⚙️ Systems Programming</h2>
+        
+        <div class="reading-item">
+            <div class="reading-title">Computer Systems: A Programmer's Perspective</div>
+            <div class="reading-author">Randal E. Bryant and David R. O'Hallaron</div>
+            <div class="reading-desc">The classic "CS:APP". Deep understanding of how programs execute on hardware.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">Operating Systems: Three Easy Pieces</div>
+            <div class="reading-author">Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau</div>
+            <div class="reading-desc">Free online textbook covering virtualization, concurrency, and persistence.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">The Linux Programming Interface</div>
+            <div class="reading-author">Michael Kerrisk</div>
+            <div class="reading-desc">Comprehensive guide to Linux system calls and low-level programming.</div>
+        </div>
+        
+        <h2>🔧 Software Craft</h2>
+        
+        <div class="reading-item">
+            <div class="reading-title">The Pragmatic Programmer</div>
+            <div class="reading-author">Andrew Hunt and David Thomas</div>
+            <div class="reading-desc">Timeless advice for software developers. The "Kaizen" mindset applied to programming.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">A Philosophy of Software Design</div>
+            <div class="reading-author">John Ousterhout</div>
+            <div class="reading-desc">Stanford course notes on managing complexity in software systems.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">Working Effectively with Legacy Code</div>
+            <div class="reading-author">Michael Feathers</div>
+            <div class="reading-desc">Techniques for understanding and modifying existing codebases.</div>
+        </div>
+        
+        <h2>🌐 Online Resources</h2>
+        
+        <div class="reading-item">
+            <div class="reading-title">Rust by Example</div>
+            <div class="reading-author">doc.rust-lang.org/rust-by-example</div>
+            <div class="reading-desc">Learn Rust through runnable examples. Great for quick reference.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">Rustlings</div>
+            <div class="reading-author">github.com/rust-lang/rustlings</div>
+            <div class="reading-desc">Small exercises to get you used to reading and writing Rust code.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">This Week in Rust</div>
+            <div class="reading-author">this-week-in-rust.org</div>
+            <div class="reading-desc">Weekly newsletter with Rust news, articles, and project updates.</div>
+        </div>
+        
+        <div class="reading-item">
+            <div class="reading-title">Read Rust</div>
+            <div class="reading-author">readrust.org</div>
+            <div class="reading-desc">Curated collection of Rust blog posts organized by topic.</div>
+        </div>
+        
+        <footer class="chapter-footer">
+            <a href="appendix-a.html" class="nav-button">← Appendix A</a>
+            <a href="appendix-c.html" class="nav-button">Appendix C →</a>
+        </footer>
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

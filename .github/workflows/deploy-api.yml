@@ -1,0 +1,56 @@
+name: Deploy API to Railway
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "server/**"
+  workflow_dispatch:
+
+jobs:
+  deploy-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        working-directory: ./server
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        working-directory: ./server
+        run: |
+          pytest test_v4_api.py -v
+        env:
+          DATABASE_URL: sqlite+aiosqlite:///./data/test.db
+          SECRET_KEY: test-secret-key-for-testing-only
+          JWT_SECRET_KEY: test-jwt-key-for-testing-only
+          ENVIRONMENT: testing
+
+      - name: Deploy to Railway
+        uses: railwayhq/deploy@v1
+        with:
+          token: ${{ secrets.RAILWAY_TOKEN }}
+          service: rust-learning-ground-api
+          environment: production
+          working-dir: ./server
+        env:
+          SECRET_KEY: ${{ secrets.RAILWAY_SECRET_KEY }}
+          JWT_SECRET_KEY: ${{ secrets.RAILWAY_JWT_SECRET_KEY }}
+          DATABASE_URL: ${{ secrets.RAILWAY_DATABASE_URL }}
+          CORS_ORIGINS: https://rust-learning-ground-v4.pages.dev,http://localhost:3000
+          ENVIRONMENT: production
+          COOKIE_SECURE: "true"
+
+      - name: Health Check
+        run: |
+          sleep 10
+          curl -f https://rust-learning-ground-api.up.railway.app/api/v4/health || exit 1

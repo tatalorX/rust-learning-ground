@@ -1,0 +1,502 @@
+"""
+Secure Code Runner Service
+
+Executes Rust code in a sandboxed Docker environment with strict security controls.
+"""
+
+import asyncio
+import os
+import re
+import subprocess
+import tempfile
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Optional, Dict, Any, Tuple
+import logging
+import shutil
+
+logger = logging.getLogger(__name__)
+
+# Security Configuration
+COMPILE_TIMEOUT = 10
+EXECUTION_TIMEOUT = 5
+MAX_OUTPUT_SIZE = 64 * 1024
+MAX_CODE_SIZE = 100_000  # 100KB limit
+
+# Prohibited patterns for code validation
+PROHIBITED_PATTERNS = [
+    r"std\s*::\s*process\s*::\s*Command",
+    r"std\s*::\s*fs\s*::",
+    r"std\s*::\s*net\s*::",
+    r"std\s*::\s*os\s*::",
+    r"unsafe\s*\{",
+    r"#\s*!\s*\[\s*feature",
+    r"include\s*!",
+    r"include_str\s*!",
+    r"include_bytes\s*!",
+    r"env\s*!",
+    r"option_env\s*!",
+    r"#![\s]*no_std",
+    r"#![\s]*no_main",
+    r"extern\s+crate",
+    r"mod\s+[^;]+;",
+    r"use\s+std::process",
+    r"use\s+std::fs",
+    r"use\s+std::net",
+    r"File::open",
+    r"File::create",
+    r"File::remove",
+    r"fs::remove_file",
+    r"fs::remove_dir",
+    r"Command::new",
+    r"libc::",
+    r"winapi::",
+]
+
+# Path sanitization regex
+PATH_PATTERN = re.compile(r"/[\w/]+/")
+USER_PATTERN = re.compile(r"home/\w+/")
+
+SANDBOX_DIR = Path(
+    "/home/mushroom/Downloads/rust-learner/rust-learning-ground/.sandbox"
+)
+
+DOCKER_IMAGE = "rust-sandbox:latest"
+
+
+@dataclass
+class ExecutionResult:
+    success: bool
+    output: str
+    error: Optional[str]
+    execution_time_ms: int
+    compilation_error: bool = False
+    timed_out: bool = False
+    memory_exceeded: bool = False
+    security_violation: bool = False
+
+
+class SecurityError(Exception):
+    """Raised when code violates security policy."""
+
+    pass
+
+
+def validate_code(code: str) -> Tuple[bool, Optional[str]]:
+    """
+    Validate code before execution.
+
+    Returns:
+        Tuple of (is_valid, error_message)
+    """
+    # Check code size
+    if len(code) > MAX_CODE_SIZE:
+        return False, f"Code exceeds maximum size of {MAX_CODE_SIZE} bytes"
+
+    # Check for prohibited patterns
+    for pattern in PROHIBITED_PATTERNS:
+        if re.search(pattern, code, re.IGNORECASE | re.MULTILINE):
+            return False, f"Security violation: Prohibited pattern detected"
+
+    # Check for main function
+    if "fn main()" not in code and "fn main ()" not in code:
+        return False, "Code must contain a main function"
+
+    return True, None
+
+
+def sanitize_error_message(error: str) -> str:
+    """
+    Sanitize error messages to prevent information disclosure.
+
+    Removes:
+    - Full file system paths
+    - System usernames
+    - Internal directory structure
+    """
+    if not error:
+        return error
+
+    # Replace full paths with placeholders
+    error = PATH_PATTERN.sub("[PATH]/", error)
+
+    # Replace usernames
+    error = USER_PATTERN.sub("home/[USER]/", error)
+
+    # Remove specific temp directory names
+    error = re.sub(r"tmp[\w]+", "[TEMP]", error, flags=re.IGNORECASE)
+
+    return error
+
+
+class CodeRunner:
+    """Secure code runner with Docker sandboxing."""
+
+    @staticmethod
+    async def run_code(code: str, exercise_id: Optional[int] = None) -> ExecutionResult:
+        """Run code in secure Docker sandbox."""
+        import time
+
+        start_time = time.time()
+
+        # Validate code first
+        is_valid, validation_error = validate_code(code)
+        if not is_valid:
+            return ExecutionResult(
+                success=False,
+                output="",
+                error=f"Security violation: {validation_error}",
+                execution_time_ms=int((time.time() - start_time) * 1000),
+                security_violation=True,
+            )
+
+        # Check if Docker is available
+        if not await CodeRunner._check_docker():
+            # Fallback to restricted subprocess mode
+            logger.warning("Docker not available, using restricted subprocess mode")
+            return await CodeRunner._run_subprocess_mode(code, start_time)
+
+        return await CodeRunner._run_docker_mode(code, start_time)
+
+    @staticmethod
+    async def _check_docker() -> bool:
+        """Check if Docker is available."""
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                "docker",
+                "info",
+                stdout=asyncio.subprocess.DEVNULL,
+                stderr=asyncio.subprocess.DEVNULL,
+            )
+            await proc.wait()
+            return proc.returncode == 0
+        except FileNotFoundError:
+            return False
+
+    @staticmethod
+    async def _run_docker_mode(code: str, start_time: float) -> ExecutionResult:
+        """Run code using Docker sandbox."""
+        import time
+
+        temp_dir = None
+        try:
+            # Create temporary directory
+            temp_dir = tempfile.mkdtemp(dir=SANDBOX_DIR)
+            temp_path = Path(temp_dir)
+            source_file = temp_path / "main.rs"
+
+            # Write code to file
+            source_file.write_text(code)
+
+            # Run Docker container with security restrictions
+            docker_cmd = [
+                "docker",
+                "run",
+                "--rm",  # Remove container after run
+                "--network=none",  # No network access
+                "--read-only",  # Read-only filesystem
+                "--memory=64m",  # 64MB memory limit
+                "--memory-swap=64m",  # No swap
+                "--cpus=0.5",  # Half CPU core
+                "--pids-limit=10",  # Max 10 processes
+                "--security-opt=no-new-privileges:true",
+                "--cap-drop=ALL",  # Drop all capabilities
+                "-v",
+                f"{temp_dir}:/sandbox:ro",  # Mount code read-only
+                DOCKER_IMAGE,
+            ]
+
+            proc = await asyncio.create_subprocess_exec(
+                *docker_cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+
+            try:
+                stdout_bytes, stderr_bytes = await asyncio.wait_for(
+                    proc.communicate(), timeout=COMPILE_TIMEOUT + EXECUTION_TIMEOUT + 5
+                )
+            except asyncio.TimeoutError:
+                proc.kill()
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error="Execution timed out (sandbox)",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                    timed_out=True,
+                )
+
+            stdout = stdout_bytes.decode("utf-8", errors="replace").strip()
+            stderr = stderr_bytes.decode("utf-8", errors="replace").strip()
+
+            # Check for specific errors
+            if "COMPILATION_FAILED" in stderr:
+                error = sanitize_error_message(stderr.replace("COMPILATION_FAILED", ""))
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error=f"Compilation error: {error or 'Unknown error'}",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                    compilation_error=True,
+                )
+
+            if "EXECUTION_TIMEOUT" in stderr:
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error="Execution timed out after 5 seconds",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                    timed_out=True,
+                )
+
+            if "RUNTIME_ERROR" in stderr:
+                return ExecutionResult(
+                    success=False,
+                    output=stdout,
+                    error="Runtime error occurred",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                )
+
+            return ExecutionResult(
+                success=proc.returncode == 0,
+                output=stdout,
+                error=sanitize_error_message(stderr) if stderr else None,
+                execution_time_ms=int((time.time() - start_time) * 1000),
+            )
+
+        except Exception as e:
+            logger.error(f"Docker execution error: {e}")
+            return ExecutionResult(
+                success=False,
+                output="",
+                error="Sandbox execution failed",
+                execution_time_ms=int((time.time() - start_time) * 1000),
+            )
+        finally:
+            # Cleanup
+            if temp_dir and os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir, ignore_errors=True)
+
+    @staticmethod
+    async def _run_subprocess_mode(code: str, start_time: float) -> ExecutionResult:
+        """Fallback: Run code using restricted subprocess (less secure)."""
+        import time
+
+        with tempfile.TemporaryDirectory(dir=SANDBOX_DIR) as temp_dir:
+            temp_path = Path(temp_dir)
+            source_file = temp_path / "main.rs"
+            binary_file = temp_path / "main"
+
+            try:
+                source_file.write_text(code)
+            except Exception as e:
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error="Failed to write code",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                )
+
+            # Compile
+            compile_result = await CodeRunner._compile(source_file, binary_file)
+
+            if not compile_result.success:
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error=sanitize_error_message(compile_result.error)
+                    or "Compilation failed",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                    compilation_error=True,
+                )
+
+            # Execute with resource limits
+            exec_result = await CodeRunner._execute_restricted(binary_file)
+
+            exec_time = int((time.time() - start_time) * 1000)
+
+            return ExecutionResult(
+                success=exec_result.success,
+                output=exec_result.output,
+                error=sanitize_error_message(exec_result.error),
+                execution_time_ms=exec_time,
+                timed_out=exec_result.timed_out,
+            )
+
+    @staticmethod
+    async def _compile(source_file: Path, binary_file: Path) -> ExecutionResult:
+        """Compile Rust code."""
+        import time
+
+        start_time = time.time()
+
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                "rustc",
+                str(source_file),
+                "-o",
+                str(binary_file),
+                "--edition",
+                "2021",
+                "-O",
+                stderr=asyncio.subprocess.PIPE,
+                stdout=asyncio.subprocess.PIPE,
+            )
+
+            try:
+                await asyncio.wait_for(proc.wait(), timeout=COMPILE_TIMEOUT)
+            except asyncio.TimeoutError:
+                proc.kill()
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error="Compilation timed out",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                    compilation_error=True,
+                )
+
+            if proc.returncode != 0:
+                stderr_bytes = await proc.stderr.read() if proc.stderr else b""
+                stderr = stderr_bytes.decode("utf-8", errors="replace")
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error=sanitize_error_message(stderr),
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                    compilation_error=True,
+                )
+
+            return ExecutionResult(
+                success=True,
+                output="",
+                error=None,
+                execution_time_ms=int((time.time() - start_time) * 1000),
+            )
+
+        except FileNotFoundError:
+            return ExecutionResult(
+                success=False,
+                output="",
+                error="Rust compiler not available",
+                execution_time_ms=int((time.time() - start_time) * 1000),
+                compilation_error=True,
+            )
+        except Exception as e:
+            logger.error(f"Compilation error: {e}")
+            return ExecutionResult(
+                success=False,
+                output="",
+                error="Compilation failed",
+                execution_time_ms=int((time.time() - start_time) * 1000),
+                compilation_error=True,
+            )
+
+    @staticmethod
+    async def _execute_restricted(binary_file: Path) -> ExecutionResult:
+        """Execute binary with restrictions."""
+        import time
+
+        start_time = time.time()
+
+        try:
+            if not binary_file.exists():
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error="Compiled binary not found",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                )
+
+            # Use timeout command for resource limits
+            cmd = [
+                "timeout",
+                "--signal=KILL",
+                "5",  # Hard timeout
+                "nice",
+                "-n",
+                "19",  # Low priority
+                str(binary_file),
+            ]
+
+            proc = await asyncio.create_subprocess_exec(
+                *cmd,
+                stderr=asyncio.subprocess.PIPE,
+                stdout=asyncio.subprocess.PIPE,
+                limit=MAX_OUTPUT_SIZE,
+            )
+
+            try:
+                stdout_bytes, stderr_bytes = await asyncio.wait_for(
+                    proc.communicate(), timeout=EXECUTION_TIMEOUT + 2
+                )
+            except asyncio.TimeoutError:
+                proc.kill()
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error="Execution timed out",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                    timed_out=True,
+                )
+
+            stdout = stdout_bytes.decode("utf-8", errors="replace")
+            stderr = stderr_bytes.decode("utf-8", errors="replace")
+
+            # Check if timeout killed it
+            if proc.returncode == 137:  # SIGKILL
+                return ExecutionResult(
+                    success=False,
+                    output="",
+                    error="Execution terminated (resource limit)",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                    timed_out=True,
+                )
+
+            if proc.returncode != 0:
+                return ExecutionResult(
+                    success=False,
+                    output=stdout,
+                    error="Runtime error occurred",
+                    execution_time_ms=int((time.time() - start_time) * 1000),
+                )
+
+            return ExecutionResult(
+                success=True,
+                output=stdout,
+                error=None,
+                execution_time_ms=int((time.time() - start_time) * 1000),
+            )
+
+        except Exception as e:
+            logger.error(f"Execution error: {e}")
+            return ExecutionResult(
+                success=False,
+                output="",
+                error="Execution failed",
+                execution_time_ms=int((time.time() - start_time) * 1000),
+            )
+
+    @staticmethod
+    async def verify_solution(
+        code: str, expected_output: str, exercise_id: Optional[int] = None
+    ) -> Dict[str, Any]:
+        """Verify solution against expected output."""
+        result = await CodeRunner.run_code(code, exercise_id)
+
+        success = result.success and result.output.strip() == expected_output.strip()
+
+        return {
+            "success": success,
+            "output": result.output,
+            "expected": expected_output,
+            "error": result.error,
+            "execution_time_ms": result.execution_time_ms,
+            "compilation_error": result.compilation_error,
+            "timed_out": result.timed_out,
+            "security_violation": result.security_violation,
+        }
+
+
+def get_code_runner() -> CodeRunner:
+    """Get code runner instance."""
+    return CodeRunner()

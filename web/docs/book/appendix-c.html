@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appendix C: Exercise Solutions - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-rust: #a0522d;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #2d2d44 100%);
+            color: white;
+            padding: 60px 40px;
+        }
+        
+        .chapter-number {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-title {
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 40px;
+        }
+        
+        h2 {
+            font-size: 1.6em;
+            margin: 40px 0 20px;
+            color: var(--bg-dark);
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+        
+        .solution {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-rust);
+        }
+        
+        .solution-number {
+            font-weight: 600;
+            color: var(--accent-rust);
+            margin-bottom: 10px;
+        }
+        
+        .solution-approach {
+            margin-bottom: 15px;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        .note {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+            border: 1px solid #f39c12;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .chapter-footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="appendix-b.html">← Appendix B</a>
+            <a href="appendix-d.html">Appendix D →</a>
+        </div>
+        <div class="chapter-number">Appendix C</div>
+        <h1 class="chapter-title">Exercise Solutions Guide</h1>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <div class="note">
+            <strong>📖 Note:</strong> This appendix provides solution approaches and key insights for selected exercises. We encourage you to attempt the exercises independently first—the struggle is part of the learning process.
+        </div>
+        
+        <h2>Chapter 1-6: Foundations (Exercises 001-045)</h2>
+        
+        <div class="solution">
+            <div class="solution-number">Exercise 001: Hello, Rust!</div>
+            <div class="solution-approach">Focus on understanding the basic structure of a Rust program.</div>
+            <pre>fn main() {
+    println!("Hello, Rust!");
+}</pre>
+        </div>
+        
+        <div class="solution">
+            <div class="solution-number">Exercise 015: Ownership Basics</div>
+            <div class="solution-approach">Key insight: Understand move semantics. When you assign a String to another variable, ownership moves.</div>
+            <pre>fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 is MOVED to s2
+    // println!("{}", s1);  // ERROR: s1 no longer valid
+    println!("{}", s2);  // OK
+}</pre>
+        </div>
+        
+        <div class="solution">
+            <div class="solution-number">Exercise 020: Borrowing</div>
+            <div class="solution-approach">Remember: Either one mutable reference OR any number of immutable references.</div>
+            <pre>fn main() {
+    let mut s = String::from("hello");
+    
+    let r1 = &s;  // OK: immutable borrow
+    let r2 = &s;  // OK: multiple immutable borrows
+    println!("{} {}", r1, r2);
+    
+    let r3 = &mut s;  // OK: r1 and r2 no longer used
+    r3.push_str(" world");
+}</pre>
+        </div>
+        
+        <h2>Chapter 7-11: Abstractions (Exercises 055-110)</h2>
+        
+        <div class="solution">
+            <div class="solution-number">Exercise 055: Iterator Basics</div>
+            <div class="solution-approach">Iterators are lazy—nothing happens until you call a consuming method.</div>
+            <pre>fn main() {
+    let sum: i32 = (1..=10)
+        .filter(|x| x % 2 == 0)  // Keep even numbers
+        .map(|x| x * x)           // Square them
+        .sum();                   // Sum them up
+    
+    println!("Sum of squares of even numbers 1-10: {}", sum);
+}</pre>
+        </div>
+        
+        <div class="solution">
+            <div class="solution-number">Exercise 066: Closures</div>
+            <div class="solution-approach">Closures capture their environment. The compiler determines how (by reference, mutable reference, or by value).</div>
+            <pre>fn main() {
+    let multiplier = 3;
+    
+    let multiply = |x| x * multiplier;  // Captures multiplier by reference
+    
+    println!("3 * 5 = {}", multiply(5));
+}</pre>
+        </div>
+        
+        <h2>Chapter 12-18: Mastery (Exercises 130-320)</h2>
+        
+        <div class="solution">
+            <div class="solution-number">Exercise 280: Thread Spawn</div>
+            <div class="solution-approach">Use the move keyword to transfer ownership to the thread.</div>
+            <pre>use std::thread;
+
+fn main() {
+    let data = vec![1, 2, 3];
+    
+    let handle = thread::spawn(move || {
+        println!("Data in thread: {:?}", data);
+    });
+    
+    handle.join().unwrap();
+}</pre>
+        </div>
+        
+        <div class="solution">
+            <div class="solution-number">Exercise 300: Mutex</div>
+            <div class="solution-approach">Always wrap Mutex in Arc when sharing between threads. The lock is automatically released when the guard is dropped.</div>
+            <pre>use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+    
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+    
+    for h in handles { h.join().unwrap(); }
+    
+    println!("Result: {}", *counter.lock().unwrap());
+}</pre>
+        </div>
+        
+        <h2>Projects (Exercises 151-170)</h2>
+        
+        <div class="solution">
+            <div class="solution-number">Project 151: CLI Tool</div>
+            <div class="solution-approach">Use clap for argument parsing. Structure your project with main.rs as thin wrapper.</div>
+            <pre>// Cargo.toml dependencies:
+// clap = { version = "4", features = ["derive"] }
+
+use clap::Parser;
+
+#[derive(Parser)]
+#[command(name = "grepr")]
+struct Args {
+    pattern: String,
+    path: std::path::PathBuf,
+}
+
+fn main() {
+    let args = Args::parse();
+    // Implementation here
+}</pre>
+        </div>
+        
+        <footer class="chapter-footer">
+            <a href="appendix-b.html" class="nav-button">← Appendix B</a>
+            <a href="appendix-d.html" class="nav-button">Appendix D →</a>
+        </footer>
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

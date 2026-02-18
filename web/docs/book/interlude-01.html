@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surgical Interlude: The Anatomy of a Stack Frame</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-medical: #f0f4f8;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-rust: #a0522d;
+            --accent-medical: #0066cc;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-medical);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .interlude-header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            padding: 80px 40px 60px;
+            position: relative;
+        }
+        
+        .interlude-number {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+        
+        .interlude-title {
+            font-size: 2.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .interlude-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #1e3a5f;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-medical);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .diagram {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        
+        .diagram-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-medical);
+            text-align: center;
+        }
+        
+        .memory-address {
+            color: var(--text-muted);
+            display: inline-block;
+            width: 120px;
+        }
+        
+        .memory-content {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+        
+        .stack-frame { background: #e3f2fd; }
+        .return-address { background: #fff3e0; }
+        .saved-registers { background: #f3e5f5; }
+        .local-vars { background: #e8f5e9; }
+        .padding { background: #fce4ec; }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 102, 204, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: var(--accent-medical);
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: #f8f8f2;
+        }
+        
+        .surgical-note {
+            background: white;
+            border-left: 5px solid var(--accent-blood);
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .surgical-note-title {
+            color: var(--accent-blood);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .info-box {
+            background: white;
+            border-left: 5px solid var(--accent-medical);
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .info-box-title {
+            color: var(--accent-medical);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .measurement {
+            display: inline-block;
+            background: var(--accent-medical);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        th {
+            background: #1e3a5f;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: #1e3a5f;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-medical);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="interlude-header">
+        <div class="nav-bar">
+            <a href="chapter-04.html">← Chapter 4</a>
+            <a href="chapter-05.html">Chapter 5 →</a>
+        </div>
+        <div class="interlude-number">🔬 Surgical Interlude I</div>
+        <h1 class="interlude-title">The Anatomy of a Stack Frame</h1>
+        <p class="interlude-subtitle">A precision examination of memory layout, register allocation, and the delicate architecture of function calls</p>
+    </header>
+    
+    <article class="content">
+        <p>In the operating room, the surgeon does not cut blindly. They know the anatomy—the layers of tissue, the location of vessels, the exact depth of each structure. So too must the systems programmer know the anatomy of the stack frame.</p>
+        
+        <p>When you call a function in Rust, you are not merely transferring control. You are constructing a temporary building—a stack frame—that will house the function's execution. This interlude dissects that building, layer by layer.</p>
+        
+        <h2>The Architecture of the Stack Frame</h2>
+        
+        <p>Consider this simple function:</p>
+        
+        <pre><code><span style="color: #ff79c6;">fn</span> <span style="color: #8be9fd;">calculate</span>(x: <span style="color: #8be9fd;">i32</span>, y: <span style="color: #8be9fd;">i32</span>) -> <span style="color: #8be9fd;">i32</span> {
+    <span style="color: #ff79c6;">let</span> sum = x + y;
+    <span style="color: #ff79c6;">let</span> result = sum * <span style="color: #bd93f9;">2</span>;
+    result
+}</code></pre>
+        
+        <p>When <code>calculate</code> is called, the following structure is built on the stack:</p>
+        
+        <div class="diagram">
+            <div class="diagram-title">Figure 1.1: Stack Frame Layout (x86_64, System V AMD64 ABI)</div>
+            <div><span class="memory-address">0x7fff_ffff_ffff</span>  <span style="color: #999;">← Stack starts here (high address)</span></div>
+            <div style="color: #999;">            ↓ grows downward</div>
+            <div><span class="memory-address">RSP + 24</span>  ┌─────────────────────┐</div>
+            <div>             │ <span class="memory-content local-vars">result: i32 (4 bytes)</span> │</div>
+            <div><span class="memory-address">RSP + 20</span>  │ <span class="memory-content local-vars">sum: i32 (4 bytes)</span>    │ ← Local variables</div>
+            <div><span class="memory-address">RSP + 16</span>  ├─────────────────────┤</div>
+            <div>             │ <span class="memory-content padding">padding (4 bytes)</span>   │ ← Alignment to 16 bytes</div>
+            <div><span class="memory-address">RSP + 12</span>  ├─────────────────────┤</div>
+            <div>             │ <span class="memory-content saved-registers">saved RBP (8 bytes)</span> │ ← Frame pointer</div>
+            <div><span class="memory-address">RSP + 4</span>   ├─────────────────────┤</div>
+            <div>             │ <span class="memory-content return-address">return address (8 bytes)</span> │ ← Where to go back</div>
+            <div><span class="memory-address">RSP</span>       └─────────────────────┘ ← Current stack pointer</div>
+            <div style="color: #999;">            ↓ continues...</div>
+        </div>
+        
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: The Incision Points</div>
+            <p>Notice the <strong>padding</strong> in the stack frame. Just as a surgeon must account for tissue elasticity and swelling, the compiler accounts for alignment. On x86_64, the stack must be 16-byte aligned before a <code>CALL</code> instruction. The 4 bytes of padding ensure this alignment is maintained.</p>
+            <p>This is not wasted space—it is <em>structural integrity</em>.</p>
+        </div>
+        
+        <h2>The Layers Explained</h2>
+        
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Size (x86_64)</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>Return Address</td>
+                <td><span class="measurement">8 bytes</span></td>
+                <td>The address to return to after function completes. Pushed by the <code>CALL</code> instruction.</td>
+            </tr>
+            <tr>
+                <td>Saved Frame Pointer</td>
+                <td><span class="measurement">8 bytes</span></td>
+                <td>Previous value of RBP, enabling stack unwinding for debugging and exception handling.</td>
+            </tr>
+            <tr>
+                <td>Padding</td>
+                <td><span class="measurement">0-15 bytes</span></td>
+                <td>Ensures 16-byte alignment. Size varies based on preceding allocations.</td>
+            </tr>
+            <tr>
+                <td>Local Variables</td>
+                <td><span class="measurement">Variable</span></td>
+                <td>Space for variables declared within the function. Optimized by the compiler.</td>
+            </tr>
+            <tr>
+                <td>Spill Space</td>
+                <td><span class="measurement">32+ bytes</span></td>
+                <td>"Red zone" and register spill area for the compiler's register allocator.</td>
+            </tr>
+        </table>
+        
+        <h2>The Prologue and Epilogue</h2>
+        
+        <p>Every function performs a <strong>prologue</strong> upon entry and an <strong>epilogue</strong> upon exit. These are the surgical rituals that prepare and close the operation.</p>
+        
+        <h3>The Prologue (Entry)</h3>
+        
+        <pre><code>push    rbp              ; Save the old frame pointer
+mov     rbp, rsp         ; Establish new frame pointer
+sub     rsp, 32          ; Allocate space for locals (32 bytes in this example)</code></pre>
+        
+        <div class="info-box">
+            <div class="info-box-title">💡 Clinical Observation</div>
+            <p>The instruction <code>push rbp</code> does two things atomically: it decrements RSP by 8, then stores the old RBP at the new RSP location. This is the first suture in our stack frame anatomy—connecting the current frame to its parent.</p>
+        </div>
+        
+        <h3>The Epilogue (Exit)</h3>
+        
+        <pre><code>mov     rsp, rbp         ; Deallocate local variables
+pop     rbp              ; Restore previous frame pointer
+ret                      ; Pop return address and jump to it</code></pre>
+        
+        <p>The epilogue is the cleanup. The surgeon closes the incision. The stack pointer is restored, the frame pointer reverted, and control returns to the caller.</p>
+        
+        <h2>Parameter Passing: The Arguments</h2>
+        
+        <p>In the System V AMD64 ABI (used by Linux and macOS), the first six integer/pointer arguments are passed in registers, not on the stack:</p>
+        
+        <div class="diagram">
+            <div class="diagram-title">Figure 1.2: Register Allocation for Arguments</div>
+            <div>Argument 1  →  <span style="color: #0066cc; font-weight: bold;">RDI</span>  (destination index)</div>
+            <div>Argument 2  →  <span style="color: #0066cc; font-weight: bold;">RSI</span>  (source index)</div>
+            <div>Argument 3  →  <span style="color: #0066cc; font-weight: bold;">RDX</span>  (data)</div>
+            <div>Argument 4  →  <span style="color: #0066cc; font-weight: bold;">RCX</span>  (counter)</div>
+            <div>Argument 5  →  <span style="color: #0066cc; font-weight: bold;">R8</span>   (extension)</div>
+            <div>Argument 6  →  <span style="color: #0066cc; font-weight: bold;">R9</span>   (extension)</div>
+            <div>Argument 7+ →  <span style="color: #c0392b; font-weight: bold;">Stack</span> (spilled to memory)</div>
+        </div>
+        
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: The Register Strategy</div>
+            <p>Using registers for arguments is like a surgeon keeping their most-used instruments within hand reach. Registers are faster than memory—no cache lookup, no bus traffic. The compiler fights for registers like a surgeon fights for time.</p>
+            <p>When there are more than 6 arguments, the extras "spill" to the stack. This is not failure—it is triage.</p>
+        </div>
+        
+        <h2>Return Values</h2>
+        
+        <p>Return values follow a similar philosophy:</p>
+        
+        <ul style="margin: 20px 0 20px 30px;">
+            <li>Integers and pointers: <span class="measurement">RAX</span></li>
+            <li>Floating point: <span class="measurement">XMM0</span></li>
+            <li>Structs up to 16 bytes: <span class="measurement">RAX:RDX</span></li>
+            <li>Larger structs: Caller allocates space, passes pointer in <span class="measurement">RDI</span></li>
+        </ul>
+        
+        <h2>Viewing Stack Frames in Practice</h2>
+        
+        <p>You can examine stack frames using debugging tools:</p>
+        
+        <pre><code>$ cargo build --release
+$ gdb target/release/your_program
+(gdb) break calculate
+(gdb) run
+(gdb) info registers rsp rbp
+(gdb) x/64xg $rsp    # Examine 64 quadwords from stack pointer</code></pre>
+        
+        <p>Or use <code>rustc</code> to emit assembly:</p>
+        
+        <pre><code>$ rustc --emit asm your_program.rs
+$ cat your_program.s | less  # Examine the generated assembly</code></pre>
+        
+        <h2>The Red Zone</h2>
+        
+        <p>One final anatomical feature: the <strong>red zone</strong>. On System V AMD64, the 128 bytes below RSP are reserved for the function's use without adjusting the stack pointer. Leaf functions (those that don't call other functions) can use this space without the overhead of explicit allocation.</p>
+        
+        <div class="info-box">
+            <div class="info-box-title">⚠️ Important Note</div>
+            <p>The red zone does not exist on Windows (x64 ABI) or in kernel code. It is a convenience, not a guarantee. Relying on it makes your code non-portable.</p>
+        </div>
+        
+        <h2>Conclusion: The Living Stack</h2>
+        
+        <p>The stack is not a static structure—it breathes. Functions call functions, frames stack upon frames, each prologue adding, each epilogue removing. When you understand this anatomy, you understand:</p>
+        
+        <ul style="margin: 20px 0 20px 30px;">
+            <li>Why stack overflow is possible (finite space)</li>
+            <li>Why recursion depth matters (each call adds a frame)</li>
+            <li>Why local variables are fast (stack allocation is just pointer subtraction)</li>
+            <li>Why stack variables have automatic lifetime (they die with the epilogue)</li>
+        </ul>
+        
+        <p>The stack frame is the fundamental unit of function execution. Know it well.</p>
+        
+        <footer class="chapter-footer">
+            <a href="chapter-04.html" class="nav-button">← Chapter 4</a>
+            <span style="color: var(--text-muted);">Surgical Interlude I</span>
+            <a href="chapter-05.html" class="nav-button">Chapter 5 →</a>
+        </footer>
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+</body>
+</html>

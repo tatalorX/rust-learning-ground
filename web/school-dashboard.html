@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Dashboard - Rust Learning Ground</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="website-i18n.js" defer></script>
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1f2937;
+            --bg-elevated: #283548;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-orange: #f97316;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-yellow: #eab308;
+            --border-color: #374151;
+        }
+
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-orange, #f97316);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 10000;
+            border-radius: 0 0 4px 0;
+            transition: top 0.3s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Skeleton loading screens */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-tertiary, #1f2937) 25%, var(--bg-elevated, #283548) 50%, var(--bg-tertiary, #1f2937) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 4px;
+        }
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .skeleton-text {
+            height: 1em;
+            margin-bottom: 0.5em;
+        }
+        .skeleton-title {
+            height: 1.5em;
+            width: 60%;
+            margin-bottom: 1em;
+        }
+        .skeleton-card {
+            height: 120px;
+            margin-bottom: 1em;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--accent-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-primary);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .sidebar-title {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .sidebar-link.active {
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        /* Content Area */
+        .content-area {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            min-height: 600px;
+        }
+
+        /* Gamification Card */
+        .gamification-card {
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-elevated) 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .rank-display {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .rank-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-purple));
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+        }
+
+        .rank-info h2 {
+            font-size: 1.5em;
+            margin-bottom: 4px;
+        }
+
+        .rank-info p {
+            color: var(--text-secondary);
+        }
+
+        .xp-progress {
+            margin-top: 16px;
+        }
+
+        .xp-bar {
+            height: 12px;
+            background: var(--bg-primary);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+
+        .xp-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-icon {
+            font-size: 1.5em;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        /* Treats Display */
+        .treats-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* Classroom Cards */
+        .classroom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .classroom-card {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .classroom-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .classroom-icon {
+            font-size: 2.5em;
+            margin-bottom: 16px;
+        }
+
+        .classroom-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .classroom-meta {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+
+        .classroom-code {
+            display: inline-block;
+            background: var(--bg-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            color: var(--accent-yellow);
+        }
+
+        /* Titles Section */
+        .titles-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .title-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 20px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .title-badge:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .title-badge.equipped {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .title-badge.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .btn-orange {
+            background: var(--accent-orange);
+        }
+
+        .btn-orange:hover {
+            background: #ea580c;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-elevated);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.visible {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .mobile-sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 260px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            z-index: 1000;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            padding: 20px;
+        }
+        
+        .mobile-sidebar.open {
+            left: 0;
+        }
+        
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        
+        .mobile-overlay.open {
+            display: block;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .close-menu {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .mobile-sidebar {
+                display: block;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .main-container {
+                padding: 20px 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 15px;
+            }
+            
+            .logo span:last-child {
+                display: none;
+            }
+            
+            .treats-display {
+                padding: 6px 10px;
+                font-size: 0.85em;
+            }
+            
+            .user-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9em;
+            }
+            
+            .content-card {
+                padding: 20px;
+            }
+            
+            .gamification-card {
+                padding: 20px;
+            }
+            
+            .rank-display {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .classroom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 20px 10px;
+            }
+            
+            .leaderboard-item {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .leaderboard-rank {
+                width: 30px;
+                height: 30px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+    <script src="api-config.js" defer></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Mobile Sidebar -->
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <aside class="mobile-sidebar" id="mobile-sidebar">
+        <div class="mobile-nav-header">
+            <span style="font-weight: 600;">Menu</span>
+            <button class="close-menu" onclick="toggleMobileMenu()">×</button>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-title">Navigation</div>
+            <a href="/" class="sidebar-link">🏠 Home</a>
+            <a href="/docs/book/" class="sidebar-link">📚 The Book</a>
+            <a href="/" class="sidebar-link">📝 Exercises</a>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-title">Dashboard</div>
+            <a class="sidebar-link active" onclick="showSection('overview'); toggleMobileMenu();">📊 Overview</a>
+            <a class="sidebar-link" onclick="showSection('classrooms'); toggleMobileMenu();">🏫 Classrooms</a>
+            <a class="sidebar-link" onclick="showSection('progress'); toggleMobileMenu();">📈 Progress</a>
+            <a class="sidebar-link" onclick="showSection('ranks'); toggleMobileMenu();">🏆 Ranks & XP</a>
+            <a class="sidebar-link" onclick="showSection('titles'); toggleMobileMenu();">👑 Titles</a>
+            <a class="sidebar-link" onclick="showSection('leaderboard'); toggleMobileMenu();">🥇 Leaderboard</a>
+        </div>
+        <div class="sidebar-section" id="mobile-teacher-menu" style="display: none;">
+            <div class="sidebar-title">Teacher</div>
+            <a class="sidebar-link" onclick="openCreateModal(); toggleMobileMenu();">➕ Create Classroom</a>
+        </div>
+    </aside>
+    
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <span>🦀</span>
+                <span>Rust Learning Ground</span>
+            </a>
+            <nav class="nav-links">
+                <a href="/" class="nav-link" data-i18n="nav.exercises">Exercises</a>
+                <a href="/docs/book/" class="nav-link" data-i18n="nav.book">The Book</a>
+                <a href="/school-dashboard.html" class="nav-link active" data-i18n="nav.school">🏫 School</a>
+            </nav>
+            <div class="user-menu">
+                <div class="treats-display">
+                    <span>🦴</span>
+                    <span id="treats-count">0</span>
+                </div>
+                <div class="user-avatar" id="user-avatar">?</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container" id="main-content">
+        <div class="dashboard-grid">
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title" data-i18n="school.dashboard">Dashboard</div>
+                    <a class="sidebar-link active" data-section="overview">
+                        <span>📊</span> <span data-i18n="school.overview">Overview</span>
+                    </a>
+                    <a class="sidebar-link" data-section="classrooms">
+                        <span>🏫</span> <span data-i18n="school.classrooms">Classrooms</span>
+                    </a>
+                    <a class="sidebar-link" data-section="progress">
+                        <span>📈</span> <span data-i18n="school.progress">Progress</span>
+                    </a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-title" data-i18n="school.gamification">Gamification</div>
+                    <a class="sidebar-link" data-section="ranks">
+                        <span>🏆</span> <span data-i18n="school.ranks">Ranks & XP</span>
+                    </a>
+                    <a class="sidebar-link" data-section="titles">
+                        <span>👑</span> <span data-i18n="school.titles">Titles</span>
+                    </a>
+                    <a class="sidebar-link" data-section="leaderboard">
+                        <span>🥇</span> <span data-i18n="school.leaderboard">Leaderboard</span>
+                    </a>
+                </div>
+                <div class="sidebar-section" id="teacher-menu" style="display: none;">
+                    <div class="sidebar-title" data-i18n="school.teacher">Teacher</div>
+                    <a class="sidebar-link" data-section="my-classrooms">
+                        <span>📚</span> <span data-i18n="school.myClassrooms">My Classrooms</span>
+                    </a>
+                    <a class="sidebar-link" data-section="assignments">
+                        <span>📝</span> Assignments
+                    </a>
+                    <a class="sidebar-link" data-section="students">
+                        <span>👨‍🎓</span> Students
+                    </a>
+                </div>
+            </aside>
+
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                ☰ Menu
+            </button>
+            <div class="content-area" id="content-area">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Classroom Modal -->
+    <div class="modal-overlay" id="create-classroom-modal">
+        <div class="modal">
+            <h2 class="modal-title" data-i18n="school.createClassroomTitle">Create New Classroom</h2>
+            <form id="create-classroom-form">
+                <div class="form-group">
+                    <label class="form-label" data-i18n="school.classroomName">Classroom Name</label>
+                    <input type="text" class="form-input" id="classroom-name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-i18n="school.description">Description</label>
+                    <input type="text" class="form-input" id="classroom-description">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-i18n="school.gradeLevel">Grade Level</label>
+                    <select class="form-select" id="classroom-grade">
+                        <option value="">Select Grade...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-i18n="school.maxStudents">Max Students</label>
+                    <input type="number" class="form-input" id="classroom-max" value="50" min="1" max="200">
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button type="submit" class="btn btn-orange" data-i18n="school.create">Create</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()" data-i18n="school.cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Join Classroom Modal -->
+    <div class="modal-overlay" id="join-classroom-modal">
+        <div class="modal">
+            <h2 class="modal-title" data-i18n="school.joinClassroom">Join Classroom</h2>
+            <form id="join-classroom-form">
+                <div class="form-group">
+                    <label class="form-label" data-i18n="school.classroomCode">Classroom Code</label>
+                    <input type="text" class="form-input" id="join-code" required placeholder="e.g., ABC12345" data-i18n-placeholder="school.enterCode">
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button type="submit" class="btn btn-orange" data-i18n="school.join">Join</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()" data-i18n="school.cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = (window.API_CONFIG && window.API_CONFIG.API_BASE) || localStorage.getItem('api_base') || 'http://localhost:8000';
+        let currentUser = null;
+        let schoolProfile = null;
+        let gradeLevels = [];
+        
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            document.getElementById('mobile-sidebar').classList.toggle('open');
+            document.querySelector('.mobile-overlay').classList.toggle('open');
+        }
+        
+        // Show section (for mobile)
+        function showSection(section) {
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${section}"]`)?.classList.add('active');
+            
+            switch(section) {
+                case 'overview': renderOverview(); break;
+                case 'classrooms': renderClassrooms(); break;
+                case 'progress': renderProgress(); break;
+                case 'ranks': renderRanks(); break;
+                case 'titles': renderTitles(); break;
+                case 'leaderboard': renderLeaderboard(); break;
+            }
+        }
+        
+        // Open create modal (for mobile)
+        function openCreateModal() {
+            document.getElementById('create-classroom-modal').classList.add('open');
+        }
+
+        // Initialize
+        async function init() {
+            await checkAuth();
+            await loadGradeLevels();
+            await loadSchoolProfile();
+            renderOverview();
+            setupEventListeners();
+        }
+
+        async function checkAuth() {
+            try {
+                const res = await fetch(`${API_BASE}/api/me`, { credentials: 'include' });
+                if (res.ok) {
+                    currentUser = await res.json();
+                    document.getElementById('user-avatar').textContent = 
+                        (currentUser.display_name || currentUser.username)[0].toUpperCase();
+                } else {
+                    window.location.href = '/auth.html';
+                }
+            } catch (e) {
+                window.location.href = '/auth.html';
+            }
+        }
+
+        async function loadSchoolProfile() {
+            try {
+                const res = await fetch(`${API_BASE}/api/school/profile`, { credentials: 'include' });
+                if (res.ok) {
+                    schoolProfile = await res.json();
+                    document.getElementById('treats-count').textContent = schoolProfile.treats;
+                    
+                    // Show teacher menu if applicable
+                    if (schoolProfile.role === 'teacher' || schoolProfile.role === 'admin') {
+                        document.getElementById('teacher-menu').style.display = 'block';
+                    }
+                }
+            } catch (e) {
+                console.error('Failed to load school profile:', e);
+            }
+        }
+
+        async function loadGradeLevels() {
+            try {
+                const res = await fetch(`${API_BASE}/api/school/grade-levels`, { credentials: 'include' });
+                if (res.ok) {
+                    gradeLevels = await res.json();
+                    populateGradeSelect();
+                }
+            } catch (e) {
+                console.error('Failed to load grade levels:', e);
+            }
+        }
+
+        function populateGradeSelect() {
+            const select = document.getElementById('classroom-grade');
+            gradeLevels.forEach(grade => {
+                const option = document.createElement('option');
+                option.value = grade.value;
+                option.textContent = `${grade.name} (${grade.age_range})`;
+                select.appendChild(option);
+            });
+        }
+
+        // Render Functions
+        function renderOverview() {
+            const container = document.getElementById('content-area');
+            
+            if (!schoolProfile) {
+                container.innerHTML = '<p>Loading...</p>';
+                return;
+            }
+
+            const rankColors = {
+                novice: '#8B4513',
+                apprentice: '#4682B4',
+                journeyman: '#2E8B57',
+                adept: '#9370DB',
+                expert: '#FF6347',
+                master: '#FFD700',
+                grandmaster: '#FF1493',
+                legend: '#DC143C'
+            };
+
+            const rankIcons = {
+                novice: '🌱',
+                apprentice: '📚',
+                journeyman: '🔨',
+                adept: '⚡',
+                expert: '🎯',
+                master: '👑',
+                grandmaster: '🌟',
+                legend: '🔥'
+            };
+
+            const rp = schoolProfile.rank_progress;
+            const rankColor = rankColors[schoolProfile.current_rank] || '#8B4513';
+
+            container.innerHTML = `
+                <h1 style="margin-bottom: 30px;" data-i18n="school.overviewTitle">Dashboard Overview</h1>
+                
+                <div class="gamification-card">
+                    <div class="rank-display">
+                        <div class="rank-icon" style="background: ${rankColor};">
+                            ${rankIcons[schoolProfile.current_rank]}
+                        </div>
+                        <div class="rank-info">
+                            <h2>${schoolProfile.current_rank.charAt(0).toUpperCase() + schoolProfile.current_rank.slice(1)}</h2>
+                            <p>${schoolProfile.current_title || 'No title equipped'}</p>
+                        </div>
+                    </div>
+                    <div class="xp-progress">
+                        <div class="xp-bar">
+                            <div class="xp-fill" style="width: ${rp.percentage}%"></div>
+                        </div>
+                        <div class="xp-text">
+                            <span>${rp.current_xp} <span data-i18n="stats.xp">XP</span></span>
+                            <span>${rp.xp_to_next_rank} <span data-i18n="stats.xp">XP</span> <span data-i18n="school.toNextRank">to next rank</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-value">${schoolProfile.problems_solved_total}</div>
+                        <div class="stat-label" data-i18n="school.problemsSolved">Problems Solved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-value">${schoolProfile.streak_days}</div>
+                        <div class="stat-label" data-i18n="school.currentStreak">Current Streak</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🦴</div>
+                        <div class="stat-value">${schoolProfile.treats}</div>
+                        <div class="stat-label" data-i18n="school.treats">Treats</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👑</div>
+                        <div class="stat-value">${schoolProfile.achievements.length || 0}</div>
+                        <div class="stat-label">Achievements</div>
+                    </div>
+                </div>
+
+                ${schoolProfile.role === 'teacher' || schoolProfile.role === 'admin' ? `
+                <div style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid var(--accent-orange); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 8px; color: var(--accent-orange);">👨‍🏫 Teacher Mode Active</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 12px;">You can create classrooms, manage students, and create assignments.</p>
+                    <button class="btn btn-orange" onclick="showCreateModal()" data-i18n="school.createClassroom">+ Create Your First Classroom</button>
+                </div>
+                ` : ''}
+                
+                <h2 style="margin-bottom: 20px;" data-i18n="school.myClassrooms">My Classrooms</h2>
+                <div class="classroom-grid" id="my-classrooms-grid">
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
+                        Loading classrooms...
+                    </div>
+                </div>
+            `;
+
+            loadMyClassrooms();
+        }
+
+        async function loadMyClassrooms() {
+            try {
+                const res = await fetch(`${API_BASE}/api/school/classrooms/joined`, { credentials: 'include' });
+                if (res.ok) {
+                    const classrooms = await res.json();
+                    renderClassrooms(classrooms, 'my-classrooms-grid');
+                }
+            } catch (e) {
+                console.error('Failed to load classrooms:', e);
+            }
+        }
+
+        function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            function renderClassrooms(classrooms, containerId) {
+            const container = document.getElementById(containerId);
+            
+            if (classrooms.length === 0) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><p style="color: var(--text-muted); margin-bottom: 20px;">No classrooms yet</p><button class="btn btn-orange" onclick="showJoinModal()" data-i18n="school.joinClassroom">Join a Classroom</button></div>';
+                return;
+            }
+
+            container.innerHTML = classrooms.map(c => {
+                const safeIcon = escapeHtml(c.icon);
+                const safeName = escapeHtml(c.name);
+                const safeGrade = escapeHtml(c.grade_level || 'All levels');
+                const safeCode = escapeHtml(c.code);
+                return '<div class="classroom-card" onclick="viewClassroom(' + c.id + ')"><div class="classroom-icon">' + safeIcon + '</div><div class="classroom-name">' + safeName + '</div><div class="classroom-meta">' + c.member_count + ' students • ' + safeGrade + '</div><span class="classroom-code">' + safeCode + '</span></div>';
+            }).join('');
+        }
+
+        async function renderRanks() {
+            const container = document.getElementById('content-area');
+            
+            try {
+                const res = await fetch(`${API_BASE}/api/school/ranks`, { credentials: 'include' });
+                const ranks = await res.json();
+                
+                const ranksHtml = ranks.map(rank => {
+                    const isCurrent = schoolProfile && schoolProfile.current_rank === rank.rank_tier;
+                    const safeName = escapeHtml(rank.name);
+                    const safeDesc = escapeHtml(rank.description || '');
+                    const safeIcon = escapeHtml(rank.icon);
+                    return '<div style="background: var(--bg-tertiary); border-radius: 12px; padding: 20px; border: 2px solid ' + (isCurrent ? rank.color : 'transparent') + '; display: flex; align-items: center; gap: 20px;"><div style="font-size: 2.5em;">' + safeIcon + '</div><div style="flex: 1;"><h3 style="margin-bottom: 4px; color: ' + rank.color + ';">' + safeName + '</h3><p style="color: var(--text-secondary); font-size: 0.9em;">' + safeDesc + '</p><p style="color: var(--text-muted); font-size: 0.85em; margin-top: 8px;">' + rank.min_xp.toLocaleString() + ' - ' + (rank.max_xp ? rank.max_xp.toLocaleString() : '∞') + ' <span data-i18n="stats.xp">XP</span></p></div>' + (isCurrent ? '<span style="color: var(--accent-green);" data-i18n="school.current">✓ Current</span>' : '') + '</div>';
+                }).join('');
+                container.innerHTML = '<h1 style="margin-bottom: 30px;" data-i18n="school.ranksTitle">Ranks & Progress</h1><div style="display: flex; flex-direction: column; gap: 16px;">' + ranksHtml + '</div>';
+            } catch (e) {
+                container.innerHTML = '<p>Error loading ranks</p>';
+            }
+        }
+
+        async function renderTitles() {
+            const container = document.getElementById('content-area');
+            container.innerHTML = '<p>Loading titles...</p>';
+            
+            try {
+                const [titlesRes, myTitlesRes] = await Promise.all([
+                    fetch(`${API_BASE}/api/school/titles`, { credentials: 'include' }),
+                    fetch(`${API_BASE}/api/school/titles/my`, { credentials: 'include' })
+                ]);
+                
+                const allTitles = await titlesRes.json();
+                const myTitles = await myTitlesRes.json();
+                const earnedKeys = new Set(myTitles.map(t => t.title_key));
+                const equippedKey = myTitles.find(t => t.is_equipped)?.title_key;
+                
+                const titlesHtml = allTitles.map(title => {
+                    const earned = earnedKeys.has(title.key);
+                    const equipped = title.key === equippedKey;
+                    const safeIcon = escapeHtml(title.icon || '🏷️');
+                    const safeName = escapeHtml(title.name);
+                    const className = 'title-badge ' + (earned ? (equipped ? 'equipped' : '') : 'locked');
+                    const onclick = earned ? 'onclick="equipTitle('' + title.key + '')"' : '';
+                    return '<div class="' + className + '" ' + onclick + '><span>' + safeIcon + '</span><span>' + safeName + '</span>' + (equipped ? '<span>✓</span>' : '') + '</div>';
+                }).join('');
+                container.innerHTML = '<h1 style="margin-bottom: 30px;" data-i18n="school.titles">Titles</h1><div class="titles-grid">' + titlesHtml + '</div>';
+            } catch (e) {
+                container.innerHTML = '<p>Error loading titles</p>';
+            }
+        }
+
+        async function renderLeaderboard() {
+            const container = document.getElementById('content-area');
+            container.innerHTML = '<p>Loading leaderboard...</p>';
+            
+            try {
+                const res = await fetch(`${API_BASE}/api/school/leaderboard/global`, { credentials: 'include' });
+                const data = await res.json();
+                
+                container.innerHTML = `
+                    <h1 style="margin-bottom: 30px;" data-i18n="school.leaderboardTitle">Global Leaderboard</h1>
+                    <div style="background: var(--bg-tertiary); border-radius: 12px; overflow: hidden;">
+                        ${data.entries.map((entry, i) => `
+                            <div style="
+                                display: flex;
+                                align-items: center;
+                                padding: 16px 20px;
+                                border-bottom: 1px solid var(--border-color);
+                                ${entry.is_current_user ? 'background: rgba(59, 130, 246, 0.1);' : ''}
+                            ">
+                                <div style="width: 40px; font-weight: 700; font-size: 1.2em;">
+                                    ${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : entry.rank}
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">${entry.display_name || entry.username}</div>
+                                    <div style="font-size: 0.85em; color: var(--text-muted);">
+                                        ${entry.current_rank}
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-weight: 700; color: var(--accent-green);">
+                                        ${entry.xp_total.toLocaleString()} <span data-i18n="stats.xp">XP</span>
+                                    </div>
+                                    <div style="font-size: 0.85em; color: var(--text-muted);">
+                                        ${entry.problems_solved} <span data-i18n="school.problems">problems</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } catch (e) {
+                container.innerHTML = '<p>Error loading leaderboard</p>';
+            }
+        }
+
+        async function renderClassrooms() {
+            const container = document.getElementById('content-area');
+            const isTeacher = schoolProfile && (schoolProfile.role === 'teacher' || schoolProfile.role === 'admin');
+            
+            container.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <h1 data-i18n="school.myClassrooms">My Classrooms</h1>
+                    <div style="display: flex; gap: 12px;">
+                        ${isTeacher ? '<button class="btn btn-secondary" onclick="showCreateModal()" data-i18n="school.createClassroom">+ Create Classroom</button>' : ''}
+                        <button class="btn btn-orange" onclick="showJoinModal()" data-i18n="school.joinClassroom">Join Classroom</button>
+                    </div>
+                </div>
+                ${isTeacher ? `
+                <div style="background: var(--bg-tertiary); border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 8px;">👨‍🏫 Teacher Mode</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9em;">You can create classrooms and manage students. Create a classroom to get started!</p>
+                </div>
+                ` : ''}
+                <div class="classroom-grid" id="classrooms-grid">
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">Loading...</div>
+                </div>
+            `;
+            
+            renderClassroomsList();
+        }
+
+        async function renderClassroomsList() {
+            try {
+                const res = await fetch(`${API_BASE}/api/school/classrooms/joined`, { credentials: 'include' });
+                if (res.ok) {
+                    const classrooms = await res.json();
+                    renderClassrooms(classrooms, 'classrooms-grid');
+                }
+            } catch (e) {
+                console.error('Failed to load classrooms:', e);
+            }
+        }
+
+        // Actions
+        async function equipTitle(titleKey) {
+            try {
+                const res = await fetch(`${API_BASE}/api/school/titles/equip`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ title_key: titleKey })
+                });
+                
+                if (res.ok) {
+                    await loadSchoolProfile();
+                    renderTitles();
+                }
+            } catch (e) {
+                console.error('Failed to equip title:', e);
+            }
+        }
+
+        function viewClassroom(id) {
+            window.location.href = `/classroom.html?id=${id}`;
+        }
+
+        function showJoinModal() {
+            document.getElementById('join-classroom-modal').classList.add('visible');
+        }
+
+        function showCreateModal() {
+            document.getElementById('create-classroom-modal').classList.add('visible');
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('visible'));
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Sidebar navigation
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = link.dataset.section;
+                    
+                    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    switch(section) {
+                        case 'overview': renderOverview(); break;
+                        case 'ranks': renderRanks(); break;
+                        case 'titles': renderTitles(); break;
+                        case 'leaderboard': renderLeaderboard(); break;
+                        case 'classrooms': renderClassrooms(); break;
+                        case 'my-classrooms': renderTeachingClassrooms(); break;
+                    }
+                });
+            });
+
+            // Join classroom form
+            document.getElementById('join-classroom-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const code = document.getElementById('join-code').value;
+                
+                try {
+                    const res = await fetch(`${API_BASE}/api/school/classrooms/join`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify({ code })
+                    });
+                    
+                    if (res.ok) {
+                        closeModal();
+                        renderClassrooms();
+                    } else {
+                        const err = await res.json();
+                        alert(err.detail || 'Failed to join classroom');
+                    }
+                } catch (e) {
+                    alert('Network error');
+                }
+            });
+
+            // Create classroom form
+            document.getElementById('create-classroom-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const data = {
+                    name: document.getElementById('classroom-name').value,
+                    description: document.getElementById('classroom-description').value,
+                    grade_level: document.getElementById('classroom-grade').value || null,
+                    max_students: parseInt(document.getElementById('classroom-max').value)
+                };
+                
+                try {
+                    const res = await fetch(`${API_BASE}/api/school/classrooms`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify(data)
+                    });
+                    
+                    if (res.ok) {
+                        closeModal();
+                        renderClassrooms();
+                    } else {
+                        const err = await res.json();
+                        alert(err.detail || 'Failed to create classroom');
+                    }
+                } catch (e) {
+                    alert('Network error');
+                }
+            });
+
+            // Close modals on overlay click
+            document.querySelectorAll('.modal-overlay').forEach(m => {
+                m.addEventListener('click', (e) => {
+                    if (e.target === m) closeModal();
+                });
+            });
+        }
+
+        // Teacher: Load teaching classrooms
+        async function renderTeachingClassrooms() {
+            const container = document.getElementById('content-area');
+            
+            container.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <h1 data-i18n="school.classroomsITeach">Classrooms I Teach</h1>
+                    <button class="btn btn-orange" onclick="showCreateModal()" data-i18n="school.createClassroom">+ Create Classroom</button>
+                </div>
+                <div class="classroom-grid" id="teaching-classrooms-grid">
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">Loading...</div>
+                </div>
+            `;
+            
+            try {
+                const res = await fetch(`${API_BASE}/api/school/classrooms/teaching`, { credentials: 'include' });
+                if (res.ok) {
+                    const classrooms = await res.json();
+                    renderClassrooms(classrooms, 'teaching-classrooms-grid');
+                }
+            } catch (e) {
+                console.error('Failed to load teaching classrooms:', e);
+            }
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>

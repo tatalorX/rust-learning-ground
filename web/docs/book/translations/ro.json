@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "language": "Română",
+    "code": "ro",
+    "flag": "🇷🇴",
+    "direction": "ltr"
+  },
+  "nav": {
+    "home": "Acasă",
+    "exercises": "Exerciții",
+    "book": "Cartea",
+    "toc": "Cuprins",
+    "prev": "← Precedent",
+    "next": "Următor →",
+    "backToContents": "← Înapoi la Cuprins"
+  },
+  "book": {
+    "title": "Cartea Rust",
+    "subtitle": "O Călătorie Filosofică și Tehnică prin Programarea Sistemelor",
+    "epigraph": "\"Cine se uită în afară, visează; cine se uită înăuntru, se trezește.\" — C.G. Jung",
+    "progress": "Progres Carte",
+    "complete": "Complet",
+    "pages": "pagini"
+  },
+  "parts": {
+    "partI": "Partea I: Arhetipurile",
+    "partITheme": "Psihologia Jungiană întâlnește Rust",
+    "partII": "Partea II: Precizie Chirurgicală",
+    "partIITheme": "Anatomia computației",
+    "partIII": "Partea III: Filozofia Kernel",
+    "partIIITheme": "Gândire pragmatică în sisteme",
+    "partIV": "Partea IV: Sisteme Colective",
+    "partIVTheme": "Programare asincronă, rețele și distribuită",
+    "partV": "Partea V: Stăpânire",
+    "partVTheme": "Calea meșterului"
+  },
+  "legend": {
+    "title": "Legendă",
+    "archetype": "Casetă Arhetip: Insight psihologic Jungian",
+    "kernel": "Înțelepciune Kernel: Insight pragmatic în sisteme",
+    "surgical": "Notă Chirurgicală: Detaliu tehnic/anatomic profund"
+  },
+  "exercise": {
+    "exercises": "Exerciții",
+    "projects": "Proiecte",
+    "difficulty": "Dificultate",
+    "time": "Timp",
+    "minutes": "minute",
+    "start": "Începe Exercițiul",
+    "submit": "Trimite Soluția",
+    "hint": "Arată Indiciul",
+    "solution": "Vezi Soluția"
+  },
+  "language": {
+    "select": "Selectează Limba",
+    "primary": "Limbi Principale",
+    "secondary": "Traducere Automată",
+    "autoTranslate": "Traduce automat în..."
+  },
+  "archetypes": {
+    "self": "Sinele",
+    "shadow": "Umbra",
+    "anima": "Anima",
+    "persona": "Persona",
+    "wiseOldMan": "Bătrânul Înțelept",
+    "greatMother": "Marea Mamă",
+    "puerAeternus": "Puer Aeternus",
+    "trickster": "Păcălitorul",
+    "divineChild": "Copilul Divin",
+    "ruler": "Conducătorul",
+    "explorer": "Exploratorul",
+    "detective": "Detectivul",
+    "sage": "Înțeleptul",
+    "artist": "Artistul",
+    "hero": "Eroul",
+    "integratedSelf": "Sinele Integrat"
+  },
+  "footer": {
+    "copyright": "© 2024 Cartea Rust",
+    "license": "Licență MIT",
+    "source": "Cod Sursă"
+  }
+}

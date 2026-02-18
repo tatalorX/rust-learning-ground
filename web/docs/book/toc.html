@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="translations/i18n.js" defer></script>
+    <title>The Book of Rust - Table of Contents</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-rust: #a0522d;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #2d2d44 100%);
+            color: white;
+            padding: 100px 40px 80px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3em;
+            opacity: 0.8;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero .epigraph {
+            font-size: 1em;
+            opacity: 0.6;
+            font-style: italic;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.1);
+            height: 8px;
+            border-radius: 4px;
+            max-width: 400px;
+            margin: 30px auto 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
+            height: 100%;
+            width: 85.7%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+        
+        .toc-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .part {
+            margin-bottom: 50px;
+        }
+        
+        .part-header {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .part-number {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-rust);
+            font-weight: 600;
+        }
+        
+        .part-title {
+            font-size: 1.6em;
+            font-weight: 600;
+            color: var(--text-ink);
+        }
+        
+        .part-theme {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        .chapter-list {
+            list-style: none;
+        }
+        
+        .chapter-item {
+            display: flex;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid #eee;
+            transition: all 0.2s;
+        }
+        
+        .chapter-item:hover {
+            background: rgba(0,0,0,0.02);
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        
+        .chapter-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            color: var(--text-muted);
+            min-width: 60px;
+            font-weight: 500;
+        }
+        
+        .chapter-info {
+            flex: 1;
+        }
+        
+        .chapter-link {
+            font-size: 1.15em;
+            color: var(--text-ink);
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .chapter-link:hover {
+            color: var(--accent-rust);
+        }
+        
+        .chapter-desc {
+            font-size: 0.95em;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        .chapter-meta {
+            font-size: 0.8em;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+        
+        .interlude .chapter-num {
+            color: var(--accent-blood);
+        }
+        
+        .interlude .chapter-link {
+            color: var(--accent-blood);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 60px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .legend {
+            margin-top: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .legend h3 {
+            margin-bottom: 20px;
+            color: var(--text-ink);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .legend-symbol {
+            font-size: 1.2em;
+        }
+        
+        .completion-banner {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .completion-banner h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+    </style>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="hero">
+        <h1>📚 The Book of Rust</h1>
+        <p class="subtitle">A Philosophical and Technical Journey Through Systems Programming</p>
+        <p class="epigraph">"Who looks outside, dreams; who looks inside, awakes." — C.G. Jung<br>"Talk is cheap. Show me the code." — Linus Torvalds<br>"The scalpel is an instrument of healing because it respects anatomy." — Leon Dăvila</p>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <p class="progress-text">Book Complete: 85.7% (24/28 components) | 18 Chapters + 5 Interludes</p>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <main class="toc-container">
+        <div class="completion-banner">
+            <h2>🎉 All 18 Chapters Complete!</h2>
+            <p>~257 pages of philosophical and technical wisdom</p>
+        </div>
+        
+        <!-- PART I: ARCHETYPES -->
+        <section class="part">
+            <div class="part-header">
+                <span class="part-number">Part I</span>
+                <h2 class="part-title">The Archetypes</h2>
+                <span class="part-theme">Jungian Psychology meets Rust</span>
+            </div>
+            
+            <ul class="chapter-list">
+                <li class="chapter-item"><span class="chapter-num">Ch. 1</span><div class="chapter-info"><a href="chapter-01.html" class="chapter-link">The Call to Individuation</a><p class="chapter-desc">Why programmers seek Rust—the journey toward integration</p><p class="chapter-meta">🎭 The Self | Exercises 001-010</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 2</span><div class="chapter-info"><a href="chapter-02.html" class="chapter-link">The Shadow</a><p class="chapter-desc">Understanding unsafe as the repressed unconscious of safe code</p><p class="chapter-meta">🎭 The Shadow | Exercises 011-020</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 3</span><div class="chapter-info"><a href="chapter-03.html" class="chapter-link">The Anima</a><p class="chapter-desc">Memory as the soul of the system—ownership and borrowing</p><p class="chapter-meta">🎭 The Anima | Exercises 015-020</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 4</span><div class="chapter-info"><a href="chapter-04.html" class="chapter-link">The Persona</a><p class="chapter-desc">Traits as masks—interfaces, capabilities, and abstraction</p><p class="chapter-meta">🎭 The Persona | Exercises 020-025</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 5</span><div class="chapter-info"><a href="chapter-05.html" class="chapter-link">The Wise Old Man</a><p class="chapter-desc">Lifetimes as accumulated wisdom—the temporal boundaries of references</p><p class="chapter-meta">🎭 The Wise Old Man | Exercises 030-035</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 6</span><div class="chapter-info"><a href="chapter-06.html" class="chapter-link">The Great Mother</a><p class="chapter-desc">Error handling as embrace—Result, Option, and graceful failure</p><p class="chapter-meta">🎭 The Great Mother | Exercises 040-045</p></div></li>
+            </ul>
+        </section>
+        
+        <!-- PART II: SURGICAL PRECISION -->
+        <section class="part">
+            <div class="part-header">
+                <span class="part-number">Part II</span>
+                <h2 class="part-title">Surgical Precision</h2>
+                <span class="part-theme">The anatomy of computation</span>
+            </div>
+            
+            <ul class="chapter-list">
+                <li class="chapter-item interlude"><span class="chapter-num">Int. I</span><div class="chapter-info"><a href="interlude-01.html" class="chapter-link">Stack Frame Anatomy</a><p class="chapter-desc">Dissecting function calls at the assembly level</p><p class="chapter-meta">🔬 Surgical | Exercises 050-052</p></div></li>
+                <li class="chapter-item interlude"><span class="chapter-num">Int. II</span><div class="chapter-info"><a href="interlude-02.html" class="chapter-link">Heap Anatomy</a><p class="chapter-desc">Dynamic memory allocation and fragmentation</p><p class="chapter-meta">🔬 Surgical | Exercises 026-029</p></div></li>
+                <li class="chapter-item interlude"><span class="chapter-num">Int. III</span><div class="chapter-info"><a href="interlude-03.html" class="chapter-link">Pointer Anatomy</a><p class="chapter-desc">References, raw pointers, and smart pointers dissected</p><p class="chapter-meta">🔬 Surgical | Exercises 046-050</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 7</span><div class="chapter-info"><a href="chapter-07.html" class="chapter-link">The Puer Aeternus</a><p class="chapter-desc">Iterators—the eternal child playing through data</p><p class="chapter-meta">🎭 The Eternal Child | Exercises 055-065</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 8</span><div class="chapter-info"><a href="chapter-08.html" class="chapter-link">The Trickster</a><p class="chapter-desc">Closures and dynamic dispatch—shape-shifting code</p><p class="chapter-meta">🎭 The Trickster | Exercises 066-075</p></div></li>
+            </ul>
+        </section>
+        
+        <!-- PART III: KERNEL PHILOSOPHY -->
+        <section class="part">
+            <div class="part-header">
+                <span class="part-number">Part III</span>
+                <h2 class="part-title">Kernel Philosophy</h2>
+                <span class="part-theme">Pragmatic systems thinking</span>
+            </div>
+            
+            <ul class="chapter-list">
+                <li class="chapter-item"><span class="chapter-num">Ch. 9</span><div class="chapter-info"><a href="chapter-09.html" class="chapter-link">The Divine Child</a><p class="chapter-desc">Fearless concurrency—threads without terror</p><p class="chapter-meta">🎭 The Divine Child | Exercises 280-300</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 10</span><div class="chapter-info"><a href="chapter-10.html" class="chapter-link">Zero-Cost Abstractions</a><p class="chapter-desc">What you use, you cannot hand-code better</p><p class="chapter-meta">⚙️ Pragmatic | Exercises 101-110</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 11</span><div class="chapter-info"><a href="chapter-11.html" class="chapter-link">The Unix Philosophy</a><p class="chapter-desc">Do one thing well. Compose small tools.</p><p class="chapter-meta">⚙️ Pragmatic | Exercises 090-100</p></div></li>
+            </ul>
+        </section>
+        
+        <!-- PART IV: COLLECTIVE SYSTEMS -->
+        <section class="part">
+            <div class="part-header">
+                <span class="part-number">Part IV</span>
+                <h2 class="part-title">Collective Systems</h2>
+                <span class="part-theme">Async, network, and distributed programming</span>
+            </div>
+            
+            <ul class="chapter-list">
+                <li class="chapter-item interlude"><span class="chapter-num">Int. IV</span><div class="chapter-info"><a href="interlude-04.html" class="chapter-link">Async Internals</a><p class="chapter-desc">Futures, wakers, and the async state machine</p><p class="chapter-meta">🔬 Surgical | Exercises 250-270</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 12</span><div class="chapter-info"><a href="chapter-12.html" class="chapter-link">The Ruler</a><p class="chapter-desc">Project structure—modules, crates, and workspaces</p><p class="chapter-meta">🎭 The Ruler | Exercises 076-085</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 13</span><div class="chapter-info"><a href="chapter-13.html" class="chapter-link">The Explorer</a><p class="chapter-desc">Network programming—sockets, protocols, wilderness</p><p class="chapter-meta">🎭 The Explorer | Exercises 200-230</p></div></li>
+            </ul>
+        </section>
+        
+        <!-- PART V: MASTERY -->
+        <section class="part">
+            <div class="part-header">
+                <span class="part-number">Part V</span>
+                <h2 class="part-title">Mastery</h2>
+                <span class="part-theme">The path of the crafts-person</span>
+            </div>
+            
+            <ul class="chapter-list">
+                <li class="chapter-item interlude"><span class="chapter-num">Int. V</span><div class="chapter-info"><a href="interlude-05.html" class="chapter-link">Optimization</a><p class="chapter-desc">When and how to optimize—tools of the performance engineer</p><p class="chapter-meta">🔬 Surgical | Exercises 300-320</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 14</span><div class="chapter-info"><a href="chapter-14.html" class="chapter-link">The Detective</a><p class="chapter-desc">Debugging—reading stack traces, using debuggers</p><p class="chapter-meta">🎭 The Detective | Exercises 085-095</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 15</span><div class="chapter-info"><a href="chapter-15.html" class="chapter-link">The Sage</a><p class="chapter-desc">Testing—wisdom through verification</p><p class="chapter-meta">🎭 The Sage | Exercises 130-140</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 16</span><div class="chapter-info"><a href="chapter-16.html" class="chapter-link">The Artist</a><p class="chapter-desc">API design—elegance, ergonomics, and beauty</p><p class="chapter-meta">🎭 The Artist | Projects 151-170</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 17</span><div class="chapter-info"><a href="chapter-17.html" class="chapter-link">The Hero</a><p class="chapter-desc">Unsafe Rust—venturing into danger prepared</p><p class="chapter-meta">🎭 The Hero | Exercises 011-020</p></div></li>
+                <li class="chapter-item"><span class="chapter-num">Ch. 18</span><div class="chapter-info"><a href="chapter-18.html" class="chapter-link">The Integrated Self</a><p class="chapter-desc">Synthesis, mastery, and the path forward</p><p class="chapter-meta">🎭 Integration | All exercises</p></div></li>
+            </ul>
+        </section>
+        
+        <div class="legend">
+            <h3>📖 Legend</h3>
+            <div class="legend-item"><span class="legend-symbol">🎭</span><span><strong>Archetype Box:</strong> Jungian psychological insight</span></div>
+            <div class="legend-item"><span class="legend-symbol">⚙️</span><span><strong>Kernel Wisdom:</strong> Pragmatic systems insight</span></div>
+            <div class="legend-item"><span class="legend-symbol">🔬</span><span><strong>Surgical Note:</strong> Deep technical/anatomical detail</span></div>
+        </div>
+        
+        <a href="../../index.html" class="back-link">← Back to Rust Learning Ground</a>
+    </main>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>
+<!-- Google Translate Container (hidden) -->
+<div id="google_translate_element"></div>

@@ -1,0 +1,676 @@
+# Rust Learning Ground - Git Ignore
+# Comprehensive ignore rules for Python backend, Node.js frontend, and general development
+
+# =============================================================================
+# Python (Backend)
+# =============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.env.local
+.env.*.local
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+.idea/
+
+# =============================================================================
+# Node.js (Frontend)
+# =============================================================================
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production builds
+build/
+dist/
+dist-ssr/
+*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# =============================================================================
+# Rust Learning Ground Specific
+# =============================================================================
+
+# Database files
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+data/*.db
+data/*.sqlite
+
+# Uploaded files
+uploads/
+media/
+
+# Static files cache
+web/static/.cache/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Session files
+sessions/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# =============================================================================
+# Operating System
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.nfs*
+
+# =============================================================================
+# IDE & Editors
+# =============================================================================
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# IntelliJ / PyCharm / WebStorm / PHPStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# NetBeans
+nbproject/
+
+# Eclipse
+.metadata
+*.bak
+*.tmp
+*.swp
+*~
+.settings/
+.loadpath
+.recommenders/
+
+# Atom
+.atom/
+
+# Brackets
+.brackets.json
+
+# Dreamweaver
+dwsync.xml
+
+# Cloud9
+c9/
+
+# KDevelop
+.kdev4/
+
+# Kate
+*.kate-swp
+
+# Gedit
+gedit/
+
+# =============================================================================
+# Security & Secrets (NEVER commit these!)
+# =============================================================================
+
+# Private keys
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+
+# Secret files
+*.secret
+.secrets/
+secrets/
+credentials.json
+credentials.yml
+credentials.yaml
+
+# AWS
+.aws/
+aws-credentials
+
+# Google Cloud
+gcp-credentials.json
+application_default_credentials.json
+
+# Azure
+azure-credentials.json
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Kubernetes
+kubeconfig
+.kube/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraformrc
+terraform.rc
+
+# =============================================================================
+# Package Managers & Dependencies
+# =============================================================================
+
+# npm
+package-lock.json
+yarn.lock
+
+# pip
+requirements.freeze
+requirements.txt.freeze
+
+# Bundler
+Gemfile.lock
+
+# Composer
+composer.lock
+vendor/
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+
+# Cargo
+/target/
+Cargo.lock
+
+# Go
+vendor/
+go.sum
+
+# =============================================================================
+# Compiled & Generated Files
+# =============================================================================
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.dylib
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# =============================================================================
+# Documentation
+# =============================================================================
+
+# Generated documentation
+/docs/build/
+/docs/_build/
+/site/
+
+# =============================================================================
+# Logs and Databases
+# =============================================================================
+
+*.log
+*.sql
+*.sqlite
+
+# =============================================================================
+# Runtime data
+# =============================================================================
+
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# =============================================================================
+# Dependency directories (keep at end)
+# =============================================================================
+
+node_modules/
+jspm_packages/
+bower_components/
+
+# =============================================================================
+# Rust Learning Ground Specific (Continued)
+# =============================================================================
+
+# Problem exercise files (these are auto-generated)
+problems/**/__pycache__/
+
+# Script outputs
+scripts/output/
+scripts/temp/
+
+# E2E test results
+e2e/results/
+e2e/screenshots/
+e2e/videos/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+
+# Local config overrides
+config.local.json
+config.local.yml
+config.local.yaml
+
+# Environment-specific configs (uncomment if needed)
+# .env.production
+# .env.staging
+# .env.development
+# .env.test
+
+# Misc development files
+*.local
+*.development
+*.production
+.dev/
+
+# Large binary files
+*.deb
+*.rpm
+*.pkg
+*.msi
+*.dmg
+*.app
+*.exe
+
+# =============================================================================
+# SECURITY: NEVER COMMIT THESE FILES
+# =============================================================================
+
+# Production secrets (use sops to encrypt before committing if needed)
+secrets/*.yaml
+!secrets/*.yaml.enc
+!secrets/README.md
+
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+server/.env
+web-v4/.env
+web/.env
+
+# Secret keys and credentials
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+secrets/
+server/data/keys/
+server/data/secrets/
+
+# Age encryption keys
+master.key
+*.age
+!*.age.pub
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Cloudflared binary
+cloudflared-linux-amd64.deb
+cloudflared*
+
+# Audit reports (keep the latest)
+AUDIT_REPORT_*.md
+AUDIT_VERIFICATION_*.md
+AUDIT_REPORT.md
+!AUDIT_REPORT.md
+AUDIT_REPORT_FINAL_*.md
+
+# Temporary image files
+Pasted image*.png
+Pasted image*.jpg
+
+# Omega audit temp files
+omegaaudit.txt
+
+# =============================================================================
+# Sovereign Deployment (age/sops secrets, nsjail, sandbox)
+# =============================================================================
+
+# age private keys (NEVER commit)
+master.key
+*.age
+!*.age.pub
+
+# Decrypted secrets (only encrypted versions should be committed)
+secrets/*.yaml
+!secrets/*.yaml.enc
+/run/secrets/
+
+# Sandbox artifacts
+/var/sandboxes/
+
+# Caddy runtime data
+caddy_data/
+caddy_config/
+
+# Victoria Metrics data
+vm_data/
+
+# Grafana data
+grafana_data/
+
+# Loki data
+loki_data/
+
+# Podman/Docker override
+compose.override.yml
+
+# Video/screenshot files
+*.mp4
+*.webm

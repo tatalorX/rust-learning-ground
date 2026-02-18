@@ -1,0 +1,54 @@
+# Caddyfile -- Modern TLS, HSTS, hardened headers
+# Sovereign deployment: all traffic through this single entry point
+
+{
+    # Use Let's Encrypt (or ZeroSSL as alternative CA)
+    email admin@yourdomain.com
+
+    # Uncomment for Tor hidden service:
+    # servers {
+    #     listener_wrappers {
+    #         http_redirect
+    #         tls
+    #     }
+    # }
+}
+
+yourdomain.com {
+    # -- Reverse proxy to API (internal network only) -----------------------
+    reverse_proxy api:8000 {
+        health_uri /api/v4/health
+        health_interval 30s
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+
+    # -- Security headers ---------------------------------------------------
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "no-referrer"
+        Permissions-Policy "geolocation=(), camera=(), microphone=()"
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+
+        # Remove server fingerprinting
+        -Server
+        -X-Powered-By
+    }
+
+    # -- Rate limiting (built into Caddy v2.7+) -----------------------------
+    # Protects code execution endpoint
+    @exec_endpoint path /api/v4/exercises/*/run /api/v4/exercises/*/submit
+    rate_limit @exec_endpoint 10r/m
+
+    # -- Logging: structured, no PII ----------------------------------------
+    log {
+        output file /var/log/caddy/access.log {
+            roll_size 100mb
+            roll_keep 5
+        }
+        format json
+    }
+}

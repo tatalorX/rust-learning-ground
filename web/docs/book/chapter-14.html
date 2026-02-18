@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 14: The Detective - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-detective: #5d6d7e;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #5d6d7e 100%);
+            color: white;
+            padding: 80px 40px 60px;
+        }
+        
+        .chapter-number {
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-title {
+            font-size: 3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+            max-width: 700px;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-detective);
+            background: linear-gradient(135deg, #f4f6f7 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-detective);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-detective);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(93, 109, 126, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: #515a5a;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: #f8f8f2;
+        }
+        
+        .detective-box {
+            background: linear-gradient(135deg, #2c3e50 0%, #5d6d7e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(93, 109, 126, 0.3);
+        }
+        
+        .detective-title {
+            color: #d5d8dc;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .kernel-wisdom {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .kernel-wisdom-title {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-detective);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="interlude-05.html">← Interlude V</a>
+            <a href="chapter-15.html">Chapter 15 →</a>
+        </div>
+        <div class="chapter-number">Chapter Fourteen</div>
+        <h1 class="chapter-title">The Detective: Debugging</h1>
+        <p class="chapter-subtitle">The art of investigation—reading stack traces, using debuggers, and finding the truth</p>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"Debugging is like being the detective in a crime movie where you are also the murderer."</p>
+            <p class="epigraph-author">— Filipe Fortes</p>
+        </div>
+        
+        <p class="drop-cap">Bugs are mysteries. They hide in the gap between what you wrote and what you meant. To debug is to investigate—to gather evidence, form hypotheses, test them, and ultimately find the truth. The <strong>Detective</strong> archetype embodies this methodical search for understanding.</p>
+        
+        <div class="detective-box">
+            <div class="detective-title">🔍 The Detective Speaks</div>
+            <p>"I investigate. I do not guess. I read stack traces like crime scene reports, looking for the exact moment things went wrong. I use debuggers to step through code, examining the state at each point. I add logging to trace the flow of execution."</p>
+            <p style="margin-top: 15px;">"The bug is always there, in the code. My job is to find it."</p>
+        </div>
+        
+        <h2>The Stack Trace</h2>
+        
+        <p>When Rust panics, it produces a stack trace. Read it from bottom to top:</p>
+        
+        <pre><code>thread 'main' panicked at 'index out of bounds', src/main.rs:42:17
+stack backtrace:
+   0: rust_begin_unwind
+   1: core::panicking::panic_fmt
+   2: core::panicking::panic_bounds_check
+   3: myapp::process_data             &lt;-- Your code
+             at ./src/main.rs:42
+   4: myapp::main
+             at ./src/main.rs:10</code></pre>
+        
+        <p>The panic occurred at line 42 in <code>process_data</code>, which was called from <code>main</code> at line 10.</p>
+        
+        <h2>Using GDB/LLDB</h2>
+        
+        <pre><code># Build with debug symbols
+$ cargo build
+
+# Start debugger
+$ gdb target/debug/myapp
+
+# Set breakpoint
+(gdb) break myapp::process_data
+
+# Run
+(gdb) run
+
+# Step through
+(gdb) next
+(gdb) step
+(gdb) continue
+
+# Inspect variables
+(gdb) print variable_name
+(gdb) info locals</code></pre>
+        
+        <div class="kernel-wisdom">
+            <div class="kernel-wisdom-title">⚙️ Kernel Wisdom: Debugging the Kernel</div>
+            <p>"Kernel debugging is the hardest kind—one wrong move and the machine hangs. We use serial consoles, JTAG probes, and printk. In userspace Rust, you have luxury: GDB, sanitizers, and reproducible test cases. Use these tools."</p>
+        </div>
+        
+        <h2>The dbg! Macro</h2>
+        
+        <p>Rust provides a convenient debugging macro:</p>
+        
+        <pre><code>let x = dbg!(calculate_value());  // Prints: [src/main.rs:10] x = 42</code></pre>
+        
+        <p>Use it liberally when tracking down issues. Remove before committing.</p>
+        
+        <h2>Sanitizers</h2>
+        
+        <pre><code># AddressSanitizer: detects memory errors
+RUSTFLAGS="-Z sanitizer=address" cargo run
+
+# ThreadSanitizer: detects data races
+RUSTFLAGS="-Z sanitizer=thread" cargo run</code></pre>
+        
+        <p>Go to Exercises 085-095 to practice debugging techniques.</p>
+        
+        <footer class="chapter-footer">
+            <a href="interlude-05.html" class="nav-button">← Interlude V</a>
+            <span style="color: var(--text-muted);">Chapter 14 of 18</span>
+            <a href="chapter-15.html" class="nav-button">Chapter 15 →</a>
+        </footer>
+    
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: Core Dump Analysis</div>
+            <p>When a program crashes, you can analyze the core dump:</p>
+            <pre style="background: #2d3748; margin: 10px 0;"><code>$ ulimit -c unlimited  # Enable core dumps
+$ ./myapp              # Run until crash
+$ gdb ./myapp core     # Analyze the dump
+
+(gdb) bt               # Show backtrace
+(gdb) info registers   # Show CPU registers
+(gdb) x/10x $rsp       # Examine stack memory</code></pre>
+            <p>Core dumps preserve the entire program state at crash time.</p>
+        </div>
+
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

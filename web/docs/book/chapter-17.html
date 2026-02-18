@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 17: The Hero - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-hero: #ff5722;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #bf360c 0%, #ff5722 100%);
+            color: white;
+            padding: 80px 40px 60px;
+        }
+        
+        .chapter-number {
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-title {
+            font-size: 3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+            max-width: 700px;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-hero);
+            background: linear-gradient(135deg, #fbe9e7 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #bf360c;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-hero);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-hero);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 87, 34, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: #d84315;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: #f8f8f2;
+        }
+        
+        .hero-box {
+            background: linear-gradient(135deg, #bf360c 0%, #ff5722 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(255, 87, 34, 0.3);
+        }
+        
+        .hero-title {
+            color: #ffccbc;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .kernel-wisdom {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .kernel-wisdom-title {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-hero);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="chapter-16.html">← Chapter 16</a>
+            <a href="chapter-18.html">Chapter 18 →</a>
+        </div>
+        <div class="chapter-number">Chapter Seventeen</div>
+        <h1 class="chapter-title">The Hero: Unsafe Rust</h1>
+        <p class="chapter-subtitle">When the safe path is blocked, the Hero ventures into danger—armed with knowledge and discipline</p>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"The cave you fear to enter holds the treasure you seek."</p>
+            <p class="epigraph-author">— Joseph Campbell</p>
+        </div>
+        
+        <p class="drop-cap">We began this journey with the Shadow—the unsafe blocks that lurk beneath safe abstractions. Now, at the end of our exploration, we return to this territory not as novices but as masters. The <strong>Hero</strong> does not avoid danger; they confront it with preparation, skill, and purpose.</p>
+        
+        <p>Unsafe Rust is not a betrayal of Rust's principles—it is their foundation. The standard library uses unsafe to implement safe abstractions. FFI requires unsafe to interface with other languages. Performance-critical code sometimes needs unsafe to squeeze out the last cycles. The Hero knows when to use it and how to contain it.</p>
+        
+        <div class="hero-box">
+            <div class="hero-title">⚔️ The Hero Speaks</div>
+            <p>"I do not enter the unsafe block lightly. I bring with me invariants—conditions that must hold for safety. I document them. I verify them. I contain the unsafe code in the smallest scope possible, exposing only safe interfaces to the world."</p>
+            <p style="margin-top: 15px;">"The unsafe block is my weapon. Used wisely, it defeats impossible problems. Used recklessly, it destroys everything."</p>
+        </div>
+        
+        <h2>Five Powers of Unsafe</h2>
+        
+        <p>Unsafe Rust grants five capabilities:</p>
+        
+        <ul style="margin: 20px 0 20px 30px;">
+            <li>Dereference raw pointers</li>
+            <li>Call unsafe functions</li>
+            <li>Access or modify mutable static variables</li>
+            <li>Implement unsafe traits</li>
+            <li>Access fields of unions</li>
+        </ul>
+        
+        <h2>Raw Pointer Dereferencing</h2>
+        
+        <pre><code>let mut num = 5;
+let r1 = &amp;num as *const i32;
+let r2 = &amp;mut num as *mut i32;
+
+unsafe {
+    println!("r1 is: {}", *r1);
+    *r2 = 10;
+    println!("r2 is now: {}", *r2);
+}</code></pre>
+        
+        <h2>Implementing Safe Abstractions</h2>
+        
+        <p>The pattern: unsafe implementation, safe interface:</p>
+        
+        <pre><code>pub struct SafeBuffer&lt;T&gt; {
+    ptr: *mut T,
+    len: usize,
+    cap: usize,
+}
+
+impl&lt;T&gt; SafeBuffer&lt;T&gt; {
+    // Safe public interface
+    pub fn new() -> Self {
+        // ... safe initialization
+    }
+    
+    pub fn get(&amp;self, index: usize) -> Option&lt;&amp;T&gt; {
+        if index &lt; self.len {
+            unsafe { Some(&amp;*self.ptr.add(index)) }
+        } else {
+            None
+        }
+    }
+}</code></pre>
+        
+        <div class="kernel-wisdom">
+            <div class="kernel-wisdom-title">⚙️ Kernel Wisdom: The Safety Contract</div>
+            <p>"Every unsafe block is a contract with the compiler. You promise: I have verified the preconditions. I have checked the invariants. I guarantee this is safe. Break the contract, and undefined behavior follows. Keep the contract, and you get the power of C with the safety of Rust at the boundaries."</p>
+        </div>
+        
+        <h2>Unsafe Traits</h2>
+        
+        <p>Some traits are unsafe to implement because the compiler cannot verify their guarantees:</p>
+        
+        <pre><code>unsafe trait Zeroable {
+    fn zero() -> Self;
+}
+
+unsafe impl Zeroable for u32 {
+    fn zero() -> Self { 0 }
+}
+
+unsafe impl&lt;T: Zeroable&gt; Zeroable for [T; 4] {
+    fn zero() -> Self {
+        [T::zero(), T::zero(), T::zero(), T::zero()]
+    }
+}</code></pre>
+        
+        <div class="hero-box">
+            <div class="hero-title">⚔️ The Hero's Oath</div>
+            <p>"I swear to use unsafe only when necessary. I swear to document every invariant. I swear to contain unsafe code behind safe interfaces. I swear to audit my unsafe code more carefully than any other. I am the Hero—not because I avoid danger, but because I face it prepared."</p>
+        </div>
+        
+        <p>Go to Exercises 011-020 to practice unsafe Rust in controlled environments.</p>
+        
+        <footer class="chapter-footer">
+            <a href="chapter-16.html" class="nav-button">← Chapter 16</a>
+            <span style="color: var(--text-muted);">Chapter 17 of 18</span>
+            <a href="chapter-18.html" class="nav-button">Chapter 18 →</a>
+        </footer>
+    
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: Unsafe Block Guidelines</div>
+            <p>Keep unsafe blocks minimal and documented:</p>
+            <pre style="background: #2d3748; margin: 10px 0;"><code>// BAD: Large unsafe block
+unsafe {
+    let x = ptr.read();
+    let y = another_ptr.read();
+    complex_logic(x, y);
+}
+
+// GOOD: Small, documented blocks
+// SAFETY: ptr is valid and aligned (checked above)
+let x = unsafe { ptr.read() };
+// SAFETY: another_ptr is valid (invariant of struct)
+let y = unsafe { another_ptr.read() };
+complex_logic(x, y);</code></pre>
+        </div>
+
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

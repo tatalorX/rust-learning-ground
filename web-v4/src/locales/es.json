@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "exercises": "Ejercicios",
+    "rustBook": "Libro de Rust",
+    "events": "Eventos",
+    "leaderboard": "Clasificación",
+    "achievements": "Logros",
+    "documentation": "Documentación",
+    "settings": "Configuración",
+    "profile": "Perfil"
+  },
+  "home": {
+    "hero": {
+      "badge": "Domina Rust con práctica",
+      "title": "Aprende",
+      "titleHighlight": "Programación en Rust",
+      "subtitle": "De la Manera Correcta",
+      "description": "Ejercicios interactivos, retroalimentación instantánea y una experiencia de aprendizaje gamificada diseñada para desarrolladores modernos. Comienza tu viaje con Rust hoy.",
+      "startLearning": "Comenzar a Aprender",
+      "createAccount": "Crear Cuenta"
+    },
+    "features": {
+      "exercises": {
+        "title": "300+ Ejercicios",
+        "description": "Desde lo básico hasta patrones avanzados"
+      },
+      "feedback": {
+        "title": "Retroalimentación Instantánea",
+        "description": "Ejecuta y prueba tu código al instante"
+      },
+      "streak": {
+        "title": "Sistema de Racha",
+        "description": "Construye consistencia con objetivos diarios"
+      },
+      "achievements": {
+        "title": "Logros",
+        "description": "Desbloquea insignias mientras avanzas"
+      }
+    },
+    "editor": {
+      "title": "Editor de Código Interactivo",
+      "description": "Escribe código Rust directamente en tu navegador con nuestro editor Monaco. Compilación instantánea, mensajes de error claros y ejecución sin problemas.",
+      "features": [
+        "Resaltado de sintaxis para Rust",
+        "Auto-completado y sugerencias",
+        "Detección de errores en tiempo real",
+        "Ejecución de código con un clic"
+      ],
+      "tryExercise": "Probar Ejercicio 1"
+    },
+    "whyRust": {
+      "title": "¿Por Qué Aprender Rust?",
+      "description": "Rust es el lenguaje de programación más amado, combinando el rendimiento de C++ con seguridad de memoria y experiencia moderna de desarrollador.",
+      "features": [
+        {
+          "title": "Seguridad de Memoria",
+          "description": "Sin segfaults, garantizado por el compilador"
+        },
+        {
+          "title": "Alto Rendimiento",
+          "description": "Comparable a C y C++"
+        },
+        {
+          "title": "Herramientas Modernas",
+          "description": "Cargo, crates.io y más"
+        }
+      ]
+    },
+    "cta": {
+      "title": "¿Listo para Comenzar tu Viaje?",
+      "description": "Únete a miles de desarrolladores aprendiendo Rust de la manera correcta.",
+      "button": "Comenzar a Aprender Gratis"
+    }
+  },
+  "exercises": {
+    "title": "Ejercicios",
+    "subtitle": "ejercicios disponibles",
+    "completed": "completado",
+    "difficulty": {
+      "beginner": "Principiante",
+      "easy": "Fácil",
+      "medium": "Medio",
+      "hard": "Difícil",
+      "expert": "Experto"
+    },
+    "status": {
+      "completed": "Completado",
+      "inProgress": "En Progreso",
+      "notStarted": "No Iniciado"
+    },
+    "filters": {
+      "search": "Buscar ejercicios...",
+      "difficulty": "Dificultad",
+      "category": "Categoría",
+      "all": "Todos"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "submit": "Enviar",
+    "run": "Ejecutar",
+    "reset": "Restablecer",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "continue": "Continuar",
+    "back": "Atrás",
+    "close": "Cerrar",
+    "open": "Abrir",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "info": "Información"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "username": "Nombre de Usuario",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes una cuenta?",
+    "hasAccount": "¿Ya tienes una cuenta?"
+  },
+  "gamification": {
+    "xp": "PX",
+    "level": "Nivel",
+    "streak": "Racha",
+    "streakDays": "días de racha",
+    "focusSessions": "Sesiones de Enfoque"
+  }
+}

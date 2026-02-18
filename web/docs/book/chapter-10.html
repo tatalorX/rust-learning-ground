@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: Zero-Cost Abstractions - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-zero: #27ae60;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #145a32 0%, #27ae60 100%);
+            color: white;
+            padding: 80px 40px 60px;
+        }
+        
+        .chapter-number {
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-title {
+            font-size: 3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+            max-width: 700px;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-zero);
+            background: linear-gradient(135deg, #e9f7ef 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #145a32;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-zero);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-zero);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(39, 174, 96, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: #1e8449;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: #f8f8f2;
+        }
+        
+        .kernel-wisdom {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .kernel-wisdom-title {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-zero);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="chapter-09.html">← Chapter 9</a>
+            <a href="chapter-11.html">Chapter 11 →</a>
+        </div>
+        <div class="chapter-number">Chapter Ten</div>
+        <h1 class="chapter-title">Zero-Cost Abstractions</h1>
+        <p class="chapter-subtitle">What you do not use, you do not pay for—and what you do use, you could not hand-code any better</p>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"C++ is a language where you pay for what you use. Rust is a language where you only pay for what you use—and you cannot hand-code better than what the compiler produces."</p>
+            <p class="epigraph-author">— Rust Design Principle</p>
+        </div>
+        <div class="zero-box" style="background: linear-gradient(135deg, #145a32 0%, #27ae60 100%); color: white; padding: 30px; border-radius: 8px; margin: 30px 0; box-shadow: 0 4px 20px rgba(39, 174, 96, 0.3);">
+            <div style="color: #d5f5e3; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9em; margin-bottom: 15px;">🎭 The Optimizer Speaks</div>
+            <p>"I am the pursuit of perfection through elimination. I remove what is unnecessary until only essence remains. I am not about making things faster—I am about making them invisible, transparent, as if they were never there at all."</p>
+            <p style="margin-top: 15px;">"Zero-cost is not a goal. It is a philosophy. The belief that elegance and efficiency are the same thing."</p>
+        </div>
+
+        
+        <p class="drop-cap">There is a profound difference between a language that <em>allows</em> efficiency and a language that <em>guarantees</em> it. In many high-level languages, abstraction comes with runtime cost—virtual method tables, garbage collection pauses, boxing overhead. The programmer must choose between clarity and speed. This is a false dichotomy.</p>
+        
+        <p>Rust rejects this tradeoff through <strong>zero-cost abstractions</strong>. The high-level constructs you write—iterators, closures, trait objects—compile down to code as efficient as hand-written assembly. The abstractions exist for the programmer, not the machine. The machine sees only the optimized result.</p>
+        
+        <div class="kernel-wisdom">
+            <div class="kernel-wisdom-title">⚙️ Kernel Wisdom: Abstraction Without Guilt</div>
+            <p>"In the kernel, we used to write everything in assembly because we could not trust compilers to generate efficient code. Then C came along with 'sufficiently smart compiler' promises. Rust is the first language where I believe the promises—because I've seen the assembly output."</p>
+        </div>
+        
+        <h2>The Iterator Example</h2>
+        
+        <p>Consider this high-level code:</p>
+        
+        <pre><code>let sum: i32 = (0..100)
+    .filter(|x| x % 2 == 0)
+    .map(|x| x * x)
+    .sum();</code></pre>
+        
+        <p>This looks elegant, but what does the machine see? With optimizations enabled, LLVM produces assembly equivalent to:</p>
+        
+        <pre><code>// Hand-optimized equivalent
+let mut sum = 0;
+for x in 0..100 {
+    if x % 2 == 0 {
+        sum += x * x;
+    }
+}
+
+// Or even more optimized—loop unrolling, SIMD, etc.</code></pre>
+        
+        <p>The iterator chain has been <strong>completely fused</strong> into a single loop. No intermediate allocations, no virtual calls, no overhead. This is zero-cost abstraction in action.</p>
+        
+        <h2>Monomorphization: Pay for What You Use</h2>
+        
+        <p>Generic functions in Rust use <strong>monomorphization</strong>—the compiler generates a specialized version of the function for each concrete type used:</p>
+        
+        <pre><code>fn process&lt;T: Display&gt;(item: T) {
+    println!("{}", item);
+}
+
+process(42);      // Generates process_i32
+process("hello"); // Generates process_str
+process(3.14);    // Generates process_f64</code></pre>
+        
+        <p>At runtime, there is no generic <code>process</code> function—only the specific versions that were actually called. This is the same code you would write by hand, but without the duplication.</p>
+        
+        <h2>Trait Objects vs Generics</h2>
+        
+        <p>When you need runtime polymorphism, you use <code>dyn Trait</code> and pay the small cost of dynamic dispatch. When you do not need it, generics give you static dispatch with zero overhead:</p>
+        
+        <pre><code>// Static dispatch - monomorphized, zero overhead
+fn use_generic&lt;T: Draw&gt;(item: T) {
+    item.draw();  // Direct call, inlined
+}
+
+// Dynamic dispatch - vtable lookup, small overhead
+fn use_trait_object(item: &dyn Draw) {
+    item.draw();  // Indirect call through vtable
+}</code></pre>
+        
+        <p>Rust gives you the choice. You pay only for the abstraction you actually need.</p>
+        
+        <div class="kernel-wisdom">
+            <div class="kernel-wisdom-title">⚙️ Kernel Wisdom: The Cost of Flexibility</div>
+            <p>"Every abstraction has a cost. The question is: when do you pay it? In Rust, you pay at compile time (longer compile times for monomorphization) rather than runtime. For systems code, this is the right tradeoff."</p>
+        </div>
+        
+        <h2>Assembly Verification</h2>
+        
+        <p>The serious systems programmer verifies claims. Use <code>cargo asm</code> or <code>godbolt.org</code> to inspect the generated assembly:</p>
+        
+        <pre><code># Install cargo-asm
+$ cargo install cargo-asm
+
+# View assembly for a function
+$ cargo asm --lib my_function</code></pre>
+        
+        <p>When you see your elegant high-level code compiled to tight loops with no prologue/epilogue overhead, no unnecessary moves, no hidden allocations—that is when you know Rust's promises are real.</p>
+        
+        <p>Go to Exercises 101-110 to practice writing efficient abstractions and verifying their assembly output.</p>
+        
+        <footer class="chapter-footer">
+            <a href="chapter-09.html" class="nav-button">← Chapter 9</a>
+            <span style="color: var(--text-muted);">Chapter 10 of 18</span>
+            <a href="chapter-11.html" class="nav-button">Chapter 11 →</a>
+        </footer>
+    
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: Monomorphization Cost</div>
+            <p>Generic code is duplicated for each concrete type:</p>
+            <pre style="background: #2d3748; margin: 10px 0;"><code>// This generic:
+fn process<T: Display>(x: T) { println!("{}", x); }
+
+// Generates monomorphized versions:
+// process_i32, process_str, process_bool, etc.
+
+// Each is a separate function in the binary.
+// This increases code size but enables inlining
+// and zero-cost abstractions.</code></pre>
+            <p>Use <code>dyn Trait</code> when binary size matters more than performance.</p>
+        </div>
+
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

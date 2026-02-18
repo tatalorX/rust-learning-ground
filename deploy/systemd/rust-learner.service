@@ -1,0 +1,43 @@
+# /etc/systemd/system/rust-learner.service
+# Hardened systemd service unit for the Rust Learning Platform API
+
+[Unit]
+Description=Rust Learning Platform API
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=exec
+User=rustlearner
+Group=rustlearner
+WorkingDirectory=/opt/rust-learner/server
+ExecStart=/opt/rust-learner/venv/bin/uvicorn app.main:app \
+    --host 10.0.1.2 --port 8000 --workers 4
+
+# -- Systemd sandboxing (free hardening layer) ----------------------------
+NoNewPrivileges=yes
+PrivateTmp=yes              # Isolated /tmp
+PrivateDevices=yes          # No access to /dev
+ProtectSystem=strict        # Read-only system dirs
+ProtectHome=yes             # No access to /home
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictNamespaces=~user    # Can't create new user namespaces (nsjail handles this)
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+SystemCallFilter=@system-service  # Whitelist systemd's "sane service" syscall set
+SystemCallErrorNumber=EPERM
+
+# -- Resource limits ------------------------------------------------------
+LimitNOFILE=65536
+LimitNPROC=512
+MemoryMax=2G
+CPUQuota=200%
+
+# -- Environment from sops-decrypted secrets ------------------------------
+EnvironmentFile=/run/secrets/app_secrets
+
+[Install]
+WantedBy=multi-user.target

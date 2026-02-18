@@ -1,0 +1,2870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive platform for learning Rust through progressive exercises and projects">
+    <meta name="theme-color" content="#0f172a">
+    <title>🦀 Rust Learning Ground - Master Rust Programming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="api-config.js" defer></script>
+    <script src="website-i18n.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1f2937;
+            --bg-elevated: #283548;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-orange: #f97316;
+            --accent-orange-light: #fb923c;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-yellow: #eab308;
+            --accent-cyan: #06b6d4;
+            --accent-red: #ef4444;
+            --border-color: #374151;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --shadow-glow-blue: 0 0 20px rgba(59, 130, 246, 0.3);
+            --shadow-glow-green: 0 0 20px rgba(16, 185, 129, 0.3);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition-fast: 150ms ease;
+            --transition-normal: 250ms ease;
+            --transition-slow: 350ms ease;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-orange);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 10000;
+            border-radius: 0 0 4px 0;
+            transition: top 0.3s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body { 
+            background: var(--bg-primary);
+            color: var(--text-primary); 
+            font-family: 'Inter', system-ui, sans-serif; 
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(249, 115, 22, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(2%, 2%) rotate(1deg); }
+            66% { transform: translate(-1%, 1%) rotate(-1deg); }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.95) 0%, rgba(17, 24, 39, 0.8) 100%);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logo { 
+            font-size: 1.6em; 
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-icon {
+            font-size: 1.3em;
+            animation: crabFloat 3s ease-in-out infinite;
+            display: inline-block;
+        }
+        
+        @keyframes crabFloat {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-3px) rotate(5deg); }
+        }
+        
+        .version {
+            font-size: 0.7em; 
+            color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.15);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            padding: 10px 18px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .nav-link.active {
+            color: var(--accent-orange);
+            background: rgba(249, 115, 22, 0.1);
+        }
+        
+        /* Stats Container */
+        .stats-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .stat-box {
+            background: var(--bg-tertiary);
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            min-width: 100px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow-blue);
+        }
+        
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+        }
+        
+        .stat-box.xp::before {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow));
+        }
+        
+        .stat-label {
+            font-size: 0.7em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .stat-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 2px;
+        }
+        
+        .stat-box.xp .stat-value {
+            color: var(--accent-green);
+        }
+        
+        .user-menu {
+            margin-left: 12px;
+        }
+        
+        .login-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .signup-btn {
+            background: transparent;
+            color: var(--accent-orange);
+            border: 1px solid var(--accent-orange);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-right: 8px;
+        }
+
+        .signup-btn:hover {
+            background: rgba(249, 115, 22, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-tertiary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .user-info:hover {
+            border-color: var(--accent-blue);
+        }
+        
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: 700;
+        }
+        
+        .user-name {
+            font-size: 0.9em;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 30px 60px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-green);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-orange) 50%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3em;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 1.1em;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary-large {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-light) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-primary-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.5);
+        }
+
+        .btn-secondary-large {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary-large:hover {
+            background: var(--bg-elevated);
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Joke of the Day Banner */
+        .joke-banner {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 24px 32px;
+            margin: 40px auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .joke-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue), var(--accent-cyan));
+        }
+
+        .joke-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: var(--accent-purple);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .joke-text {
+            font-size: 1.1em;
+            color: var(--text-primary);
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .joke-punchline {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(139, 92, 246, 0.3);
+            color: var(--accent-cyan);
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .joke-punchline:hover {
+            color: var(--accent-blue);
+        }
+
+        .joke-punchline.hidden {
+            filter: blur(8px);
+            user-select: none;
+        }
+
+        .joke-date {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 0.75em;
+            color: var(--text-muted);
+        }
+
+        /* Rust Info Section */
+        .rust-info-section {
+            padding: 80px 30px;
+            background: linear-gradient(180deg, transparent 0%, rgba(17, 24, 39, 0.5) 50%, transparent 100%);
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header-center {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            color: var(--accent-orange);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-purple));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-orange);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Rust Code Example */
+        .code-showcase {
+            padding: 80px 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .code-window {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .code-header {
+            background: var(--bg-tertiary);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ff5f56; }
+        .code-dot.yellow { background: #ffbd2e; }
+        .code-dot.green { background: #27c93f; }
+
+        .code-filename {
+            margin-left: 12px;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .code-content {
+            padding: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-content .keyword { color: #ff7b72; }
+        .code-content .function { color: #d2a8ff; }
+        .code-content .string { color: #a5d6ff; }
+        .code-content .comment { color: #8b949e; }
+        .code-content .type { color: #ffa657; }
+
+        /* Progress Bar */
+        .progress-section {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .progress-content {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .progress-title {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .progress-percentage {
+            font-size: 0.9em;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        .progress-bar-container {
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green) 0%, var(--accent-blue) 50%, var(--accent-purple) 100%);
+            border-radius: 4px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+            animation: progressShimmer 2s infinite;
+        }
+        
+        @keyframes progressShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Controls Bar */
+        .controls-section {
+            background: var(--bg-primary);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .controls-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .filter-btn:hover {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border-color: var(--accent-blue);
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+        
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-tertiary);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .view-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all var(--transition-fast);
+        }
+        
+        .view-btn:hover {
+            color: var(--text-secondary);
+        }
+        
+        .view-btn.active {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 30px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-header:first-child {
+            margin-top: 0;
+        }
+        
+        .section-icon {
+            font-size: 1.3em;
+        }
+        
+        .section-title-sm {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .section-count {
+            margin-left: auto;
+            font-size: 0.8em;
+            color: var(--text-muted);
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        
+        /* Grid Layout */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); 
+            gap: 12px; 
+        }
+        
+        .grid.compact {
+            grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+            gap: 8px;
+        }
+        
+        /* Exercise Card */
+        .box { 
+            background: var(--bg-secondary); 
+            border: 1px solid var(--border-color); 
+            padding: 16px 0; 
+            text-align: center; 
+            border-radius: var(--radius-md); 
+            cursor: pointer; 
+            transition: all var(--transition-normal);
+            font-weight: 600;
+            color: var(--text-muted);
+            position: relative;
+            user-select: none;
+            overflow: hidden;
+        }
+        
+        .box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: transparent;
+            transition: background var(--transition-fast);
+        }
+        
+        .box:hover { 
+            border-color: var(--accent-blue); 
+            color: var(--text-primary); 
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-glow-blue);
+            background: var(--bg-tertiary);
+        }
+        
+        .box:hover::before {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+        }
+        
+        .box.project {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-color: rgba(99, 102, 241, 0.4);
+            color: #a5b4fc;
+        }
+        
+        .box.project::before {
+            background: linear-gradient(90deg, var(--accent-purple), #a855f7);
+        }
+        
+        .box.project:hover {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+            color: #c4b5fd;
+        }
+        
+        .box.solved { 
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%); 
+            color: var(--accent-green); 
+            border-color: rgba(16, 185, 129, 0.5); 
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+        }
+        
+        .box.solved::before {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+        }
+        
+        .box.solved:hover, .box.solved:focus-visible {
+            box-shadow: var(--shadow-glow-green);
+            transform: translateY(-3px) scale(1.05);
+            color: #34d399;
+        }
+        
+        .box .number {
+            font-size: 1em;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .box .name {
+            font-size: 0.65em;
+            font-weight: 500;
+            margin-top: 4px;
+            opacity: 0.8;
+            line-height: 1.2;
+            max-height: 1.4em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 4px;
+            display: none;
+        }
+        
+        .grid:not(.compact) .box .name {
+            display: block;
+        }
+        
+        .box .type-icon {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-size: 0.65em;
+            opacity: 0.5;
+        }
+        
+        .box .difficulty-indicator {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 2px;
+        }
+        
+        .box .difficulty-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            opacity: 0.3;
+        }
+        
+        .box .difficulty-dot.active {
+            opacity: 1;
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 24px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+        }
+        
+        .legend-box {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .legend-box.exercise { background: var(--bg-secondary); }
+        .legend-box.project { 
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%); 
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+        .legend-box.solved { 
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%); 
+            border-color: rgba(16, 185, 129, 0.5); 
+        }
+
+        /* Leaderboard Section */
+        .leaderboard-section {
+            padding: 60px 30px;
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.5) 0%, transparent 100%);
+            position: relative;
+            z-index: 2;
+        }
+
+        .leaderboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .leaderboard-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .leaderboard-header {
+            background: var(--bg-tertiary);
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .leaderboard-title {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .leaderboard-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s;
+        }
+
+        .leaderboard-item:last-child {
+            border-bottom: none;
+        }
+
+        .leaderboard-item:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .rank {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .rank.gold { background: linear-gradient(135deg, #ffd700, #ffb700); color: #000; }
+        .rank.silver { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); color: #000; }
+        .rank.bronze { background: linear-gradient(135deg, #cd7f32, #b87333); color: #fff; }
+        .rank.other { background: var(--bg-elevated); color: var(--text-secondary); }
+
+        .leaderboard-user {
+            flex: 1;
+        }
+
+        .leaderboard-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .leaderboard-meta {
+            font-size: 0.8em;
+            color: var(--text-muted);
+        }
+
+        .leaderboard-score {
+            font-weight: 700;
+            color: var(--accent-green);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Modal */
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+        
+        .modal-overlay.visible {
+            opacity: 1;
+        }
+        
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%) scale(0.95);
+            background: var(--bg-secondary); 
+            border-radius: var(--radius-lg); 
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg), 0 0 40px rgba(0,0,0,0.5); 
+            width: 90%;
+            max-width: 600px; 
+            max-height: 85vh;
+            overflow-y: auto;
+            z-index: 100;
+            opacity: 0;
+            transition: all var(--transition-normal);
+        }
+        
+        .modal.visible {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+        
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0;
+            font-size: 1.4em;
+        }
+        
+        .type-badge {
+            font-size: 0.55em; 
+            padding: 5px 12px; 
+            border-radius: 20px; 
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .type-badge.project {
+            background: linear-gradient(135deg, var(--accent-purple), #a855f7);
+        }
+        
+        .type-badge.solved {
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            background: var(--bg-primary);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+        
+        .info-label {
+            font-size: 0.7em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .info-value {
+            font-size: 0.95em;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .info-value.skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        
+        .path-display {
+            background: var(--bg-primary);
+            padding: 14px;
+            border-radius: var(--radius-md);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin: 16px 0;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .path-display::before {
+            content: '📁';
+        }
+        
+        .cmd-display {
+            background: #000;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-green);
+            margin: 16px 0;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cmd-display::before {
+            content: '$';
+            color: var(--accent-yellow);
+        }
+        
+        .hint-box {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.1) 0%, rgba(234, 179, 8, 0.05) 100%);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        .hint-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-yellow);
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        
+        .hint-text {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-green), #059669);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-tertiary {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-tertiary:hover {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border-color: var(--accent-blue);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .status-message {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.9em;
+            display: none;
+        }
+        
+        .status-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        .status-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-primary);
+        }
+        
+        .prereq-info {
+            font-size: 0.8em;
+            color: var(--text-muted);
+        }
+        
+        .prereq-info a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        /* Achievement Toast */
+        .toast-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toast {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-green);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideInRight 0.4s ease;
+            max-width: 350px;
+        }
+        
+        .toast-icon {
+            font-size: 1.5em;
+        }
+        
+        .toast-content {
+            flex: 1;
+        }
+        
+        .toast-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .toast-message {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                opacity: 0; 
+                transform: translateX(100%) scale(0.9); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0) scale(1); 
+            }
+        }
+        
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-light) 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: none;
+            z-index: 40;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 30px rgba(249, 115, 22, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 30px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1em;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            line-height: 1.8;
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-orange);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85em;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 260px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+        }
+        
+        .mobile-nav.open {
+            left: 0;
+        }
+        
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        
+        .mobile-nav-overlay.open {
+            display: block;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        .mobile-nav-link {
+            display: block;
+            padding: 12px 0;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .mobile-nav-link:hover {
+            color: var(--accent-orange);
+        }
+        
+        /* iPad & Tablet Styles */
+        @media (max-width: 1024px) {
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            .hero {
+                padding: 60px 15px;
+            }
+            
+            .hero h1 {
+                font-size: 3em;
+            }
+            
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+                gap: 8px;
+                padding: 0 15px;
+            }
+            
+            .box {
+                min-height: 100px;
+            }
+            
+            .modal-content {
+                max-width: 90%;
+                margin: 20px auto;
+            }
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-nav {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2em;
+            }
+            
+            .hero p {
+                font-size: 1.1em;
+            }
+            
+            .stats-container {
+                gap: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .stat-box {
+                padding: 10px 15px;
+                min-width: 70px;
+            }
+            
+            .stat-value {
+                font-size: 1.3em;
+            }
+            
+            .stat-label {
+                font-size: 0.65em;
+            }
+            
+            .controls-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .filter-group {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .view-toggle {
+                align-self: center;
+            }
+            
+            .grid { 
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+                gap: 6px;
+                padding: 0 10px;
+            }
+            
+            .box {
+                padding: 10px 0;
+                min-height: 80px;
+            }
+            
+            .box-id {
+                font-size: 0.9em;
+            }
+            
+            .box-title {
+                font-size: 0.65em;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                justify-content: center;
+                padding: 12px 20px;
+                min-height: 48px; /* Touch-friendly */
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+            
+            .feature-card {
+                padding: 24px;
+            }
+            
+            .difficulty-dots {
+                gap: 3px;
+            }
+            
+            .difficulty-dot {
+                width: 5px;
+                height: 5px;
+            }
+            
+            .joke-container {
+                margin: 30px 15px;
+                padding: 24px;
+            }
+            
+            .section {
+                padding: 40px 15px;
+            }
+            
+            .footer {
+                padding: 30px 15px;
+            }
+        }
+        
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.7em;
+            }
+            
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .box {
+                min-height: 70px;
+            }
+            
+            .stat-box {
+                padding: 8px 10px;
+                min-width: 60px;
+            }
+            
+            .stat-value {
+                font-size: 1.1em;
+            }
+            
+            .filter-btn {
+                padding: 8px 12px;
+                font-size: 0.85em;
+            }
+        }
+        
+        /* Loading State */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--bg-elevated) 50%, var(--bg-tertiary) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--radius-md);
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+        
+        .empty-state-icon {
+            font-size: 4em;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        .empty-state-text {
+            font-size: 1.1em;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay" onclick="toggleMobileNav()"></div>
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <span style="font-weight: 600;">🦀 Menu</span>
+            <button class="mobile-nav-close" onclick="toggleMobileNav()">×</button>
+        </div>
+        <a href="/" class="mobile-nav-link">🏠 Home</a>
+        <a href="/docs/book/" class="mobile-nav-link">📚 The Book</a>
+        <a href="/school-dashboard.html" class="mobile-nav-link">🏫 School</a>
+        <a href="/auth.html" class="mobile-nav-link">🔐 Sign In</a>
+    </nav>
+    
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-group">
+                <a href="/" class="logo">
+                    <span class="logo-icon">🦀</span>
+                    Rust Learning Ground
+                </a>
+                <span class="version">v3.0</span>
+            </div>
+            <nav class="header-nav">
+                <a href="#exercises" class="nav-link" data-i18n="nav.exercises">Exercises</a>
+                <a href="/school-dashboard.html" class="nav-link" data-i18n="nav.school">🏫 School</a>
+                <a href="/docs/book/" class="nav-link" data-i18n="nav.book">📖 The Book</a>
+                <a href="#leaderboard" class="nav-link" data-i18n="nav.leaderboard">Leaderboard</a>
+            </nav>
+            <div class="stats-container">
+                <div class="stat-box xp">
+                    <div class="stat-label" data-i18n="stats.xp">Total XP</div>
+                    <div class="stat-value" id="xp-value">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label" data-i18n="stats.completed">Completed</div>
+                    <div class="stat-value" id="solved-value">0/170</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label" data-i18n="stats.streak">Streak</div>
+                    <div class="stat-value" id="streak-value">🔥 0</div>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileNav()">☰</button>
+                <div class="user-menu" id="user-menu">
+                    <button class="signup-btn" onclick="window.location.href='/auth.html?tab=register'" data-i18n="auth.signup">Sign Up</button>
+                    <button class="login-btn" onclick="window.location.href='/auth.html'" data-i18n="auth.signin">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span>🚀</span>
+            <span data-i18n="hero.badge">170+ Interactive Exercises</span>
+        </div>
+        <h1 data-i18n="hero.title">Master Rust Programming</h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+            Learn Rust through hands-on practice. From basic syntax to advanced algorithms, 
+            build real skills with our progressive learning path.
+        </p>
+        <div class="hero-cta">
+            <button class="btn-large btn-primary-large" onclick="window.location.href='/school-dashboard.html'">
+                <span>🏫</span> <span>School Platform</span>
+            </button>
+            <button class="btn-large btn-secondary-large" onclick="scrollToExercises()">
+                <span>🎯</span> <span data-i18n="hero.startLearning">Start Learning</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Joke of the Day Banner -->
+    <div class="joke-banner">
+        <span class="joke-date" id="joke-date"></span>
+        <div class="joke-header">
+            <span>😄</span>
+            <span data-i18n="joke.title">Joke of the Day</span>
+        </div>
+        <p class="joke-text" id="joke-setup" data-i18n="joke.loading">Loading today's programming joke...</p>
+        <div class="joke-punchline hidden" id="joke-punchline" onclick="revealPunchline()" data-i18n="joke.reveal">
+            Click to reveal punchline
+        </div>
+    </div>
+
+    <!-- Rust Info Section -->
+    <section class="rust-info-section" id="about">
+        <div class="section-container">
+            <div class="section-header-center reveal">
+                <span class="section-tag" data-i18n="why.tag">Why Rust?</span>
+                <h2 class="section-title" data-i18n="why.title">The Language of the Future</h2>
+                <p class="section-subtitle" data-i18n="why.subtitle">
+                    Rust is a systems programming language that runs blazingly fast, 
+                    prevents segfaults, and guarantees thread safety.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title" data-i18n="features.fast.title">Blazingly Fast</h3>
+                    <p class="feature-description">
+                        Rust is designed for performance. With zero-cost abstractions and 
+                        no runtime or garbage collector, it powers critical services at 
+                        companies like Mozilla, Dropbox, and Cloudflare.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title" data-i18n="features.safety.title">Memory Safety</h3>
+                    <p class="feature-description">
+                        Rust's ownership system guarantees memory safety without a garbage 
+                        collector. Say goodbye to null pointer dereferences, dangling pointers, 
+                        and data races at compile time.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🧵</div>
+                    <h3 class="feature-title" data-i18n="features.concurrency.title">Fearless Concurrency</h3>
+                    <p class="feature-description">
+                        Write concurrent code without the fear of data races. Rust's type 
+                        system ensures thread safety, making parallel programming accessible 
+                        and reliable.
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📦</div>
+                    <h3 class="feature-title" data-i18n="features.tooling.title">Great Tooling</h3>
+                    <p class="feature-description">
+                        Cargo, Rust's package manager and build system, makes dependency 
+                        management and building projects a breeze. Combined with rustfmt, 
+                        clippy, and rust-analyzer, you have a world-class development experience.
+                    </p>
+                </div>
+                <div class="feature-card reveal" onclick="window.location.href='/school-dashboard.html'" style="cursor: pointer; border: 2px solid var(--accent-orange);">
+                    <div class="feature-icon">🏫</div>
+                    <h3 class="feature-title">School Platform</h3>
+                    <p class="feature-description">
+                        <strong>New!</strong> Join classrooms, track your progress, earn ranks and titles. 
+                        Perfect for students and teachers. Features gamification with XP, 
+                        leaderboards, and achievement badges!
+                    </p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title" data-i18n="features.production.title">Production Ready</h3>
+                    <p class="feature-description">
+                        From web servers to operating systems, game engines to blockchain 
+                        platforms, Rust is used in production by hundreds of companies 
+                        worldwide. Your Rust skills are in high demand.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Showcase -->
+    <section class="code-showcase">
+        <div class="section-container">
+            <div class="section-header-center reveal">
+                <span class="section-tag" data-i18n="example.tag">Example</span>
+                <h2 class="section-title" data-i18n="example.title">Elegant & Expressive</h2>
+                <p class="section-subtitle" data-i18n="example.subtitle">
+                    Rust combines low-level control with high-level ergonomics.
+                </p>
+            </div>
+            
+            <div class="code-window reveal">
+                <div class="code-header">
+                    <div class="code-dot red"></div>
+                    <div class="code-dot yellow"></div>
+                    <div class="code-dot green"></div>
+                    <span class="code-filename">hello.rs</span>
+                </div>
+                <div class="code-content">
+<span class="comment">// Ownership in action - Rust's killer feature</span>
+<span class="keyword">fn</span> <span class="function">main</span>() {
+    <span class="keyword">let</span> s1 = <span class="type">String</span>::from(<span class="string">"hello"</span>);
+    <span class="keyword">let</span> len = <span class="function">calculate_length</span>(&s1); <span class="comment">// Borrow, don't steal</span>
+    <span class="function">println!</span>(<span class="string">"The length of '{}' is {}."</span>, s1, len);
+}
+
+<span class="keyword">fn</span> <span class="function">calculate_length</span>(s: &<span class="type">String</span>) -> <span class="type">usize</span> {
+    s.<span class="function">len</span>()
+} <span class="comment">// s goes out of scope, but the String isn't dropped</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Bar -->
+    <div class="progress-section" id="exercises">
+        <div class="progress-content">
+            <div class="progress-header">
+                <span class="progress-title" data-i18n="progress.title">📊 Your Learning Progress</span>
+                <span class="progress-percentage" id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Controls Bar -->
+    <div class="controls-section">
+        <div class="controls-content">
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all" data-i18n="filter.all">
+                    🎯 All
+                </button>
+                <button class="filter-btn" data-filter="unsolved" data-i18n="filter.todo">
+                    📝 To Do
+                </button>
+                <button class="filter-btn" data-filter="solved" data-i18n="filter.solved">
+                    ✅ Solved
+                </button>
+                <button class="filter-btn" data-filter="project" data-i18n="filter.projects">
+                    📦 Projects
+                </button>
+            </div>
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="normal" data-i18n="view.normal">Normal</button>
+                <button class="view-btn" data-view="compact" data-i18n="view.compact">Compact</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+        <!-- Beginner Section -->
+        <div class="section-header">
+            <span class="section-icon">🌱</span>
+            <span class="section-title-sm" data-i18n="section.beginner">Beginner (001-050)</span>
+            <span class="section-count" id="beginner-count">0/50</span>
+        </div>
+        <div class="grid" id="grid-beginner"></div>
+        
+        <!-- Intermediate Section -->
+        <div class="section-header">
+            <span class="section-icon">🚀</span>
+            <span class="section-title-sm" data-i18n="section.intermediate">Intermediate (051-100)</span>
+            <span class="section-count" id="intermediate-count">0/50</span>
+        </div>
+        <div class="grid" id="grid-intermediate"></div>
+        
+        <!-- Advanced Section -->
+        <div class="section-header">
+            <span class="section-icon">🔥</span>
+            <span class="section-title-sm" data-i18n="section.advanced">Advanced Algorithms (101-150)</span>
+            <span class="section-count" id="advanced-count">0/50</span>
+        </div>
+        <div class="grid" id="grid-advanced"></div>
+        
+        <!-- Projects Section -->
+        <div class="section-header">
+            <span class="section-icon">📦</span>
+            <span class="section-title-sm" data-i18n="section.projects">Real-World Projects (151-170)</span>
+            <span class="section-count" id="projects-count">0/20</span>
+        </div>
+        <div class="grid" id="grid-projects"></div>
+        
+        <!-- Real-World Section -->
+        <div class="section-header">
+            <span class="section-icon">🚀</span>
+            <span class="section-title-sm" data-i18n="section.realworld">Production & Real-World (171-320)</span>
+            <span class="section-count" id="realworld-count">0/150</span>
+        </div>
+        <div class="grid" id="grid-realworld"></div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box exercise"></div>
+                <span data-i18n="legend.exercise">Exercise (1-150)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box project"></div>
+                <span data-i18n="legend.project">Project (151-170)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box solved"></div>
+                <span data-i18n="legend.solved">Solved</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Leaderboard Section -->
+    <section class="leaderboard-section" id="leaderboard">
+        <div class="section-container">
+            <div class="section-header-center reveal">
+                <span class="section-tag" data-i18n="leaderboard.tag">Competition</span>
+                <h2 class="section-title" data-i18n="leaderboard.title">Leaderboards</h2>
+                <p class="section-subtitle" data-i18n="leaderboard.subtitle">
+                    See who's mastering Rust the fastest. Compete for the most efficient solutions!
+                </p>
+            </div>
+            
+            <div class="leaderboard-grid">
+                <div class="leaderboard-card reveal">
+                    <div class="leaderboard-header">
+                        <span>🏆</span>
+                        <span class="leaderboard-title" data-i18n="leaderboard.top">Top Learners</span>
+                    </div>
+                    <ul class="leaderboard-list" id="top-learners">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+                
+                <div class="leaderboard-card reveal">
+                    <div class="leaderboard-header">
+                        <span>⚡</span>
+                        <span class="leaderboard-title" data-i18n="leaderboard.efficient">Most Efficient Algorithms</span>
+                    </div>
+                    <ul class="leaderboard-list" id="efficiency-leaders">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-i18n="footer.title">🦀 Rust Learning Ground</h3>
+                <p>Master Rust programming through interactive exercises and real-world projects. Join thousands of learners on their journey to becoming Rustaceans.</p>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer.links">Quick Links</h3>
+                <a href="/">Home</a>
+                <a href="/auth.html">Sign In</a>
+                <a href="/editor.html">Web Editor</a>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer.resources">Resources</h3>
+                <a href="https://www.rust-lang.org/" target="_blank">Official Rust Website</a>
+                <a href="https://doc.rust-lang.org/book/" target="_blank">The Rust Book</a>
+                <a href="https://doc.rust-lang.org/rust-by-example/" target="_blank">Rust by Example</a>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer.community">Community</h3>
+                <a href="https://www.rust-lang.org/community" target="_blank">Join the Community</a>
+                <a href="https://users.rust-lang.org/" target="_blank">User Forum</a>
+                <a href="https://discord.gg/rust-lang" target="_blank">Discord Server</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Made with 🦀 by the Rust Learning Ground Team | Not affiliated with the Rust Foundation</p>
+        </div>
+    </footer>
+    
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="overlay" onclick="closeModal()"></div>
+    
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">
+                <span id="m-title">Problem</span>
+                <span id="m-type" class="type-badge">Exercise</span>
+                <span id="m-solved-badge" class="type-badge solved" style="display:none;">✓ Solved</span>
+            </h2>
+        </div>
+        
+        <div class="modal-body">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label" data-i18n="modal.category">Category</div>
+                    <div class="info-value" id="m-category">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-i18n="modal.difficulty">Difficulty</div>
+                    <div class="info-value" id="m-difficulty">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-i18n="modal.time">Est. Time</div>
+                    <div class="info-value" id="m-time">-</div>
+                </div>
+                <div class="info-item" style="grid-column: span 2;">
+                    <div class="info-label" data-i18n="modal.skills">Skills You'll Learn</div>
+                    <div class="info-value skills" id="m-skills">-</div>
+                </div>
+            </div>
+            
+            <div class="hint-box">
+                <div class="hint-title" data-i18n="modal.objective">💡 Learning Objective</div>
+                <div class="hint-text" id="m-hint">
+                    Select a problem to see the learning objective.
+                </div>
+            </div>
+            
+            <p style="color: var(--text-muted); margin-bottom: 8px; font-size: 0.85em;" data-i18n="modal.fileLocation">File Location:</p>
+            <div class="path-display" id="m-path">problems/XXX_exercise</div>
+            
+            <p style="color: var(--text-muted); margin-bottom: 8px; font-size: 0.85em;" data-i18n="modal.cli">CLI Command:</p>
+            <div class="cmd-display" id="m-cmd">./r.py run X</div>
+            
+            <div class="button-group">
+                <a href="#" id="web-editor-link" class="btn btn-primary">
+                    📝 <span data-i18n="modal.webEditor">Open in Web Editor</span>
+                </a>
+                <button onclick="openExternalEditor()" class="btn btn-secondary" id="open-btn">
+                    🚀 <span data-i18n="modal.vscode">Open in VS Code</span>
+                </button>
+                <button onclick="closeModal()" class="btn btn-tertiary">
+                    <span data-i18n="modal.close">Close</span>
+                </button>
+            </div>
+            
+            <div id="m-status" class="status-message"></div>
+        </div>
+        
+        <div class="modal-footer">
+            <span class="prereq-info">
+                <span data-i18n="modal.prereqs">💪 Build upon:</span> <span id="m-prereqs" data-i18n="modal.none">None</span>
+            </span>
+            <span style="color: var(--text-muted); font-size: 0.8em;">
+                <span data-i18n="modal.esc">Press <kbd>ESC</kbd> to close</span>
+            </span>
+        </div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+    
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="scrollToNextUnsolved()" title="Jump to next unsolved">
+        🎯
+    </button>
+
+    <script>
+        const TOTAL_PROBLEMS = 320;
+        const PROJECT_START = 151;  // Both 151-170 and 291-320 are projects
+        // Default to localhost:8000 (FastAPI auth server), not window.location.origin
+        // Use API_CONFIG from api-config.js, fallback to localStorage or default
+        const API_BASE = (window.API_CONFIG && window.API_CONFIG.API_BASE) || localStorage.getItem('api_base') || 'http://localhost:8000';
+        let currentPid = null;
+        let isOpening = false;
+        let exerciseData = {};
+        let solvedProblems = [];
+        let currentFilter = 'all';
+        let currentView = 'normal';
+        let currentUser = null;
+        
+        // Mobile Navigation
+        function toggleMobileNav() {
+            document.getElementById('mobile-nav').classList.toggle('open');
+            document.querySelector('.mobile-nav-overlay').classList.toggle('open');
+        }
+
+        // Daily Programming Jokes
+        const programmingJokes = [
+            { setup: "Why do Rust programmers wear glasses?", punchline: "Because they can't C#" },
+            { setup: "Why was the Rust developer always calm?", punchline: "Because they never panic! (unwrap was banned)" },
+            { setup: "What did the Rust borrow checker say to the programmer?", punchline: "I'm afraid I can't let you do that, Dave." },
+            { setup: "Why don't Rust developers play hide and seek?", punchline: "Because good luck hiding when the borrow checker always finds you!" },
+            { setup: "What's a Rustacean's favorite music?", punchline: "Ownership - because sharing is caring, but not in Rust!" },
+            { setup: "Why did the Rust developer break up with Java?", punchline: "Too much garbage collection in the relationship!" },
+            { setup: "How many Rust developers does it take to change a lightbulb?", punchline: "None, they'll just rewrite the entire house in Rust instead." },
+            { setup: "What do you call a Rust programmer who doesn't use unsafe?", punchline: "A unicorn - they actually exist!" },
+            { setup: "Why was the Rust function feeling lonely?", punchline: "Because it had no main to call its own!" },
+            { setup: "What's the Rust programmer's favorite drink?", punchline: "Ferris Wheel - it's got a great spin!" },
+            { setup: "Why did the variable go to therapy?", punchline: "It had too many ownership issues!" },
+            { setup: "What did the compiler say to the programmer at 3 AM?", punchline: "I know you're tired, but I'm not accepting Option<Sleep> right now." },
+            { setup: "Why do Python developers have more free time?", punchline: "Because Rust developers are still fighting with the borrow checker!" },
+            { setup: "What's a Rust developer's favorite exercise?", punchline: "Lifetime annotations - it's all about staying in scope!" },
+            { setup: "Why was the async function so popular at parties?", punchline: "Because it never blocked anyone!" },
+            { setup: "What do you call it when a Rust program compiles on the first try?", punchline: "A miracle. Or a hello world." },
+            { setup: "Why did the iterator cross the road?", punchline: "To get to the other .next()!" },
+            { setup: "What's the difference between a Rust developer and a magician?", punchline: "The magician can make null disappear without the compiler noticing!" },
+            { setup: "Why do Rust developers make great detectives?", punchline: "Because they're always tracing lifetimes!" },
+            { setup: "What did the Box say to the reference?", punchline: "I've got your back... on the heap!" },
+            { setup: "Why don't Rust programs need garbage trucks?", punchline: "Because they drop everything at the right time!" },
+            { setup: "What's a Rustacean's favorite movie genre?", punchline: "Drop-dead comedies!" },
+            { setup: "Why did the trait feel left out?", punchline: "Because it wasn't implemented by anyone!" },
+            { setup: "What do you call a nervous Rust program?", punchline: "A bit twitchy with all those unsafe blocks!" },
+            { setup: "Why was the enum feeling indecisive?", punchline: "It could be Some, None, or anything in between!" },
+            { setup: "What did the Result say to the ? operator?", punchline: "You complete me... or you propagate me!" },
+            { setup: "Why do Rust developers love camping?", punchline: "Because they're experts at managing lifetimes!" },
+            { setup: "What's the borrow checker's favorite game?", punchline: "Capture the flag... and the reference!" },
+            { setup: "Why was the closure so secretive?", punchline: "Because it captured everything from its environment!" },
+            { setup: "What do you call a Rust program with no bugs?", punchline: "A theoretical construct!" },
+            { setup: "Why did the pointer go to school?", punchline: "To learn how to dereference safely!" }
+        ];
+
+        // Get today's joke based on date
+        function getDailyJoke() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const jokeIndex = dayOfYear % programmingJokes.length;
+            return programmingJokes[jokeIndex];
+        }
+
+        function displayDailyJoke() {
+            const joke = getDailyJoke();
+            const today = new Date();
+            document.getElementById('joke-date').textContent = today.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById('joke-setup').textContent = joke.setup;
+            document.getElementById('joke-punchline').textContent = joke.punchline;
+        }
+
+        function revealPunchline() {
+            const punchline = document.getElementById('joke-punchline');
+            punchline.classList.remove('hidden');
+        }
+
+        // Leaderboard Data (simulated - would come from API in production)
+        function loadLeaderboards() {
+            const topLearners = [
+                { name: "FerrisTheCrab", xp: 2450, solved: 142, avatar: "🦀" },
+                { name: "RustaceanDev", xp: 2280, solved: 135, avatar: "🚀" },
+                { name: "MemorySafe", xp: 2100, solved: 128, avatar: "🛡️" },
+                { name: "BorrowMaster", xp: 1950, solved: 118, avatar: "⚡" },
+                { name: "CargoCultist", xp: 1820, solved: 110, avatar: "📦" }
+            ];
+
+            const efficiencyLeaders = [
+                { name: "AlgorithmAce", algorithm: "Quick Sort", time: "0.003ms", score: 99.8 },
+                { name: "OptimalOrion", algorithm: "Binary Search", time: "0.001ms", score: 99.5 },
+                { name: "SpeedDemon", algorithm: "Merge Sort", time: "0.005ms", score: 98.9 },
+                { name: "EfficientEve", algorithm: "Dijkstra's", time: "0.012ms", score: 97.2 },
+                { name: "PerfProphet", algorithm: "A* Search", time: "0.018ms", score: 96.5 }
+            ];
+
+            // Render Top Learners
+            const learnersList = document.getElementById('top-learners');
+            learnersList.innerHTML = topLearners.map((user, i) => `
+                <li class="leaderboard-item">
+                    <div class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : 'other'}">${i + 1}</div>
+                    <div class="leaderboard-user">
+                        <div class="leaderboard-name">${user.avatar} ${escapeHtml(user.name)}</div>
+                        <div class="leaderboard-meta">${user.solved} exercises solved</div>
+                    </div>
+                    <div class="leaderboard-score">${user.xp} XP</div>
+                </li>
+            `).join('');
+
+            // Render Efficiency Leaders
+            const efficiencyList = document.getElementById('efficiency-leaders');
+            efficiencyList.innerHTML = efficiencyLeaders.map((entry, i) => `
+                <li class="leaderboard-item">
+                    <div class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : 'other'}">${i + 1}</div>
+                    <div class="leaderboard-user">
+                        <div class="leaderboard-name">${escapeHtml(entry.name)}</div>
+                        <div class="leaderboard-meta">${entry.algorithm} • ${entry.time}</div>
+                    </div>
+                    <div class="leaderboard-score">${entry.score}%</div>
+                </li>
+            `).join('');
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Scroll reveal animation
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        function scrollToExercises() {
+            document.getElementById('exercises').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Load exercise data
+        async function loadExerciseData() {
+            try {
+                const res = await fetch('/exercise_data.json');
+                if (res.ok) {
+                    const data = await res.json();
+                    exerciseData = {...data.exercises, ...data.advanced, ...data.projects, ...data.real_world};
+                }
+            } catch (err) {
+                console.error('Failed to load exercise data:', err);
+            }
+        }
+
+        // Check authentication status
+        async function checkAuth() {
+            try {
+                const res = await fetch(`${API_BASE}/api/me`, {
+                    credentials: 'include'
+                });
+                if (res.ok) {
+                    currentUser = await res.json();
+                    updateUserMenu();
+                    return true;
+                }
+            } catch (e) {
+                console.log('Not authenticated');
+            }
+            updateUserMenu();
+            return false;
+        }
+
+        function updateUserMenu() {
+            const menu = document.getElementById('user-menu');
+            if (currentUser) {
+                const initial = escapeHtml(currentUser.display_name?.[0] || currentUser.username[0]);
+                const displayName = escapeHtml(currentUser.display_name || currentUser.username);
+                menu.innerHTML = `
+                    <div class="user-info" onclick="showUserMenu()">
+                        <div class="user-avatar">${initial.toUpperCase()}</div>
+                        <span class="user-name">${displayName}</span>
+                    </div>
+                `;
+            } else {
+                menu.innerHTML = `
+                    <button class="signup-btn" onclick="window.location.href='/auth.html?tab=register'" data-i18n="auth.signup">Sign Up</button>
+                    <button class="login-btn" onclick="window.location.href='/auth.html'" data-i18n="auth.signin">Sign In</button>
+                `;
+            }
+        }
+
+        // XSS Protection - Escape HTML
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function logout() {
+            try {
+                await fetch(`${API_BASE}/api/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                currentUser = null;
+                window.location.reload();
+            } catch (e) {
+                console.error('Logout failed:', e);
+            }
+        }
+
+        // Update UI
+        async function updateUI() {
+            try {
+                let data;
+                try {
+                    const res = await fetch(`${API_BASE}/api/stats`, {
+                        credentials: 'include'
+                    });
+                    if (res.ok) {
+                        data = await res.json();
+                    } else {
+                        const legacyRes = await fetch('/api/stats');
+                        data = legacyRes.ok ? await legacyRes.json() : {xp: 0, solved: []};
+                    }
+                } catch (e) {
+                    const legacyRes = await fetch('/api/stats');
+                    data = legacyRes.ok ? await legacyRes.json() : {xp: 0, solved: []};
+                }
+                
+                solvedProblems = data.solved || [];
+                
+                document.getElementById('xp-value').textContent = data.xp || 0;
+                document.getElementById('solved-value').textContent = 
+                    `${solvedProblems.length}/${TOTAL_PROBLEMS}`;
+                
+                if (currentUser && currentUser.progress) {
+                    document.getElementById('streak-value').textContent = 
+                        `🔥 ${currentUser.progress.current_streak || 0}`;
+                }
+                
+                const percent = Math.round((solvedProblems.length / TOTAL_PROBLEMS) * 100);
+                document.getElementById('progress-bar').style.width = `${percent}%`;
+                document.getElementById('progress-percent').textContent = `${percent}%`;
+                
+                updateSectionCounts();
+                buildAllGrids();
+                
+            } catch (err) {
+                console.error('Failed to update UI:', err);
+            }
+        }
+
+        function updateSectionCounts() {
+            const beginnerSolved = solvedProblems.filter(p => p >= 1 && p <= 50).length;
+            const intermediateSolved = solvedProblems.filter(p => p >= 51 && p <= 100).length;
+            const advancedSolved = solvedProblems.filter(p => p >= 101 && p <= 150).length;
+            const projectSolved = solvedProblems.filter(p => p >= 151 && p <= 170).length;
+            const realworldSolved = solvedProblems.filter(p => p >= 171 && p <= 320).length;
+            
+            document.getElementById('beginner-count').textContent = `${beginnerSolved}/50`;
+            document.getElementById('intermediate-count').textContent = `${intermediateSolved}/50`;
+            document.getElementById('advanced-count').textContent = `${advancedSolved}/50`;
+            document.getElementById('projects-count').textContent = `${projectSolved}/20`;
+            document.getElementById('realworld-count').textContent = `${realworldSolved}/150`;
+        }
+
+        function buildAllGrids() {
+            buildGrid('grid-beginner', 1, 50);
+            buildGrid('grid-intermediate', 51, 100);
+            buildGrid('grid-advanced', 101, 150);
+            buildGrid('grid-projects', 151, 170);
+            buildGrid('grid-realworld', 171, 320);
+        }
+
+        function buildGrid(gridId, start, end) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            grid.className = 'grid' + (currentView === 'compact' ? ' compact' : '');
+            
+            for (let i = start; i <= end; i++) {
+                const data = exerciseData[i.toString().padStart(3, '0')] || {};
+                const isProject = (i >= 151 && i <= 170) || (i >= 291 && i <= 320);
+                const isSolved = solvedProblems.includes(i);
+                
+                if (currentFilter === 'solved' && !isSolved) continue;
+                if (currentFilter === 'unsolved' && isSolved) continue;
+                if (currentFilter === 'project' && !isProject) continue;
+                
+                const div = document.createElement('div');
+                div.className = 'box' + (isProject ? ' project' : '') + (isSolved ? ' solved' : '');
+                div.setAttribute('data-id', i);
+                
+                const num = document.createElement('div');
+                num.className = 'number';
+                num.textContent = i.toString().padStart(3, '0');
+                div.appendChild(num);
+                
+                if (data.name) {
+                    const name = document.createElement('div');
+                    name.className = 'name';
+                    name.textContent = data.name;
+                    div.appendChild(name);
+                }
+                
+                if (isProject) {
+                    const icon = document.createElement('span');
+                    icon.className = 'type-icon';
+                    icon.textContent = '📦';
+                    div.appendChild(icon);
+                }
+                
+                if (data.difficulty) {
+                    const dots = document.createElement('div');
+                    dots.className = 'difficulty-indicator';
+                    for (let d = 0; d < 5; d++) {
+                        const dot = document.createElement('div');
+                        dot.className = 'difficulty-dot' + (d < data.difficulty ? ' active' : '');
+                        if (d < data.difficulty) {
+                            dot.style.background = isSolved ? 'var(--accent-green)' : 
+                                                   isProject ? 'var(--accent-purple)' : 'var(--accent-blue)';
+                        }
+                        dots.appendChild(dot);
+                    }
+                    div.appendChild(dots);
+                }
+                
+                div.onclick = () => showProblem(i);
+                div.setAttribute('role', 'button');
+                div.setAttribute('tabindex', '0');
+                div.setAttribute('aria-label', `Problem ${i}${isSolved ? ' - Solved' : ''}`);
+                
+                div.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        showProblem(i);
+                    }
+                });
+                
+                grid.appendChild(div);
+            }
+            
+            if (grid.children.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-icon">🔍</div>
+                        <div class="empty-state-text">No exercises match this filter</div>
+                    </div>
+                `;
+            }
+        }
+
+        function showProblem(id) {
+            currentPid = id;
+            const pid = id.toString().padStart(3, '0');
+            const isProject = id >= PROJECT_START;
+            const isSolved = solvedProblems.includes(id);
+            const data = exerciseData[pid] || {};
+            
+            document.getElementById('m-title').textContent = data.name || `Problem ${pid}`;
+            
+            const typeBadge = document.getElementById('m-type');
+            typeBadge.textContent = isProject ? '📦 Project' : '📝 Exercise';
+            typeBadge.className = 'type-badge' + (isProject ? ' project' : '');
+            
+            const solvedBadge = document.getElementById('m-solved-badge');
+            solvedBadge.style.display = isSolved ? 'inline' : 'none';
+            
+            document.getElementById('m-category').textContent = data.category || '-';
+            document.getElementById('m-difficulty').textContent = data.difficulty ? 
+                '★'.repeat(data.difficulty) + '☆'.repeat(5 - data.difficulty) : '-';
+            document.getElementById('m-time').textContent = data.time_estimate || '-';
+            
+            const skillsEl = document.getElementById('m-skills');
+            if (data.skills && data.skills.length > 0) {
+                skillsEl.innerHTML = data.skills.map(s => `<span class="skill-tag">${escapeHtml(s)}</span>`).join('');
+            } else {
+                skillsEl.textContent = '-';
+            }
+            
+            document.getElementById('m-hint').textContent = 
+                data.hint || `Complete this ${isProject ? 'project' : 'exercise'} to learn ${data.skills ? data.skills.join(', ') : 'Rust concepts'}.`;
+            
+            const prereqsEl = document.getElementById('m-prereqs');
+            if (data.prerequisites && data.prerequisites.length > 0) {
+                // SECURITY FIX: Validate and escape prerequisite IDs (C-04)
+                prereqsEl.innerHTML = data.prerequisites.map(p => {
+                    const num = parseInt(p);
+                    if (isNaN(num) || num < 1) return '';
+                    return `<a href="#" onclick="showProblem(${num}); return false;">#${num}</a>`;
+                }).filter(Boolean).join(', ');
+            } else {
+                prereqsEl.textContent = 'None - Start here!';
+            }
+            
+            document.getElementById('m-path').textContent = 
+                `problems/${pid}_${isProject ? 'project' : 'exercise'}`;
+            document.getElementById('m-cmd').textContent = `./r.py run ${id}`;
+            
+            document.getElementById('web-editor-link').href = `/editor.html?id=${id}`;
+            
+            const statusEl = document.getElementById('m-status');
+            statusEl.style.display = 'none';
+            
+            const modal = document.getElementById('modal');
+            const overlay = document.getElementById('overlay');
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+            
+            setTimeout(() => {
+                overlay.classList.add('visible');
+                modal.classList.add('visible');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            const overlay = document.getElementById('overlay');
+            
+            modal.classList.remove('visible');
+            overlay.classList.remove('visible');
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+                overlay.style.display = 'none';
+                currentPid = null;
+                isOpening = false;
+            }, 250);
+        }
+
+        async function openExternalEditor() {
+            if (!currentPid || isOpening) return;
+            
+            isOpening = true;
+            const btn = document.getElementById('open-btn');
+            const statusEl = document.getElementById('m-status');
+            
+            btn.disabled = true;
+            btn.innerHTML = '📂 Opening...';
+            
+            try {
+                const res = await fetch(`/api/open/${currentPid}`);
+                const data = await res.json();
+                
+                statusEl.style.display = 'block';
+                
+                if (data.status === 'success') {
+                    statusEl.textContent = '✅ Opened in VS Code';
+                    statusEl.className = 'status-message success';
+                } else if (data.status === 'opened_folder') {
+                    statusEl.textContent = '✅ Opened folder (VS Code not found)';
+                    statusEl.className = 'status-message success';
+                } else {
+                    statusEl.textContent = '❌ Failed to open';
+                    statusEl.className = 'status-message error';
+                }
+            } catch (err) {
+                statusEl.style.display = 'block';
+                statusEl.textContent = '❌ Error: ' + err.message;
+                statusEl.className = 'status-message error';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '🚀 <span data-i18n="modal.vscode">Open in VS Code</span>';
+                isOpening = false;
+            }
+        }
+
+        function scrollToNextUnsolved() {
+            for (let i = 1; i <= TOTAL_PROBLEMS; i++) {
+                if (!solvedProblems.includes(i)) {
+                    const el = document.querySelector(`[data-id="${i}"]`);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        el.style.animation = 'pulse 1s ease';
+                        setTimeout(() => el.style.animation = '', 1000);
+                        showProblem(i);
+                        return;
+                    }
+                }
+            }
+            showToast('🎉 All exercises completed!', 'Congratulations on your achievement!');
+        }
+
+        function showToast(title, message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <span class="toast-icon">🏆</span>
+                <div class="toast-content">
+                    <div class="toast-title">${escapeHtml(title)}</div>
+                    <div class="toast-message">${escapeHtml(message)}</div>
+                </div>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                buildAllGrids();
+            });
+        });
+
+        // View toggle
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentView = btn.dataset.view;
+                buildAllGrids();
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Initialize
+        async function init() {
+            createParticles();
+            displayDailyJoke();
+            initScrollReveal();
+            await loadExerciseData();
+            await checkAuth();
+            await updateUI();
+            loadLeaderboards();
+            
+            setInterval(updateUI, 5000);
+        }
+
+        init();
+    </script>
+</body>
+</html>

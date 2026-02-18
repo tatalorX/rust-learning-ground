@@ -1,0 +1,7 @@
+name = "rust-learning-ground-v4"
+compatibility_date = "2024-11-20"
+pages_build_output_dir = "./dist"
+
+# Preview environment variables
+[vars]
+NODE_VERSION = "20"

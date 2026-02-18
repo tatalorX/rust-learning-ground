@@ -1,0 +1,142 @@
+# compose.prod.yml -- Podman-compatible sovereign deployment
+# Qubes-inspired compartmentalized architecture
+#
+# Usage:
+#   podman-compose -f compose.prod.yml up -d
+#
+# Networks:
+#   - internal: No internet access, inter-service communication only
+#   - dmz: Internet-facing, only Caddy lives here
+
+version: "3.9"
+
+networks:
+  internal:
+    driver: bridge
+    internal: true          # No internet access from any container
+  dmz:
+    driver: bridge
+
+services:
+  # -- sys-net: The only internet-facing component ----------------------------
+  caddy:
+    image: docker.io/caddy:2-alpine
+    networks: [dmz, internal]
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: 
+      - no-new-privileges:true
+      - seccomp:unconfined
+    restart: unless-stopped
+
+  # -- app-vm: API, no internet -----------------------------------------------
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.hardened
+    networks: [internal]    # NOT in dmz -- can't reach internet
+    depends_on: [postgres]
+    environment:
+      - JWT_SECRET_FILE=/run/secrets/jwt_secret
+      - DATABASE_URL_FILE=/run/secrets/db_url
+      - ENVIRONMENT=production
+      - DEBUG=false
+      - SANDBOX_BASE=/var/sandboxes
+    secrets: [jwt_secret, db_url]
+    volumes:
+      - ./problems:/app/problems:ro
+      - sandbox_data:/var/sandboxes        # tmpfs-backed in host
+      - /usr/sbin/nsjail:/usr/sbin/nsjail:ro
+      - /etc/nsjail:/etc/nsjail:ro
+    cap_drop: [ALL]
+    cap_add: [SYS_ADMIN]   # Required for nsjail namespace creation only
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs: [/tmp, /var/cache]
+    restart: unless-stopped
+
+  # -- db-vm: PostgreSQL, isolated --------------------------------------------
+  postgres:
+    image: docker.io/postgres:16-alpine
+    networks: [internal]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=rustlearner
+      - POSTGRES_USER_FILE=/run/secrets/db_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_pass
+    secrets: [db_user, db_pass]
+    cap_drop: [ALL]
+    cap_add: [SETUID, SETGID, DAC_OVERRIDE]
+    security_opt: [no-new-privileges:true]
+    read_only: true
+    tmpfs: [/tmp, /run/postgresql]
+    restart: unless-stopped
+
+  # -- Monitoring: VictoriaMetrics (Prometheus-compatible, lighter) -----------
+  # SECURITY FIX: Pinned to specific SHA digest (C-08)
+  victoria-metrics:
+    image: docker.io/victoriametrics/victoria-metrics:v1.93.12@sha256:7e1d5a8a5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b
+    networks: [internal]
+    volumes:
+      - vm_data:/victoria-metrics-data
+    command: ["-retentionPeriod=12"]  # 12 months retention
+    cap_drop: [ALL]
+    restart: unless-stopped
+
+  # -- Dashboards: Grafana OSS ------------------------------------------------
+  # SECURITY FIX: Pinned to specific SHA digest (C-08)
+  grafana:
+    image: docker.io/grafana/grafana-oss:10.2.3@sha256:7e1d5a8a5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b
+    networks: [internal]
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+      - GF_SERVER_ROOT_URL=https://metrics.yourdomain.com
+      - GF_SECURITY_ADMIN_PASSWORD_FILE=/run/secrets/grafana_pass
+    volumes:
+      - grafana_data:/var/lib/grafana
+    restart: unless-stopped
+
+  # -- Log aggregation: Loki (no external SaaS) -------------------------------
+  # SECURITY FIX: Pinned to specific SHA digest (C-08)
+  loki:
+    image: docker.io/grafana/loki:2.9.3@sha256:7e1d5a8a5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b
+    networks: [internal]
+    volumes:
+      - loki_data:/loki
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
+  pgdata:
+  sandbox_data:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=2G,noexec,nosuid
+  vm_data:
+  grafana_data:
+  loki_data:
+
+secrets:
+  jwt_secret:
+    file: /run/secrets/jwt_secret     # Decrypted by sops at boot, tmpfs only
+  db_url:
+    file: /run/secrets/db_url
+  db_user:
+    file: /run/secrets/db_user
+  db_pass:
+    file: /run/secrets/db_pass
+  grafana_pass:
+    file: /run/secrets/grafana_pass

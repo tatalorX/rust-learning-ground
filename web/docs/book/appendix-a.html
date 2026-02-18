@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appendix A: Glossary - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-rust: #a0522d;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #2d2d44 100%);
+            color: white;
+            padding: 60px 40px;
+        }
+        
+        .chapter-number {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-title {
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 40px;
+        }
+        
+        .glossary-term {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .term-word {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--accent-rust);
+            margin-bottom: 8px;
+        }
+        
+        .term-definition {
+            color: var(--text-ink);
+        }
+        
+        .term-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(160, 82, 45, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: var(--accent-rust);
+        }
+        
+        h2 {
+            font-size: 1.6em;
+            margin: 40px 0 25px;
+            color: var(--bg-dark);
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+        
+        .chapter-footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="toc.html">← Contents</a>
+            <a href="appendix-b.html">Appendix B →</a>
+        </div>
+        <div class="chapter-number">Appendix A</div>
+        <h1 class="chapter-title">Glossary</h1>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <h2>A</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Archetype</div>
+            <div class="term-definition">Universal patterns or images in the collective unconscious, as described by Carl Jung. In this book, archetypes represent different aspects of the programmer's journey and Rust's features.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Async/Await</div>
+            <div class="term-definition">Syntax for writing asynchronous code that looks like synchronous code. <span class="term-code">async</span> marks a function as asynchronous; <span class="term-code">.await</span> pauses execution until a Future completes.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Associated Type</div>
+            <div class="term-definition">A type placeholder in a trait that must be specified by implementations. Allows traits to work with specific types without using generics.</div>
+        </div>
+        
+        <h2>B</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Borrowing</div>
+            <div class="term-definition">Creating a reference to data without taking ownership. Rust's borrow checker ensures references are valid and follow the rules: one mutable OR any number of immutable references.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Box</div>
+            <div class="term-definition">A smart pointer that allocates data on the heap. <span class="term-code">Box&lt;T&gt;</span> owns the data and automatically frees it when dropped.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Borrow Checker</div>
+            <div class="term-definition">Rust's compile-time system that enforces ownership and borrowing rules, preventing data races and memory errors.</div>
+        </div>
+        
+        <h2>C</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Closure</div>
+            <div class="term-definition">An anonymous function that can capture variables from its enclosing scope. Closures implement the <span class="term-code">Fn</span>, <span class="term-code">FnMut</span>, or <span class="term-code">FnOnce</span> traits.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Crate</div>
+            <div class="term-definition">A compilation unit in Rust—either a binary (executable) or library. The crate root is <span class="term-code">main.rs</span> or <span class="term-code">lib.rs</span>.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Cargo</div>
+            <div class="term-definition">Rust's build system and package manager. Handles compiling code, downloading dependencies, and building projects.</div>
+        </div>
+        
+        <h2>D</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Drop Trait</div>
+            <div class="term-definition">A trait for running cleanup code when a value goes out of scope. Implements the RAII (Resource Acquisition Is Initialization) pattern.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Dangling Pointer</div>
+            <div class="term-definition">A pointer that references memory that has been freed or is otherwise invalid. Rust's borrow checker prevents these at compile time.</div>
+        </div>
+        
+        <h2>F</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Fat Pointer</div>
+            <div class="term-definition">A pointer that carries additional metadata, such as a vtable pointer (for trait objects) or length (for slices). Twice the size of a regular pointer on 64-bit systems.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Future</div>
+            <div class="term-definition">A value that may not be ready yet. The core abstraction of async Rust—represents an asynchronous computation that produces a value.</div>
+        </div>
+        
+        <h2>G</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Generic</div>
+            <div class="term-definition">A type or function parameterized over other types. Enables code reuse while maintaining type safety. Rust uses monomorphization to generate concrete implementations.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Generic Associated Type (GAT)</div>
+            <div class="term-definition">Associated types that can have their own generic parameters, enabling more flexible trait design.</div>
+        </div>
+        
+        <h2>H</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Heap</div>
+            <div class="term-definition">Memory for dynamically allocated data with arbitrary lifetime. Managed manually or through smart pointers like <span class="term-code">Box</span>, <span class="term-code">Rc</span>, or <span class="term-code">Arc</span>.</div>
+        </div>
+        
+        <h2>I</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Individuation</div>
+            <div class="term-definition">Jung's concept of becoming one's true self by integrating all aspects of the psyche—including the unconscious. The journey this book guides you through.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Iterator</div>
+            <div class="term-definition">A trait for types that can produce a sequence of values. Enables lazy evaluation and composable data processing through methods like <span class="term-code">map</span>, <span class="term-code">filter</span>, and <span class="term-code">fold</span>.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Interior Mutability</div>
+            <div class="term-definition">A design pattern allowing mutation through immutable references when runtime checks ensure safety. Implemented by <span class="term-code">RefCell</span>, <span class="term-code">Mutex</span>, and atomic types.</div>
+        </div>
+        
+        <h2>L</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Lifetime</div>
+            <div class="term-definition">The scope during which a reference is valid. Rust tracks lifetimes to prevent dangling pointers. Denoted by tick syntax: <span class="term-code">'a</span>.</div>
+        </div>
+        
+        <h2>M</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Monomorphization</div>
+            <div class="term-definition">The process of generating specific implementations of generic code at compile time. Enables zero-cost abstractions—generics have no runtime overhead.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Module</div>
+            <div class="term-definition">A namespace that organizes code within a crate. Declared with <span class="term-code">mod</span>, visibility controlled with <span class="term-code">pub</span>.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Move Semantics</div>
+            <div class="term-definition">Transferring ownership of data from one variable to another. The source can no longer be used after the move.</div>
+        </div>
+        
+        <h2>O</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Ownership</div>
+            <div class="term-definition">Rust's core memory management principle: each value has a single owner. When the owner goes out of scope, the value is dropped.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Option</div>
+            <div class="term-definition">An enum representing a value that may or may not exist: <span class="term-code">Some(T)</span> or <span class="term-code">None</span>. Rust's alternative to null pointers.</div>
+        </div>
+        
+        <h2>R</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">RAII</div>
+            <div class="term-definition">Resource Acquisition Is Initialization—tying resource lifetime to object lifetime. Resources are acquired in constructors and released in destructors (Drop).</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Result</div>
+            <div class="term-definition">An enum for operations that may fail: <span class="term-code">Ok(T)</span> for success or <span class="term-code">Err(E)</span> for failure. Forces explicit error handling.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Reference</div>
+            <div class="term-definition">A non-owning pointer to data. Immutable (<span class="term-code">&T</span>) or mutable (<span class="term-code">&mut T</span>). Always valid and never null.</div>
+        </div>
+        
+        <h2>S</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Shadow (Archetype)</div>
+            <div class="term-definition">The unconscious aspect of the personality, containing repressed weaknesses and instincts. In Rust, represented by <span class="term-code">unsafe</span> code.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Send Trait</div>
+            <div class="term-definition">A marker trait indicating a type can be safely transferred between threads. Most types are Send.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Sync Trait</div>
+            <div class="term-definition">A marker trait indicating a type can be safely shared between threads (via references). <span class="term-code">&T</span> is Send if T is Sync.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Stack</div>
+            <div class="term-definition">Memory for function-local data with automatic allocation and deallocation. Fast but limited in size and scope.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Smart Pointer</div>
+            <div class="term-definition">A data structure that acts like a pointer but has additional metadata and capabilities. Examples: <span class="term-code">Box</span>, <span class="term-code">Rc</span>, <span class="term-code">Arc</span>, <span class="term-code">RefCell</span>.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Self (Archetype)</div>
+            <div class="term-definition">The center of the psyche, representing the unified personality. The goal of individuation—the integration of all archetypes.</div>
+        </div>
+        
+        <h2>T</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Trait</div>
+            <div class="term-definition">A collection of methods defined for an unknown type. Rust's mechanism for abstraction and polymorphism—similar to interfaces in other languages.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Trait Object</div>
+            <div class="term-definition">A fat pointer to a trait instance, enabling dynamic dispatch. Written as <span class="term-code">dyn Trait</span>. Enables runtime polymorphism.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Tuple</div>
+            <div class="term-definition">A fixed-size ordered list of values of potentially different types. Written as <span class="term-code">(T, U, V)</span>.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Type Inference</div>
+            <div class="term-definition">The compiler's ability to deduce types from context, reducing the need for explicit type annotations.</div>
+        </div>
+        
+        <h2>U</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Unsafe</div>
+            <div class="term-definition">Code blocks or functions marked with <span class="term-code">unsafe</span> where the programmer takes responsibility for safety. Enables raw pointer dereferencing, FFI, and other low-level operations.</div>
+        </div>
+        
+        <div class="glossary-term">
+            <div class="term-word">Undefined Behavior (UB)</div>
+            <div class="term-definition">Operations that violate Rust's safety guarantees. The compiler assumes UB never happens; if it does, anything can happen (crashes, security vulnerabilities).</div>
+        </div>
+        
+        <h2>V</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Vtable</div>
+            <div class="term-definition">A table of function pointers used for dynamic dispatch with trait objects. Enables calling the correct method implementation at runtime.</div>
+        </div>
+        
+        <h2>W</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Waker</div>
+            <div class="term-definition">A mechanism in async Rust for notifying the executor that a Future should be polled again. Part of the async runtime infrastructure.</div>
+        </div>
+        
+        <h2>Z</h2>
+        
+        <div class="glossary-term">
+            <div class="term-word">Zero-Cost Abstraction</div>
+            <div class="term-definition">An abstraction that has no runtime overhead compared to hand-written lower-level code. Rust's iterator chains, generics, and trait methods compile to efficient machine code.</div>
+        </div>
+        
+        <footer class="chapter-footer">
+            <a href="toc.html" class="nav-button">← Contents</a>
+            <a href="appendix-b.html" class="nav-button">Appendix B →</a>
+        </footer>
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

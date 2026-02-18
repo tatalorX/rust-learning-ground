@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "exercises": "Übungen",
+    "rustBook": "Rust Buch",
+    "events": "Veranstaltungen",
+    "leaderboard": "Bestenliste",
+    "achievements": "Erfolge",
+    "documentation": "Dokumentation",
+    "settings": "Einstellungen",
+    "profile": "Profil"
+  },
+  "home": {
+    "hero": {
+      "badge": "Beherrsche Rust durch Praxis",
+      "title": "Lerne",
+      "titleHighlight": "Rust Programmierung",
+      "subtitle": "Auf die Richtige Weise",
+      "description": "Interaktive Übungen, sofortiges Feedback und ein gamifiziertes Lernerlebnis für moderne Entwickler. Beginne deine Rust-Reise heute.",
+      "startLearning": "Lernen Beginnen",
+      "createAccount": "Konto Erstellen"
+    },
+    "features": {
+      "exercises": {
+        "title": "300+ Übungen",
+        "description": "Von Grundlagen bis zu fortgeschrittenen Mustern"
+      },
+      "feedback": {
+        "title": "Sofortiges Feedback",
+        "description": "Führe und teste deinen Code sofort aus"
+      },
+      "streak": {
+        "title": "Serien-System",
+        "description": "Baue Konstanz mit täglichen Zielen auf"
+      },
+      "achievements": {
+        "title": "Erfolge",
+        "description": "Schalte Abzeichen frei, während du vorankommst"
+      }
+    },
+    "editor": {
+      "title": "Interaktiver Code-Editor",
+      "description": "Schreibe Rust-Code direkt in deinem Browser mit unserem Monaco-Editor. Sofortige Kompilierung, klare Fehlermeldungen und nahtlose Ausführung.",
+      "features": [
+        "Syntax-Hervorhebung für Rust",
+        "Auto-Vervollständigung und Hinweise",
+        "Echtzeit-Fehlererkennung",
+        "Code-Ausführung mit einem Klick"
+      ],
+      "tryExercise": "Übung 1 Ausprobieren"
+    },
+    "whyRust": {
+      "title": "Warum Rust Lernen?",
+      "description": "Rust ist die beliebteste Programmiersprache und vereint C++-Leistung mit Speichersicherheit und moderner Entwicklererfahrung.",
+      "features": [
+        {
+          "title": "Speichersicherheit",
+          "description": "Keine Segfaults, garantiert vom Compiler"
+        },
+        {
+          "title": "Hohe Leistung",
+          "description": "Vergleichbar mit C und C++"
+        },
+        {
+          "title": "Moderne Werkzeuge",
+          "description": "Cargo, crates.io und mehr"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Bereit, deine Reise zu Beginnen?",
+      "description": "Schließe dich Tausenden von Entwicklern an, die Rust auf die richtige Weise lernen.",
+      "button": "Kostenlos Lernen Beginnen"
+    }
+  },
+  "exercises": {
+    "title": "Übungen",
+    "subtitle": "Übungen verfügbar",
+    "completed": "abgeschlossen",
+    "difficulty": {
+      "beginner": "Anfänger",
+      "easy": "Einfach",
+      "medium": "Mittel",
+      "hard": "Schwer",
+      "expert": "Experte"
+    },
+    "status": {
+      "completed": "Abgeschlossen",
+      "inProgress": "In Bearbeitung",
+      "notStarted": "Nicht Begonnen"
+    },
+    "filters": {
+      "search": "Übungen suchen...",
+      "difficulty": "Schwierigkeit",
+      "category": "Kategorie",
+      "all": "Alle"
+    }
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "retry": "Wiederholen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "submit": "Absenden",
+    "run": "Ausführen",
+    "reset": "Zurücksetzen",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "continue": "Fortfahren",
+    "back": "Zurück",
+    "close": "Schließen",
+    "open": "Öffnen",
+    "success": "Erfolg",
+    "warning": "Warnung",
+    "info": "Info"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "username": "Benutzername",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Noch kein Konto?",
+    "hasAccount": "Bereits ein Konto?"
+  },
+  "gamification": {
+    "xp": "EP",
+    "level": "Stufe",
+    "streak": "Serie",
+    "streakDays": "Tage Serie",
+    "focusSessions": "Fokus-Sitzungen"
+  }
+}

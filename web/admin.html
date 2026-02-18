@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Rust Learning Ground</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-orange: #f97316;
+            --accent-red: #ef4444;
+            --accent-green: #22c55e;
+            --accent-blue: #3b82f6;
+            --border-color: #333333;
+        }
+        
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-orange, #f97316);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 10000;
+            border-radius: 0 0 4px 0;
+            transition: top 0.3s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Skeleton loading screens */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-tertiary, #252525) 25%, var(--bg-secondary, #1a1a1a) 50%, var(--bg-tertiary, #252525) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 4px;
+        }
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .skeleton-text {
+            height: 1em;
+            margin-bottom: 0.5em;
+        }
+        .skeleton-title {
+            height: 1.5em;
+            width: 60%;
+            margin-bottom: 1em;
+        }
+        .skeleton-card {
+            height: 120px;
+            margin-bottom: 1em;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .admin-header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+        
+        .logo span {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 400;
+            margin-left: 0.5rem;
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+        
+        .logout-btn {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        
+        /* Layout */
+        .admin-container {
+            display: flex;
+            min-height: calc(100vh - 65px);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-item {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-item:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .sidebar-item.active {
+            background: rgba(249, 115, 22, 0.1);
+            border-left-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+        
+        .sidebar-icon {
+            font-size: 1.25rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .page-title {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+        
+        .stat-change {
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            margin-top: 0.25rem;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.875rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .data-table tr:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        /* Status Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .badge-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+        }
+        
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-orange);
+        }
+        
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        
+        .btn-sm {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+        }
+        
+        .btn-primary {
+            background: var(--accent-orange);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: var(--accent-red);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Forms */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+        }
+        
+        /* Search */
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover {
+            color: var(--accent-orange);
+        }
+        
+        .tab.active {
+            color: var(--accent-orange);
+            border-bottom-color: var(--accent-orange);
+        }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="logo">
+            🔧 Rust Learning
+            <span>Admin Panel</span>
+        </div>
+        <nav class="admin-nav">
+            <a href="/index.html" class="nav-link">🏠 Site</a>
+            <a href="/school-dashboard.html" class="nav-link">🏫 School</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </nav>
+    </header>
+    
+    <div class="admin-container" id="main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-item active" onclick="showSection('dashboard')">
+                    <span class="sidebar-icon">📊</span>
+                    Dashboard
+                </li>
+                <li class="sidebar-item" onclick="showSection('users')">
+                    <span class="sidebar-icon">👥</span>
+                    Users
+                </li>
+                <li class="sidebar-item" onclick="showSection('classrooms')">
+                    <span class="sidebar-icon">🏫</span>
+                    Classrooms
+                </li>
+                <li class="sidebar-item" onclick="showSection('audit')">
+                    <span class="sidebar-icon">📋</span>
+                    Audit Logs
+                </li>
+                <li class="sidebar-item" onclick="showSection('security')">
+                    <span class="sidebar-icon">🛡️</span>
+                    Security
+                </li>
+                <li class="sidebar-item" onclick="showSection('system')">
+                    <span class="sidebar-icon">⚙️</span>
+                    System
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="section">
+                <h1 class="page-title">Dashboard</h1>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Users</div>
+                        <div class="stat-value" id="stat-total-users">-</div>
+                        <div class="stat-change">+0 today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Active Users</div>
+                        <div class="stat-value" id="stat-active-users">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Students</div>
+                        <div class="stat-value" id="stat-students">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Classrooms</div>
+                        <div class="stat-value" id="stat-classrooms">-</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Activity</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-activity">
+                                <tr><td colspan="4" class="loading">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Users Section -->
+            <section id="users-section" class="section" style="display: none;">
+                <h1 class="page-title">User Management</h1>
+                
+                <div class="search-bar">
+                    <input type="text" class="form-input search-input" id="user-search" placeholder="Search users...">
+                    <button class="btn btn-primary" onclick="searchUsers()">Search</button>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Users</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Joined</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table">
+                                <tr><td colspan="7" class="loading">Loading users...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Classrooms Section -->
+            <section id="classrooms-section" class="section" style="display: none;">
+                <h1 class="page-title">Classroom Management</h1>
+                
+                <div class="search-bar">
+                    <input type="text" class="form-input search-input" id="classroom-search" placeholder="Search classrooms...">
+                    <button class="btn btn-primary" onclick="searchClassrooms()">Search</button>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Classrooms</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Subject</th>
+                                    <th>Code</th>
+                                    <th>Members</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="classrooms-table">
+                                <tr><td colspan="7" class="loading">Loading classrooms...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Audit Logs Section -->
+            <section id="audit-section" class="section" style="display: none;">
+                <h1 class="page-title">Audit Logs</h1>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Events</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Event Type</th>
+                                    <th>Status</th>
+                                    <th>User ID</th>
+                                    <th>IP Address</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="audit-table">
+                                <tr><td colspan="6" class="loading">Loading logs...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Security Section -->
+            <section id="security-section" class="section" style="display: none;">
+                <h1 class="page-title">Security Events</h1>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Security Alerts (24h)</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>User</th>
+                                    <th>IP</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="security-table">
+                                <tr><td colspan="4" class="loading">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- System Section -->
+            <section id="system-section" class="section" style="display: none;">
+                <h1 class="page-title">System</h1>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">System Stats</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-label">Database Users</div>
+                                <div class="stat-value" id="sys-db-users">-</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">WS Connections</div>
+                                <div class="stat-value" id="sys-ws-connections">-</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem;">
+                            <button class="btn btn-secondary" onclick="clearCache()">Clear Cache</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:8000';
+        let currentSection = 'dashboard';
+        
+        // Check admin access
+        async function checkAdmin() {
+            try {
+                const response = await fetch(`${API_URL}/api/me`, {
+                    credentials: 'include'
+                });
+                
+                if (!response.ok) {
+                    window.location.href = '/auth.html';
+                    return;
+                }
+                
+                const user = await response.json();
+                if (!user.is_admin) {
+                    alert('Admin access required');
+                    window.location.href = '/index.html';
+                    return;
+                }
+                
+                // Load dashboard data
+                loadDashboard();
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                window.location.href = '/auth.html';
+            }
+        }
+        
+        // Show section
+        function showSection(section) {
+            // Update sidebar
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.sidebar-item').classList.add('active');
+            
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => {
+                s.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(`${section}-section`).style.display = 'block';
+            currentSection = section;
+            
+            // Load section data
+            switch(section) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'users':
+                    loadUsers();
+                    break;
+                case 'classrooms':
+                    loadClassrooms();
+                    break;
+                case 'audit':
+                    loadAuditLogs();
+                    break;
+                case 'security':
+                    loadSecurityEvents();
+                    break;
+                case 'system':
+                    loadSystemStats();
+                    break;
+            }
+        }
+        
+        // Load dashboard
+        async function loadDashboard() {
+            try {
+                const response = await fetch(`${API_URL}/api/admin/dashboard`, {
+                    credentials: 'include'
+                });
+                
+                if (!response.ok) throw new Error('Failed to load dashboard');
+                
+                const data = await response.json();
+                
+                document.getElementById('stat-total-users').textContent = data.users.total;
+                document.getElementById('stat-active-users').textContent = data.users.active;
+                document.getElementById('stat-students').textContent = data.school.students;
+                document.getElementById('stat-classrooms').textContent = data.school.classrooms.total;
+                
+            } catch (error) {
+                console.error('Dashboard load failed:', error);
+            }
+        }
+        
+        // Load users
+        async function loadUsers(search = '') {
+            try {
+                const url = search 
+                    ? `${API_URL}/api/admin/users?search=${encodeURIComponent(search)}`
+                    : `${API_URL}/api/admin/users`;
+                
+                const response = await fetch(url, { credentials: 'include' });
+                const data = await response.json();
+                
+                const tbody = document.getElementById('users-table');
+                tbody.innerHTML = data.users.map(u => `
+                    <tr>
+                        <td>${u.id}</td>
+                        <td>${escapeHtml(u.username)}</td>
+                        <td>${escapeHtml(u.email)}</td>
+                        <td>${u.is_admin ? 'Admin' : 'User'}</td>
+                        <td><span class="badge ${u.is_active ? 'badge-success' : 'badge-danger'}">${u.is_active ? 'Active' : 'Inactive'}</span></td>
+                        <td>${new Date(u.created_at).toLocaleDateString()}</td>
+                        <td>
+                            <button class="btn btn-sm btn-secondary" onclick="viewUser(${u.id})">View</button>
+                            ${u.is_active 
+                                ? `<button class="btn btn-sm btn-danger" onclick="deactivateUser(${u.id})">Deactivate</button>`
+                                : `<button class="btn btn-sm btn-primary" onclick="activateUser(${u.id})">Activate</button>`
+                            }
+                        </td>
+                    </tr>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Users load failed:', error);
+            }
+        }
+        
+        // Search users
+        function searchUsers() {
+            const search = document.getElementById('user-search').value;
+            loadUsers(search);
+        }
+        
+        // Load classrooms
+        async function loadClassrooms(search = '') {
+            try {
+                const url = search 
+                    ? `${API_URL}/api/admin/classrooms?search=${encodeURIComponent(search)}`
+                    : `${API_URL}/api/admin/classrooms`;
+                
+                const response = await fetch(url, { credentials: 'include' });
+                const data = await response.json();
+                
+                const tbody = document.getElementById('classrooms-table');
+                tbody.innerHTML = data.classrooms.map(c => `
+                    <tr>
+                        <td>${c.id}</td>
+                        <td>${escapeHtml(c.name)}</td>
+                        <td>${escapeHtml(c.subject || '-')}</td>
+                        <td><code>${c.code}</code></td>
+                        <td>${c.member_count}/${c.max_students}</td>
+                        <td><span class="badge ${c.is_active ? 'badge-success' : 'badge-warning'}">${c.is_active ? 'Active' : 'Inactive'}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-secondary">View</button>
+                            ${c.is_active 
+                                ? `<button class="btn btn-sm btn-danger" onclick="archiveClassroom(${c.id})">Archive</button>`
+                                : ''
+                            }
+                        </td>
+                    </tr>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Classrooms load failed:', error);
+            }
+        }
+        
+        // Search classrooms
+        function searchClassrooms() {
+            const search = document.getElementById('classroom-search').value;
+            loadClassrooms(search);
+        }
+        
+        // Load audit logs
+        async function loadAuditLogs() {
+            try {
+                const response = await fetch(`${API_URL}/api/admin/audit-logs`, {
+                    credentials: 'include'
+                });
+                const data = await response.json();
+                
+                const tbody = document.getElementById('audit-table');
+                tbody.innerHTML = data.logs.map(l => `
+                    <tr>
+                        <td>${l.id}</td>
+                        <td>${l.event_type}</td>
+                        <td><span class="badge ${l.event_status === 'success' ? 'badge-success' : 'badge-danger'}">${l.event_status}</span></td>
+                        <td>${l.user_id || '-'}</td>
+                        <td>${l.ip_address || '-'}</td>
+                        <td>${new Date(l.created_at).toLocaleString()}</td>
+                    </tr>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Audit logs load failed:', error);
+            }
+        }
+        
+        // Load security events
+        async function loadSecurityEvents() {
+            try {
+                const response = await fetch(`${API_URL}/api/admin/security-events`, {
+                    credentials: 'include'
+                });
+                const data = await response.json();
+                
+                const tbody = document.getElementById('security-table');
+                tbody.innerHTML = data.events.map(e => `
+                    <tr>
+                        <td>${e.event_type}</td>
+                        <td>${e.user_id || '-'}</td>
+                        <td>${e.ip_address || '-'}</td>
+                        <td>${new Date(e.created_at).toLocaleString()}</td>
+                    </tr>
+                `).join('') || '<tr><td colspan="4" class="empty-state">No security events</td></tr>';
+                
+            } catch (error) {
+                console.error('Security events load failed:', error);
+            }
+        }
+        
+        // Load system stats
+        async function loadSystemStats() {
+            try {
+                const response = await fetch(`${API_URL}/api/admin/system/stats`, {
+                    credentials: 'include'
+                });
+                const data = await response.json();
+                
+                document.getElementById('sys-db-users').textContent = data.database.users;
+                document.getElementById('sys-ws-connections').textContent = data.websockets.total_connections;
+                
+            } catch (error) {
+                console.error('System stats load failed:', error);
+            }
+        }
+        
+        // Clear cache
+        async function clearCache() {
+            try {
+                const response = await fetch(`${API_URL}/api/admin/system/clear-cache`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    alert('Cache cleared successfully');
+                } else {
+                    alert('Failed to clear cache');
+                }
+            } catch (error) {
+                console.error('Clear cache failed:', error);
+            }
+        }
+        
+        // User actions
+        async function activateUser(userId) {
+            if (!confirm('Activate this user?')) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/admin/users/${userId}/activate`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    loadUsers();
+                }
+            } catch (error) {
+                console.error('Activate failed:', error);
+            }
+        }
+        
+        async function deactivateUser(userId) {
+            if (!confirm('Deactivate this user?')) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/admin/users/${userId}/deactivate`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    loadUsers();
+                }
+            } catch (error) {
+                console.error('Deactivate failed:', error);
+            }
+        }
+        
+        // Classroom actions
+        async function archiveClassroom(classroomId) {
+            if (!confirm('Archive this classroom?')) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/admin/classrooms/${classroomId}/archive`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    loadClassrooms();
+                }
+            } catch (error) {
+                console.error('Archive failed:', error);
+            }
+        }
+        
+        // Logout
+        async function logout() {
+            try {
+                await fetch(`${API_URL}/api/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+            } catch (e) {}
+            window.location.href = '/auth.html';
+        }
+        
+        // XSS Protection
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Initialize
+        checkAdmin();
+    </script>
+</body>
+</html>

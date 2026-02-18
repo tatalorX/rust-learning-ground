@@ -1,0 +1,52 @@
+name: Deploy Frontend to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "web-v4/**"
+  workflow_dispatch:
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: web-v4/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./web-v4
+        run: npm ci
+
+      - name: Build
+        working-directory: ./web-v4
+        run: npm run build
+        env:
+          VITE_API_URL: https://rust-learning-ground-api.up.railway.app/api/v4
+          VITE_XP_ENABLED: true
+          VITE_STREAK_ENABLED: true
+          VITE_SOUNDS_ENABLED: false
+          VITE_ANIMATIONS_ENABLED: true
+          VITE_FOCUS_TIMER_ENABLED: true
+          VITE_BRAINROT_MODE: false
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-deploy@v4
+        with:
+          cloudflare_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          project_name: rust-learning-ground-v4
+          directory: web-v4/dist
+          # Optional: Set a commit hash for the deployment
+          commit_hash: ${{ github.sha }}
+
+      - name: Health Check
+        run: |
+          sleep 10
+          curl -f https://rust-learning-ground-v4.pages.dev/ || exit 1

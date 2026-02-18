@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "language": "English",
+    "code": "en",
+    "flag": "🇬🇧",
+    "direction": "ltr"
+  },
+  "nav": {
+    "home": "Home",
+    "exercises": "Exercises",
+    "book": "The Book",
+    "toc": "Table of Contents",
+    "prev": "← Previous",
+    "next": "Next →",
+    "backToContents": "← Back to Contents"
+  },
+  "book": {
+    "title": "The Book of Rust",
+    "subtitle": "A Philosophical and Technical Journey Through Systems Programming",
+    "epigraph": "\"Who looks outside, dreams; who looks inside, awakes.\" — C.G. Jung",
+    "progress": "Book Progress",
+    "complete": "Complete",
+    "pages": "pages"
+  },
+  "parts": {
+    "partI": "Part I: The Archetypes",
+    "partITheme": "Jungian Psychology meets Rust",
+    "partII": "Part II: Surgical Precision",
+    "partIITheme": "The anatomy of computation",
+    "partIII": "Part III: Kernel Philosophy",
+    "partIIITheme": "Pragmatic systems thinking",
+    "partIV": "Part IV: Collective Systems",
+    "partIVTheme": "Async, network, and distributed programming",
+    "partV": "Part V: Mastery",
+    "partVTheme": "The path of the crafts-person"
+  },
+  "legend": {
+    "title": "Legend",
+    "archetype": "Archetype Box: Jungian psychological insight",
+    "kernel": "Kernel Wisdom: Pragmatic systems insight",
+    "surgical": "Surgical Note: Deep technical/anatomical detail"
+  },
+  "exercise": {
+    "exercises": "Exercises",
+    "projects": "Projects",
+    "difficulty": "Difficulty",
+    "time": "Time",
+    "minutes": "minutes",
+    "start": "Start Exercise",
+    "submit": "Submit Solution",
+    "hint": "Show Hint",
+    "solution": "View Solution"
+  },
+  "language": {
+    "select": "Select Language",
+    "primary": "Primary Languages",
+    "secondary": "Auto-Translate",
+    "autoTranslate": "Auto-translate to..."
+  },
+  "archetypes": {
+    "self": "The Self",
+    "shadow": "The Shadow",
+    "anima": "The Anima",
+    "persona": "The Persona",
+    "wiseOldMan": "Wise Old Man",
+    "greatMother": "Great Mother",
+    "puerAeternus": "Puer Aeternus",
+    "trickster": "The Trickster",
+    "divineChild": "Divine Child",
+    "ruler": "The Ruler",
+    "explorer": "The Explorer",
+    "detective": "The Detective",
+    "sage": "The Sage",
+    "artist": "The Artist",
+    "hero": "The Hero",
+    "integratedSelf": "The Integrated Self"
+  },
+  "footer": {
+    "copyright": "© 2024 The Book of Rust",
+    "license": "Licensed under MIT",
+    "source": "Source Code"
+  }
+}

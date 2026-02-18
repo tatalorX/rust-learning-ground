@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 15: The Sage - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-sage: #85929e;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #1c2833 0%, #85929e 100%);
+            color: white;
+            padding: 80px 40px 60px;
+        }
+        
+        .chapter-number {
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-title {
+            font-size: 3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+            max-width: 700px;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-sage);
+            background: linear-gradient(135deg, #f2f4f4 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #1c2833;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-sage);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-sage);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(133, 146, 158, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: #707b7c;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: #f8f8f2;
+        }
+        
+        .sage-box {
+            background: linear-gradient(135deg, #1c2833 0%, #85929e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(133, 146, 158, 0.3);
+        }
+        
+        .sage-title {
+            color: #eaeded;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .kernel-wisdom {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .kernel-wisdom-title {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-sage);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="chapter-14.html">← Chapter 14</a>
+            <a href="chapter-16.html">Chapter 16 →</a>
+        </div>
+        <div class="chapter-number">Chapter Fifteen</div>
+        <h1 class="chapter-title">The Sage: Testing</h1>
+        <p class="chapter-subtitle">Wisdom is knowing what you know—and verifying it through trial</p>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"Testing shows the presence, not the absence of bugs."</p>
+            <p class="epigraph-author">— Edsger Dijkstra</p>
+        </div>
+        
+        <p class="drop-cap">To write code without tests is to build on faith. To write tests is to build on evidence. The <strong>Sage</strong> knows that confidence comes not from belief but from verification—from systematically challenging assumptions and confirming behavior.</p>
+        
+        <div class="sage-box">
+            <div class="sage-title">📜 The Sage Speaks</div>
+            <p>"I test not because I doubt my code, but because I understand that complexity breeds error. I write unit tests to verify components in isolation. I write integration tests to verify their collaboration. I write documentation tests to keep examples correct."</p>
+            <p style="margin-top: 15px;">"Tests are the safety net that lets you refactor with confidence."</p>
+        </div>
+        
+        <h2>Unit Tests</h2>
+        
+        <p>Unit tests verify individual components in isolation:</p>
+        
+        <pre><code>// src/lib.rs
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_add() {
+        assert_eq!(add(2, 2), 4);
+    }
+    
+    #[test]
+    #[should_panic]
+    fn test_overflow() {
+        // This test expects a panic
+        let _ = i32::MAX + 1;
+    }
+}</code></pre>
+        
+        <h2>Integration Tests</h2>
+        
+        <p>Integration tests verify that components work together:</p>
+        
+        <pre><code>// tests/integration_test.rs
+use my_crate::Database;
+
+#[test]
+fn test_database_connection() {
+    let db = Database::connect("test.db").unwrap();
+    db.insert("key", "value").unwrap();
+    let value = db.get("key").unwrap();
+    assert_eq!(value, "value");
+}</code></pre>
+        
+        <h2>Documentation Tests</h2>
+        
+        <p>Examples in documentation are tested to ensure they work:</p>
+        
+        <pre><code>/// Adds two numbers together.
+///
+/// # Examples
+///
+/// ```
+/// let result = my_crate::add(2, 3);
+/// assert_eq!(result, 5);
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}</code></pre>
+        
+        <div class="kernel-wisdom">
+            <div class="kernel-wisdom-title">⚙️ Kernel Wisdom: Testing Systems Code</div>
+            <p>"The kernel has test suites that run on every commit. They boot the kernel in VMs, run syscalls, check for regressions. Rust's test framework makes this easier—no need for custom harnesses. cargo test is your friend."</p>
+        </div>
+        
+        <h2>Property-Based Testing</h2>
+        
+        <p>Instead of testing specific cases, test properties that should always hold:</p>
+        
+        <pre><code>use proptest::prelude::*;
+
+proptest! {
+    #[test]
+    fn test_add_commutative(a: i32, b: i32) {
+        // Addition should be commutative
+        assert_eq!(add(a, b), add(b, a));
+    }
+}</code></pre>
+        
+        <p>Go to Exercises 130-140 to practice testing strategies.</p>
+        
+        <footer class="chapter-footer">
+            <a href="chapter-14.html" class="nav-button">← Chapter 14</a>
+            <span style="color: var(--text-muted);">Chapter 15 of 18</span>
+            <a href="chapter-16.html" class="nav-button">Chapter 16 →</a>
+        </footer>
+    
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: Code Coverage Analysis</div>
+            <p>Use LLVM's coverage instrumentation:</p>
+            <pre style="background: #2d3748; margin: 10px 0;"><code>$ RUSTFLAGS="-C instrument-coverage" cargo test
+$ llvm-profdata merge -o default.profdata default_*.profraw
+$ llvm-cov report --use-color --instr-profile=default.profdata     --object target/debug/deps/myapp-*</code></pre>
+            <p>Target 80%+ coverage for critical code, 100% for unsafe code.</p>
+        </div>
+
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

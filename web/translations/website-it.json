@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "language": "Italiano",
+    "code": "it",
+    "flag": "🇮🇹",
+    "direction": "ltr"
+  },
+  "nav": {
+    "home": "Home",
+    "exercises": "Esercizi",
+    "book": "Il Libro",
+    "progress": "Progressi",
+    "settings": "Impostazioni",
+    "login": "Accedi",
+    "logout": "Esci",
+    "register": "Registrati",
+    "profile": "Profilo",
+    "about": "Su Rust",
+    "leaderboard": "Classifica",
+    "school": "🏫 Scuola"
+  },
+  "hero": {
+    "title": "Padroneggia la Programmazione Rust",
+    "subtitle": "Da principiante a ingegnere di sistemi attraverso 320 esercizi pratici",
+    "startJourney": "Inizia il Tuo Viaggio",
+    "readBook": "📖 Leggi il Libro",
+    "stats": {
+      "exercises": "Esercizi",
+      "chapters": "Capitoli",
+      "languages": "Lingue"
+    },
+    "badge": "170+ Esercizi Interattivi",
+    "startLearning": "Inizia a Imparare",
+    "createAccount": "Crea Account"
+  },
+  "features": {
+    "title": "Perché Imparare con Noi?",
+    "handsOn": {
+      "title": "🎯 Apprendimento Pratico",
+      "desc": "320 esercizi progressivi da Hello World alla costruzione di database, protocolli di rete e runtime async"
+    },
+    "archetypes": {
+      "title": "🎭 Basato su Archetipi",
+      "desc": "Impara attraverso gli archetipi junghiani: L'Ombra (unsafe), L'Anima (memoria), L'Eroe (concorrenza)"
+    },
+    "surgical": {
+      "title": "🔬 Precisione Chirurgica",
+      "desc": "Studi tecnici approfonditi su stack frame, allocazione heap e anatomia dei puntatori"
+    },
+    "fearless": {
+      "title": "⚡ Concorrenza Senza Paura",
+      "desc": "Padroneggia la programmazione parallela e async con le garanzie di sicurezza di Rust"
+    },
+    "fast": {
+      "title": "⚡ Velocità Straordinaria",
+      "desc": "Rust è progettato per le prestazioni. Con astrazioni a costo zero e senza runtime o garbage collector, alimenta servizi critici in aziende come Mozilla, Dropbox e Cloudflare."
+    },
+    "safety": {
+      "title": "🛡️ Sicurezza della Memoria",
+      "desc": "Il sistema di ownership di Rust garantisce la sicurezza della memoria senza garbage collector. Dì addio ai dereferenziamenti nulli, ai puntatori pendenti e alle race condition al momento della compilazione."
+    },
+    "concurrency": {
+      "title": "🧫 Concorrenza Senza Paura",
+      "desc": "Scrivi codice concorrente senza timore di race condition. Il sistema di tipi di Rust garantisce la sicurezza dei thread, rendendo la programmazione parallela accessibile e affidabile."
+    },
+    "tooling": {
+      "title": "📦 Ottimi Strumenti",
+      "desc": "Cargo, il gestore di pacchetti e sistema di build di Rust, rende la gestione delle dipendenze e la creazione di progetti un gioco da ragazzi. Combinato con rustfmt, clippy e rust-analyzer, hai un'esperienza di sviluppo di livello mondiale."
+    },
+    "community": {
+      "title": "🎓 Amato dagli Sviluppatori",
+      "desc": "Rust è stato votato come 'linguaggio di programmazione più amato' nel Stack Overflow Developer Survey per diversi anni. Unisciti a una comunità appassionata e accogliente di Rustaceans!"
+    },
+    "production": {
+      "title": "🚀 Pronto per la Produzione",
+      "desc": "Da server web a sistemi operativi, motori di gioco a piattaforme blockchain, Rust è utilizzato in produzione da centinaia di aziende in tutto il mondo. Le tue competenze Rust sono molto richieste."
+    }
+  },
+  "sections": {
+    "basics": "Base (001-100)",
+    "advanced": "Avanzato (101-150)",
+    "projects": "Progetti (151-170)",
+    "realWorld": "Ingegneria Reale (171-320)",
+    "systems": "Programmazione di Sistemi",
+    "networking": "Reti",
+    "dataProcessing": "Elaborazione Dati",
+    "concurrency": "Concorrenza",
+    "production": "Sistemi di Produzione"
+  },
+  "exercise": {
+    "difficulty": "Difficoltà",
+    "time": "Tempo Stimato",
+    "status": "Stato",
+    "completed": "Completato",
+    "inProgress": "In Corso",
+    "notStarted": "Non Iniziato",
+    "start": "Inizia Esercizio",
+    "continue": "Continua",
+    "retry": "Riprova",
+    "submit": "Invia Soluzione",
+    "hint": "Mostra Suggerimento",
+    "solution": "Vedi Soluzione",
+    "tests": "Esegui Test",
+    "compiling": "Compilazione...",
+    "success": "Successo! Tutti i test superati",
+    "failure": "Test falliti. Riprova!",
+    "topics": "Argomenti",
+    "prerequisites": "Prerequisiti"
+  },
+  "editor": {
+    "title": "Editor di Codice",
+    "run": "▶ Esegui",
+    "test": "🧪 Test",
+    "reset": "↺ Reset",
+    "format": "✨ Formatta",
+    "hint": "💡 Suggerimento",
+    "solution": "👁 Soluzione",
+    "console": "Output Console",
+    "testResults": "Risultati Test",
+    "placeholder": "// Scrivi qui il tuo codice Rust..."
+  },
+  "auth": {
+    "loginTitle": "Bentornato",
+    "registerTitle": "Crea Account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Conferma Password",
+    "username": "Nome Utente",
+    "forgotPassword": "Password dimenticata?",
+    "noAccount": "Non hai un account?",
+    "haveAccount": "Hai già un account?",
+    "loginButton": "Accedi",
+    "registerButton": "Crea Account",
+    "signin": "Accedi",
+    "signup": "Registrati"
+  },
+  "progress": {
+    "title": "I Tuoi Progressi",
+    "overall": "Progresso Generale",
+    "completed": "completato",
+    "streak": "Serie Corrente",
+    "days": "giorni"
+  },
+  "book": {
+    "readOnline": "Leggi Online",
+    "download": "Scarica PDF",
+    "chapters": "Capitoli",
+    "interludes": "Interludi",
+    "appendices": "Appendici"
+  },
+  "school": {
+    "dashboard": "Dashboard",
+    "overview": "Panoramica",
+    "classrooms": "Aule",
+    "progress": "Progresso",
+    "gamification": "Gamificazione",
+    "ranks": "Rango & XP",
+    "titles": "Titoli",
+    "leaderboard": "Classifica",
+    "teacher": "Insegnante",
+    "myClassrooms": "Le Mie Aule",
+    "availableClassrooms": "Aule Disponibili",
+    "createClassroom": "Crea Aula",
+    "joinClassroom": "Unisciti all'Aula",
+    "createClassroomTitle": "Crea Nuova Aula",
+    "classroomName": "Nome Aula",
+    "description": "Descrizione",
+    "gradeLevel": "Livello Scolastico",
+    "maxStudents": "Max Studenti",
+    "create": "Crea",
+    "cancel": "Annulla",
+    "join": "Unisciti",
+    "classroomCode": "Codice Aula",
+    "enterCode": "Inserisci codice aula",
+    "overviewTitle": "Panoramica Dashboard",
+    "currentRank": "Rango Attuale",
+    "toNextRank": "al prossimo rango",
+    "problemsSolved": "Problemi Risolti",
+    "currentStreak": "Serie Attuale",
+    "longestStreak": "Serie Più Lunga",
+    "treats": "Ricompense",
+    "ranksTitle": "Rango & Progresso",
+    "leaderboardTitle": "Classifica Globale",
+    "current": "✓ Attuale",
+    "problems": "problemi",
+    "classroomsITeach": "Aule che Insegno",
+    "joinedClassrooms": "Aule Iscritte",
+    "noClassrooms": "Non ti sei ancora unito a nessuna aula.",
+    "createFirst": "Crea la Tua Prima Aula",
+    "joinFirst": "Unisciti a un'Aula",
+    "members": "membri",
+    "assignments": "Compiti",
+    "dueDate": "Data di Scadenza",
+    "completed": "Completato",
+    "pending": "In Attesa"
+  },
+  "footer": {
+    "copyright": "© 2024 Terreno di Apprendimento Rust",
+    "license": "Licenziato sotto MIT",
+    "madeWith": "Fatto con 🦀 e ❤️",
+    "title": "🦀 Rust Learning Ground",
+    "links": "Link Rapidi",
+    "resources": "Risorse",
+    "community": "Comunità"
+  },
+  "language": {
+    "select": "Seleziona Lingua",
+    "primary": "Lingue Principali",
+    "secondary": "Traduzione Automatica"
+  },
+  "errors": {
+    "generic": "Qualcosa è andato storto",
+    "network": "Errore di rete. Controlla la connessione.",
+    "server": "Errore server. Riprova più tardi."
+  },
+  "stats": {
+    "xp": "XP Totale",
+    "completed": "completato",
+    "streak": "Serie"
+  },
+  "joke": {
+    "title": "Battuta del Giorno",
+    "loading": "Caricamento battuta...",
+    "reveal": "Clicca per rivelare"
+  },
+  "why": {
+    "tag": "Perché Rust?",
+    "title": "Il Linguaggio del Futuro",
+    "subtitle": "Rust è un linguaggio di programmazione di sistema che gira velocemente, previene segfault e garantisce la sicurezza dei thread."
+  },
+  "example": {
+    "tag": "Esempio",
+    "title": "Elegante ed Espressivo",
+    "subtitle": "Rust combina il controllo di basso livello con l'ergonomia di alto livello."
+  },
+  "filter": {
+    "all": "🎯 Tutti",
+    "todo": "📝 Da Fare",
+    "solved": "✅ Risolti",
+    "projects": "📦 Progetti"
+  },
+  "view": {
+    "normal": "Normale",
+    "compact": "Compatto"
+  },
+  "section": {
+    "beginner": "Principiante (001-050)",
+    "intermediate": "Intermedio (051-100)",
+    "advanced": "Algoritmi Avanzati (101-150)",
+    "projects": "Progetti Reali (151-170)",
+    "realworld": "Produzione e Reale (171-320)"
+  },
+  "legend": {
+    "exercise": "Esercizio (1-150)",
+    "project": "Progetto (151-170)",
+    "solved": "Risolto"
+  },
+  "leaderboard": {
+    "tag": "Competizione",
+    "title": "Classifiche",
+    "subtitle": "Vedi chi sta padroneggiando Rust più velocemente. Gareggia per le soluzioni più efficienti!",
+    "top": "Migliori Studenti",
+    "efficient": "Algoritmi più Efficienti"
+  },
+  "modal": {
+    "category": "Categoria",
+    "difficulty": "Difficoltà",
+    "time": "Tempo Stimato",
+    "skills": "Abilità da Imparare",
+    "objective": "💡 Obiettivo di Apprendimento",
+    "fileLocation": "Percorso File:",
+    "cli": "Comando CLI:",
+    "webEditor": "Apri nell'Editor Web",
+    "vscode": "Apri in VS Code",
+    "close": "Chiudi",
+    "prereqs": "💪 Basato su:",
+    "none": "Nessuno",
+    "esc": "Premi ESC per chiudere"
+  }
+}

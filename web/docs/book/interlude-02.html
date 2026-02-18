@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interlude II: Heap Anatomy - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-rust: #a0522d;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #641e16 0%, #c0392b 100%);
+            color: white;
+            padding: 80px 40px 60px;
+            position: relative;
+        }
+        
+        .interlude-label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-title {
+            font-size: 2.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-blood);
+            background: linear-gradient(135deg, #fdedec 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #641e16;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-blood);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-blood);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        .surgical-note {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .surgical-note-title {
+            color: var(--accent-blood);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .memory-diagram {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        .section-break {
+            text-align: center;
+            margin: 50px 0;
+            color: var(--text-muted);
+            font-size: 1.5em;
+            letter-spacing: 10px;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-blood);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="chapter-04.html">← Chapter 4</a>
+            <a href="chapter-05.html">Chapter 5 →</a>
+        </div>
+        <div class="interlude-label">Interlude II</div>
+        <h1 class="chapter-title">Heap Anatomy: The Wild Memory</h1>
+        <p class="chapter-subtitle">A surgical dissection of dynamic memory allocation at the system level</p>
+    </header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"The heap is the wilderness of memory—unstructured, unbounded, requiring constant vigilance. Unlike the orderly stack, the heap has no automatic cleanup. Every allocation is a commitment; every deallocation, a responsibility fulfilled."</p>
+            <p style="color: var(--text-muted); margin-top: 10px;">— Systems Programming Doctrine</p>
+        </div>
+        
+        <p class="drop-cap">In the first interlude, we dissected the stack frame—a structured, predictable region of memory governed by the strict discipline of function calls and returns. Now we turn our attention to the heap: the dynamic memory region where persistence is purchased at the price of vigilance.</p>
+        
+        <p>The heap is the operating system's gift to programs that need memory with a lifespan beyond a single function call. But this gift is not without strings attached. The program—not the compiler, not the runtime—must track what has been allocated and ensure it is returned when no longer needed.</p>
+        
+        <h2>The Heap Block Structure</h2>
+        
+        <p>When you allocate memory on the heap using <code>Box::new</code>, <code>Vec::new</code>, or <code>String::new</code>, the allocator does not simply hand you raw bytes. It constructs a structure—a block with metadata preceding the data you requested.</p>
+        
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: The Anatomy of an Allocation</div>
+            <p>Consider what happens when you execute:</p>
+            <pre style="background: #2d3748; margin: 15px 0;"><code>let patient = Box::new(Patient { id: 42, name: "Smith".to_string() });</code></pre>
+            <p>The heap allocator performs several operations atomically:</p>
+            <ol style="margin: 15px 0 0 25px;">
+                <li>Calculates total size: metadata header + data alignment padding + actual data</li>
+                <li>Searches the free list for a sufficiently large block</li>
+                <li>If no block exists, requests more memory from the OS via brk/mmap</li>
+                <li>Writes allocation metadata (size, flags) to the block header</li>
+                <li>Returns a pointer to the user-accessible region (after the header)</li>
+            </ol>
+        </div>
+        
+        <p>The memory layout looks like this:</p>
+        
+        <div class="memory-diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│                         HEAP BLOCK ANATOMY                          │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌─────────────┬──────────────┬──────────────────┬─────────────────┐│
+│  │   HEADER    │   PADDING    │   USER DATA      │   RED ZONE      ││
+│  │   8-16 B    │   0-7 B      │   N Bytes        │   0-8 B         ││
+│  ├─────────────┴──────────────┴──────────────────┴─────────────────┤│
+│  │                                                                    │
+│  │  Header Fields:                                                    │
+│  │  • Block size (including metadata)                                │
+│  │  • Flags (in-use, prev-in-use, mapped)                            │
+│  │  • Pointer to next free block (if free)                           │
+│  │  • Pointer to previous free block (if free)                       │
+│  │                                                                    │
+│  │  User Data:                                                        │
+│  │  • The actual Patient struct: { id: u64, name: String }           │
+│  │  • The String itself points to ANOTHER heap allocation!           │
+│  │                                                                    │
+└─────────────────────────────────────────────────────────────────────┘
+
+Address Layout (64-bit):
+┌────────────────────────────────────────────────────────────────────┐
+│ 0x7f8a_4c20_0000  │ Block Header (size=64, flags=0x1)              │
+│ 0x7f8a_4c20_0008  │ Pointer returned to user (Box<Patient>)         │
+│ 0x7f8a_4c20_0008  │ patient.id: u64 = 42                           │
+│ 0x7f8a_4c20_0010  │ patient.name.ptr: *const u8 → "Smith" @ 0x...   │
+│ 0x7f8a_4c20_0018  │ patient.name.len: usize = 5                     │
+│ 0x7f8a_4c20_0020  │ patient.name.cap: usize = 5                     │
+│ 0x7f8a_4c20_0028  │ (end of allocation)                             │
+└────────────────────────────────────────────────────────────────────┘
+
+Note: The String's buffer ("Smith") is a SEPARATE heap allocation!
+This means Box::drop must recursively drop its contents.
+        </div>
+        
+        <h2>The Allocator's Dilemma: Fragmentation</h2>
+        
+        <p>The heap allocator faces a fundamental challenge: memory fragmentation. Over time, as allocations and deallocations occur, the heap becomes pockmarked with holes—free blocks too small for new requests, separated by allocated blocks that cannot be moved.</p>
+        
+        <p>Consider this sequence:</p>
+        
+        <div class="memory-diagram">
+Initial State: Single large free block
+┌────────────────────────────────────────────────────────────┐
+│                         FREE (64KB)                         │
+└────────────────────────────────────────────────────────────┘
+
+After A=malloc(16KB), B=malloc(16KB), C=malloc(16KB):
+┌─────────────────┬─────────────────┬─────────────────┬────────┐
+│   A (16KB)      │   B (16KB)      │   C (16KB)      │ FREE   │
+│   ALLOCATED     │   ALLOCATED     │   ALLOCATED     │ (16KB) │
+└─────────────────┴─────────────────┴─────────────────┴────────┘
+
+After free(B):
+┌─────────────────┬─────────────────┬─────────────────┬────────┐
+│   A (16KB)      │   B (16KB)      │   C (16KB)      │ FREE   │
+│   ALLOCATED     │   FREE          │   ALLOCATED     │ (16KB) │
+└─────────────────┴─────────────────┴─────────────────┴────────┘
+
+Problem: Cannot allocate D=malloc(32KB) despite 32KB free total!
+The free space is fragmented into two non-contiguous 16KB blocks.
+        </div>
+        
+        <p>Modern allocators combat fragmentation through strategies like:</p>
+        <ul style="margin: 20px 0 20px 30px;">
+            <li><strong>Binning</strong>: Maintaining separate free lists for different size classes</li>
+            <li><strong>Coalescing</strong>: Merging adjacent free blocks when possible</li>
+            <li><strong>Slab allocation</strong>: Pre-allocating fixed-size pools for common object sizes</li>
+        </ul>
+        
+        <h2>Rust's Box: The Smart Pointer</h2>
+        
+        <p>Rust's <code>Box&lt;T&gt;</code> is not merely a raw pointer. It is a <strong>smart pointer</strong>—a type that encapsulates both the pointer and the responsibility for cleanup.</p>
+        
+        <pre><code><span style="color: #6272a4;">// The Box struct (simplified)</span>
+<span style="color: #ff79c6;">pub struct</span> <span style="color: #8be9fd;">Box</span>&lt;T: ?<span style="color: #8be9fd;">Sized</span>&gt; {
+    ptr: <span style="color: #8be9fd;">Unique</span>&lt;T&gt;,  <span style="color: #6272a4;">// Non-null, owning pointer to heap memory</span>
+}
+
+<span style="color: #6272a4;">// When Box goes out of scope...</span>
+<span style="color: #ff79c6;">impl</span>&lt;T&gt; <span style="color: #8be9fd;">Drop</span> <span style="color: #ff79c6;">for</span> <span style="color: #8be9fd;">Box</span>&lt;T&gt; {
+    <span style="color: #ff79c6;">fn</span> <span style="color: #8be9fd;">drop</span>(&amp;<span style="color: #ff79c6;">mut</span> <span style="color: #ff79c6;">self</span>) {
+        <span style="color: #6272a4;">// 1. Drop the contents (recursively for nested types)</span>
+        <span style="color: #6272a4;">// 2. Deallocate the memory block</span>
+        <span style="color: #ff79c6;">unsafe</span> {
+            <span style="color: #ff79c6;">self</span>.ptr.<span style="color: #8be9fd;">drop_in_place</span>();  <span style="color: #6272a4;">// Call T's destructor</span>
+            <span style="color: #8be9fd;">dealloc</span>(<span style="color: #ff79c6;">self</span>.ptr.as_ptr(), <span style="color: #8be9fd;">Layout</span>::<span style="color: #8be9fd;">new</span>::&lt;T&gt;());
+        }
+    }
+}</code></pre>
+        
+        <p>This is the genius of Rust's ownership system applied to heap memory: the compiler inserts the destructor call automatically, and the destructor ensures proper cleanup. The programmer cannot forget to free the memory—the type system guarantees it.</p>
+        
+        <div class="section-break">* * *</div>
+        
+        <h2>The Global Allocator Interface</h2>
+        
+        <p>Rust allows you to replace the global allocator. This is essential for embedded systems, game engines, and any application with specific memory requirements.</p>
+        
+        <pre><code><span style="color: #6272a4;">// Using jemalloc for better fragmentation behavior</span>
+<span style="color: #ff79c6;">use</span> jemallocator::Jemalloc;
+
+<span style="color: #6272a4;">#[global_allocator]</span>
+<span style="color: #ff79c6;">static</span> <span style="color: #8be9fd;">GLOBAL</span>: <span style="color: #8be9fd;">Jemalloc</span> = <span style="color: #8be9fd;">Jemalloc</span>;
+
+<span style="color: #6272a4;">// Now all Box::new, Vec::new, String::new use jemalloc</span></code></pre>
+        
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: Allocator Selection</div>
+            <p>Choosing an allocator is like choosing a surgical approach:</p>
+            <ul style="margin: 15px 0 0 25px;">
+                <li><strong>System allocator</strong>: Good general-purpose, uses malloc/free</li>
+                <li><strong>jemalloc</strong>: Excellent for concurrent workloads, reduces fragmentation</li>
+                <li><strong>mimalloc</strong>: Small memory footprint, fast for small allocations</li>
+                <li><strong>Bump allocator</strong>: Ultra-fast, arena-style, no individual deallocation</li>
+                <li><strong>Pool allocator</strong>: Fixed-size blocks, deterministic, no fragmentation</li>
+            </ul>
+        </div>
+        
+        <h2>Exercise: Heap Visualization</h2>
+        
+        <p>Go to Exercise 026: "Heap Allocation Analysis" in the dashboard. You will use the <code>heaptrack</code> or <code>dhat</code> tools to visualize memory allocations in a Rust program.</p>
+        
+        <p>Observe:</p>
+        <ul style="margin: 20px 0 20px 30px;">
+            <li>Where fragmentation occurs</li>
+            <li>Which allocation sites dominate memory usage</li>
+            <li>How long-lived vs short-lived allocations pattern differently</li>
+        </ul>
+        
+        <p>Understanding the heap's behavior at this level transforms you from a programmer who uses memory into a programmer who <em>masters</em> memory.</p>
+        
+        <footer class="chapter-footer">
+            <a href="chapter-04.html" class="nav-button">← Chapter 4</a>
+            <span style="color: var(--text-muted);">Interlude II of V</span>
+            <a href="chapter-05.html" class="nav-button">Chapter 5 →</a>
+        </footer>
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appendix D: Index - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-rust: #a0522d;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #2d2d44 100%);
+            color: white;
+            padding: 60px 40px;
+        }
+        
+        .chapter-number {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-title {
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 40px;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 40px 0 20px;
+            color: var(--accent-rust);
+            font-weight: 600;
+        }
+        
+        .index-section {
+            margin-bottom: 30px;
+        }
+        
+        .index-letter {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--bg-dark);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 5px;
+        }
+        
+        .index-list {
+            columns: 2;
+            column-gap: 40px;
+        }
+        
+        .index-item {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+        
+        .index-term {
+            color: var(--text-ink);
+            text-decoration: none;
+        }
+        
+        .index-term:hover {
+            color: var(--accent-rust);
+        }
+        
+        .index-pages {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+        
+        .chapter-footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="appendix-c.html">← Appendix C</a>
+            <a href="toc.html">Contents →</a>
+        </div>
+        <div class="chapter-number">Appendix D</div>
+        <h1 class="chapter-title">Index</h1>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <h2>A</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-01.html" class="index-term">Archetypes</a> <span class="index-pages">Ch 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 17, 18</span></div>
+                <div class="index-item"><a href="chapter-09.html" class="index-term">Async/Await</a> <span class="index-pages">Ch 9, Int IV</span></div>
+                <div class="index-item"><a href="chapter-04.html" class="index-term">Associated Types</a> <span class="index-pages">Ch 4</span></div>
+                <div class="index-item"><a href="chapter-02.html" class="index-term">Atomics</a> <span class="index-pages">Ch 2</span></div>
+                <div class="index-item"><a href="chapter-03.html" class="index-term">Ownership</a> <span class="index-pages">Ch 3</span></div>
+            </div>
+        </div>
+        
+        <h2>B</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-03.html" class="index-term">Borrowing</a> <span class="index-pages">Ch 3</span></div>
+                <div class="index-item"><a href="chapter-03.html" class="index-term">Borrow Checker</a> <span class="index-pages">Ch 3</span></div>
+                <div class="index-item"><a href="chapter-03.html" class="index-term">Box</a> <span class="index-pages">Ch 3, Int III</span></div>
+                <div class="index-item"><a href="interlude-01.html" class="index-term">Buffer Overflow</a> <span class="index-pages">Int I</span></div>
+            </div>
+        </div>
+        
+        <h2>C</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-08.html" class="index-term">Closures</a> <span class="index-pages">Ch 8</span></div>
+                <div class="index-item"><a href="chapter-12.html" class="index-term">Crates</a> <span class="index-pages">Ch 12</span></div>
+                <div class="index-item"><a href="chapter-12.html" class="index-term">Cargo</a> <span class="index-pages">Ch 12</span></div>
+                <div class="index-item"><a href="chapter-09.html" class="index-term">Concurrency</a> <span class="index-pages">Ch 9, 17</span></div>
+                <div class="index-item"><a href="chapter-04.html" class="index-term">Traits</a> <span class="index-pages">Ch 4</span></div>
+            </div>
+        </div>
+        
+        <h2>D</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-02.html" class="index-term">Drop Trait</a> <span class="index-pages">Ch 2, 3</span></div>
+                <div class="index-item"><a href="chapter-08.html" class="index-term">Dynamic Dispatch</a> <span class="index-pages">Ch 8</span></div>
+                <div class="index-item"><a href="chapter-09.html" class="index-term">Data Races</a> <span class="index-pages">Ch 9</span></div>
+            </div>
+        </div>
+        
+        <h2>E</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-06.html" class="index-term">Error Handling</a> <span class="index-pages">Ch 6</span></div>
+                <div class="index-item"><a href="chapter-06.html" class="index-term">Result</a> <span class="index-pages">Ch 6</span></div>
+                <div class="index-item"><a href="chapter-06.html" class="index-term">Option</a> <span class="index-pages">Ch 6</span></div>
+            </div>
+        </div>
+        
+        <h2>F</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="interlude-04.html" class="index-term">Futures</a> <span class="index-pages">Int IV</span></div>
+                <div class="index-item"><a href="interlude-03.html" class="index-term">Fat Pointers</a> <span class="index-pages">Int III</span></div>
+                <div class="index-item"><a href="chapter-03.html" class="index-term">FFI</a> <span class="index-pages">Ch 3</span></div>
+            </div>
+        </div>
+        
+        <h2>G</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-04.html" class="index-term">Generics</a> <span class="index-pages">Ch 4</span></div>
+            </div>
+        </div>
+        
+        <h2>H</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="interlude-02.html" class="index-term">Heap</a> <span class="index-pages">Int II</span></div>
+            </div>
+        </div>
+        
+        <h2>I</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-01.html" class="index-term">Individuation</a> <span class="index-pages">Ch 1</span></div>
+                <div class="index-item"><a href="chapter-07.html" class="index-term">Iterators</a> <span class="index-pages">Ch 7</span></div>
+                <div class="index-item"><a href="chapter-08.html" class="index-term">Interior Mutability</a> <span class="index-pages">Ch 8</span></div>
+            </div>
+        </div>
+        
+        <h2>J</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="appendix-b.html" class="index-term">Jung, Carl</a> <span class="index-pages">Ch 1-6, App B</span></div>
+            </div>
+        </div>
+        
+        <h2>L</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-05.html" class="index-term">Lifetimes</a> <span class="index-pages">Ch 5</span></div>
+            </div>
+        </div>
+        
+        <h2>M</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-10.html" class="index-term">Monomorphization</a> <span class="index-pages">Ch 10</span></div>
+                <div class="index-item"><a href="chapter-12.html" class="index-term">Modules</a> <span class="index-pages">Ch 12</span></div>
+                <div class="index-item"><a href="chapter-09.html" class="index-term">Mutex</a> <span class="index-pages">Ch 9</span></div>
+            </div>
+        </div>
+        
+        <h2>O</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-03.html" class="index-term">Ownership</a> <span class="index-pages">Ch 3</span></div>
+            </div>
+        </div>
+        
+        <h2>R</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-03.html" class="index-term">References</a> <span class="index-pages">Ch 3</span></div>
+                <div class="index-item"><a href="chapter-03.html" class="index-term">RAII</a> <span class="index-pages">Ch 3</span></div>
+                <div class="index-item"><a href="chapter-03.html" class="index-term">Raw Pointers</a> <span class="index-pages">Ch 3</span></div>
+            </div>
+        </div>
+        
+        <h2>S</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="interlude-01.html" class="index-term">Stack</a> <span class="index-pages">Int I</span></div>
+                <div class="index-item"><a href="chapter-09.html" class="index-term">Send</a> <span class="index-pages">Ch 9</span></div>
+                <div class="index-item"><a href="chapter-09.html" class="index-term">Sync</a> <span class="index-pages">Ch 9</span></div>
+                <div class="index-item"><a href="interlude-03.html" class="index-term">Smart Pointers</a> <span class="index-pages">Int III</span></div>
+            </div>
+        </div>
+        
+        <h2>T</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-04.html" class="index-term">Traits</a> <span class="index-pages">Ch 4</span></div>
+                <div class="index-item"><a href="chapter-08.html" class="index-term">Trait Objects</a> <span class="index-pages">Ch 8</span></div>
+                <div class="index-item"><a href="chapter-15.html" class="index-term">Testing</a> <span class="index-pages">Ch 15</span></div>
+            </div>
+        </div>
+        
+        <h2>U</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-02.html" class="index-term">Unsafe</a> <span class="index-pages">Ch 2, 17</span></div>
+            </div>
+        </div>
+        
+        <h2>V</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="interlude-03.html" class="index-term">Vtable</a> <span class="index-pages">Int III</span></div>
+            </div>
+        </div>
+        
+        <h2>W</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="interlude-04.html" class="index-term">Waker</a> <span class="index-pages">Int IV</span></div>
+                <div class="index-item"><a href="chapter-12.html" class="index-term">Workspace</a> <span class="index-pages">Ch 12</span></div>
+            </div>
+        </div>
+        
+        <h2>Z</h2>
+        <div class="index-section">
+            <div class="index-list">
+                <div class="index-item"><a href="chapter-10.html" class="index-term">Zero-Cost Abstractions</a> <span class="index-pages">Ch 10</span></div>
+            </div>
+        </div>
+        
+        <footer class="chapter-footer">
+            <a href="appendix-c.html" class="nav-button">← Appendix C</a>
+            <a href="toc.html" class="nav-button">Contents →</a>
+        </footer>
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

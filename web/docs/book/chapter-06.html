@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: The Great Mother - The Book of Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #faf8f5;
+            --bg-dark: #1a1a2e;
+            --text-ink: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-blood: #c0392b;
+            --accent-gold: #f39c12;
+            --accent-mother: #e74c3c;
+            --border: #d5d8dc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-ink);
+            line-height: 1.9;
+            font-size: 19px;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #641e16 0%, #e74c3c 100%);
+            color: white;
+            padding: 80px 40px 60px;
+        }
+        
+        .chapter-number {
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-title {
+            font-size: 3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+            max-width: 700px;
+        }
+        
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+        
+        .nav-bar a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .nav-bar a:hover { color: white; }
+        
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .epigraph {
+            margin: 40px 0 60px;
+            padding: 30px 40px;
+            border-left: 4px solid var(--accent-mother);
+            background: linear-gradient(135deg, #fdedec 0%, transparent 100%);
+            font-style: italic;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 50px 0 25px;
+            color: #641e16;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            margin: 40px 0 20px;
+            color: var(--accent-mother);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            color: var(--accent-mother);
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #1a1a2e;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 25px;
+            overflow-x: auto;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: var(--accent-mother);
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: #f8f8f2;
+        }
+        
+        .mother-box {
+            background: linear-gradient(135deg, #641e16 0%, #e74c3c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(231, 76, 60, 0.3);
+        }
+        
+        .mother-title {
+            color: #f5b7b1;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .kernel-wisdom {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .kernel-wisdom-title {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        
+        .chapter-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: var(--bg-dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: var(--accent-mother);
+        }
+    </style>
+<script src="translations/i18n.js" defer></script>
+<link rel="stylesheet" href="dark-mode.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+    <header class="chapter-header">
+        <div class="nav-bar">
+            <a href="chapter-05.html">← Chapter 5</a>
+            <a href="interlude-03.html">Interlude III →</a>
+        </div>
+        <div class="chapter-number">Chapter Six</div>
+        <h1 class="chapter-title">The Great Mother: Error Handling</h1>
+        <p class="chapter-subtitle">Errors are not exceptions to be thrown away—they are messages to be embraced, understood, and transformed</p>
+    <div class="lang-switcher" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px;">
+                <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="lang-btn" data-lang="ro" title="Română">🇷🇴</button>
+                <button class="lang-btn" data-lang="it" title="Italiano">🇮🇹</button>
+                <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+                <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+                <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+                <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+                <button class="lang-btn" data-lang="ps" title="پښتو">🇵🇸</button>
+                <button class="lang-btn" data-lang="arc" title="ܐܪܡܝܐ">🏛️</button>
+                <script>
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+                    });
+                </script>
+            </div></header>
+    
+    <article class="content">
+        <div class="epigraph">
+            <p class="epigraph-text">"The Great Mother is the mother of life and also of death. She is the womb and the tomb, the beginning and the end. Everything that is born must die, and in dying returns to her."</p>
+            <p class="epigraph-author">— C.G. Jung</p>
+        </div>
+        
+        <p class="drop-cap">In many programming languages, errors are treated as exceptional—thrown up the call stack, caught or uncaught, often ignored until they crash the system at 3 AM. This is not wisdom; it is denial. Errors are not aberrations; they are <strong>information</strong>. They are the system's way of telling us: <em>this path is blocked, this assumption is false, this state is invalid.</em></p>
+        
+        <p>Rust embraces errors through its type system. The <code>Result&lt;T, E&gt;</code> and <code>Option&lt;T&gt;</code> types force us to confront the possibility of failure at every step. This is the <strong>Great Mother</strong> archetype at work—the container that holds both success and failure, creation and destruction.</p>
+        
+        <div class="mother-box">
+            <div class="mother-title">❤️ The Great Mother Speaks</div>
+            <p>"I contain all outcomes. I am the Result that may be Ok or Err. I am the Option that may be Some or None. Do not fear my emptiness—embrace it. Acknowledge that failure is possible, and you gain the power to handle it gracefully."</p>
+            <p style="margin-top: 15px;">"To ignore me is to court disaster. To unwrap me blindly is to deny reality. Handle me with match arms, with if let, with the ? operator—and you will write code that cannot fail silently."</p>
+        </div>
+        
+        <h2>The Result Type: Containing Both Outcomes</h2>
+        
+        <p><code>Result&lt;T, E&gt;</code> is an enum with two variants:</p>
+        
+        <pre><code><span style="color: #ff79c6;">enum</span> <span style="color: #8be9fd;">Result</span>&lt;T, E&gt; {
+    <span style="color: #8be9fd;">Ok</span>(T),   <span style="color: #6272a4;">// The operation succeeded; T is the result</span>
+    <span style="color: #8be9fd;">Err</span>(E),  <span style="color: #6272a4;">// The operation failed; E explains why</span>
+}</code></pre>
+        
+        <p>Every function that can fail should return a Result. This makes failure <strong>explicit</strong> in the type signature:</p>
+        
+        <pre><code><span style="color: #6272a4;">// This function might fail—it's right there in the type</span>
+<span style="color: #ff79c6;">fn</span> <span style="color: #8be9fd;">read_file</span>(path: &amp;<span style="color: #8be9fd;">str</span>) -&gt; <span style="color: #8be9fd;">Result</span>&lt;<span style="color: #8be9fd;">String</span>, <span style="color: #8be9fd;">io</span>::<span style="color: #8be9fd;">Error</span>&gt; {
+    <span style="color: #8be9fd;">fs</span>::read_to_string(path)
+}
+
+<span style="color: #6272a4;">// Callers MUST handle both cases</span>
+<span style="color: #ff79c6;">match</span> <span style="color: #8be9fd;">read_file</span>(<span style="color: #f1fa8c;">"config.txt"</span>) {
+    <span style="color: #8be9fd;">Ok</span>(contents) =&gt; <span style="color: #8be9fd;">println!</span>(<span style="color: #f1fa8c;">"Loaded: {}"</span>, contents),
+    <span style="color: #8be9fd;">Err</span>(e) =&gt; <span style="color: #8be9fd;">eprintln!</span>(<span style="color: #f1fa8c;">"Failed to load: {}"</span>, e),
+}</code></pre>
+        
+        <h2>The ? Operator: Graceful Propagation</h2>
+        
+        <p>The <code>?</code> operator propagates errors automatically. If the Result is <code>Err</code>, it returns immediately from the function with that error:</p>
+        
+        <pre><code><span style="color: #ff79c6;">fn</span> <span style="color: #8be9fd;">read_config</span>() -&gt; <span style="color: #8be9fd;">Result</span>&lt;<span style="color: #8be9fd;">Config</span>, <span style="color: #8be9fd;">io</span>::<span style="color: #8be9fd;">Error</span>&gt; {
+    <span style="color: #ff79c6;">let</span> contents = <span style="color: #8be9fd;">fs</span>::read_to_string(<span style="color: #f1fa8c;">"config.txt"</span>)?;  <span style="color: #6272a4;">// May return early</span>
+    <span style="color: #ff79c6;">let</span> config = <span style="color: #8be9fd;">parse_config</span>(&amp;contents)?;           <span style="color: #6272a4;">// May return early</span>
+    <span style="color: #8be9fd;">Ok</span>(config)
+}
+
+<span style="color: #6272a4;">// Equivalent to:</span>
+<span style="color: #ff79c6;">fn</span> <span style="color: #8be9fd;">read_config_verbose</span>() -&gt; <span style="color: #8be9fd;">Result</span>&lt;<span style="color: #8be9fd;">Config</span>, <span style="color: #8be9fd;">io</span>::<span style="color: #8be9fd;">Error</span>&gt; {
+    <span style="color: #ff79c6;">let</span> contents = <span style="color: #ff79c6;">match</span> <span style="color: #8be9fd;">fs</span>::read_to_string(<span style="color: #f1fa8c;">"config.txt"</span>) {
+        <span style="color: #8be9fd;">Ok</span>(c) =&gt; c,
+        <span style="color: #8be9fd;">Err</span>(e) =&gt; <span style="color: #ff79c6;">return</span> <span style="color: #8be9fd;">Err</span>(e),
+    };
+    <span style="color: #6272a4;">// ...</span>
+}</code></pre>
+        
+        <div class="kernel-wisdom">
+            <div class="kernel-wisdom-title">⚙️ Kernel Wisdom: Fail Fast, Fail Loud</div>
+            <p>"The kernel doesn't hide errors. An I/O failure is reported up the stack. A memory allocation failure returns NULL. Silent failures lead to data corruption and security vulnerabilities. Better to crash deterministically than continue in an invalid state."</p>
+        </div>
+        
+        <h2>Custom Error Types</h2>
+        
+        <p>As your application grows, you'll want unified error types. The <code>thiserror</code> crate makes this ergonomic:</p>
+        
+        <pre><code><span style="color: #ff79c6;">use</span> thiserror::<span style="color: #8be9fd;">Error</span>;
+
+<span style="color: #ff79c6;">#[derive(Error, Debug)]</span>
+<span style="color: #ff79c6;">enum</span> <span style="color: #8be9fd;">AppError</span> {
+    <span style="color: #6272a4;">#[error("IO error: {0}")]</span>
+    <span style="color: #8be9fd;">Io</span>(<span style="color: #8be9fd;">io</span>::<span style="color: #8be9fd;">Error</span>),
+    
+    <span style="color: #6272a4;">#[error("Invalid configuration: {message}")]</span>
+    <span style="color: #8be9fd;">Config</span> { message: <span style="color: #8be9fd;">String</span> },
+    
+    <span style="color: #6272a4;">#[error("Database error: {0}")]</span>
+    <span style="color: #8be9fd;">Database</span>(<span style="color: #8be9fd;">sqlx</span>::<span style="color: #8be9fd;">Error</span>),
+}
+
+<span style="color: #6272a4;">// Automatic conversion from io::Error</span>
+<span style="color: #ff79c6;">impl</span> <span style="color: #8be9fd;">From</span>&lt;<span style="color: #8be9fd;">io</span>::<span style="color: #8be9fd;">Error</span>&gt; <span style="color: #ff79c6;">for</span> <span style="color: #8be9fd;">AppError</span> {
+    <span style="color: #ff79c6;">fn</span> <span style="color: #8be9fd;">from</span>(e: <span style="color: #8be9fd;">io</span>::<span style="color: #8be9fd;">Error</span>) -&gt; <span style="color: #8be9fd;">Self</span> {
+        <span style="color: #8be9fd;">AppError</span>::<span style="color: #8be9fd;">Io</span>(e)
+    }
+}</code></pre>
+        
+        <h2>Option: Embracing Absence</h2>
+        
+        <p>Where Result handles <em>operations that fail</em>, Option handles <em>values that may not exist</em>:</p>
+        
+        <pre><code><span style="color: #ff79c6;">let</span> maybe_value: <span style="color: #8be9fd;">Option</span>&lt;<span style="color: #8be9fd;">i32</span>&gt; = <span style="color: #8be9fd;">Some</span>(<span style="color: #bd93f9;">42</span>);
+<span style="color: #ff79c6;">let</span> definitely_not: <span style="color: #8be9fd;">Option</span>&lt;<span style="color: #8be9fd;">i32</span>&gt; = <span style="color: #8be9fd;">None</span>;
+
+<span style="color: #6272a4;">// Transform with map</span>
+<span style="color: #ff79c6;">let</span> doubled = maybe_value.<span style="color: #8be9fd;">map</span>(|v| v * <span style="color: #bd93f9;">2</span>);  <span style="color: #6272a4;">// Some(84)</span>
+
+<span style="color: #6272a4;">// Provide default with unwrap_or</span>
+<span style="color: #ff79c6;">let</span> value = definitely_not.<span style="color: #8be9fd;">unwrap_or</span>(<span style="color: #bd93f9;">0</span>);  <span style="color: #6272a4;">// 0</span>
+
+<span style="color: #6272a4;">// Fallible operations with ok_or</span>
+<span style="color: #ff79c6;">let</span> result = maybe_value
+    .<span style="color: #8be9fd;">ok_or</span>(<span style="color: #f1fa8c;">"Value was None"</span>)?;</code></pre>
+        
+        <h2>When to Panic</h2>
+        
+        <p>Sometimes errors are truly unrecoverable. These are <strong>bugs</strong>, not expected conditions. Use <code>panic!</code> for:</p>
+        
+        <ul style="margin: 20px 0 20px 30px;">
+            <li>Programming errors (index out of bounds, unwrap on None that should never be None)</li>
+            <li>Unrecoverable states (assertion failures)</li>
+            <li>Early development before proper error handling</li>
+        </ul>
+        
+        <p>Never use panic for expected runtime errors (file not found, network timeout, invalid user input). Those are Results.</p>
+        
+        <div class="mother-box">
+            <div class="mother-title">❤️ The Great Mother's Blessing</div>
+            <p>"Go now, and write code that embraces failure. Let every function declare its fallibility. Let every error be handled with grace. In doing so, you create systems that are not just correct, but resilient—systems that can weather the storms of production and emerge stronger."</p>
+        </div>
+        
+        <p>Go to Exercises 040-045 to practice error handling patterns. Learn to love the Result type—it is your shield against the chaos of runtime failures.</p>
+        
+        <footer class="chapter-footer">
+            <a href="chapter-05.html" class="nav-button">← Chapter 5</a>
+            <span style="color: var(--text-muted);">Chapter 6 of 18</span>
+            <a href="interlude-03.html" class="nav-button">Interlude III →</a>
+        </footer>
+    
+        <div class="surgical-note">
+            <div class="surgical-note-title">🔬 Surgical Precision: The Result Layout in Memory</div>
+            <p>A <code>Result&lt;T, E&gt;</code> is a tagged union:</p>
+            <pre style="background: #2d3748; margin: 10px 0;"><code>// Result&lt;T, E&gt; memory layout (simplified):
+// Discriminant (1 byte): 0 = Ok, 1 = Err
+// Payload: max(sizeof(T), sizeof(E))
+// Alignment: max(alignof(T), alignof(E))
+
+// Example: Result&lt;i32, String&gt;
+// Size: 24 bytes (discriminant + padding + max payload)
+// The String variant is larger, so Ok(i32) wastes space</code></pre>
+            <p>This is why <code>Result&lt;(), Error&gt;</code> is common for operations that only fail.</p>
+        </div>
+
+    </article>
+<script src="dark-mode.js"></script>
+<script src="search.js"></script>
+    <script src="book-i18n.js"></script>
+</body>
+</html>

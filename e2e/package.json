@@ -1,0 +1,16 @@
+{
+  "name": "rust-learning-ground-e2e",
+  "version": "1.0.0",
+  "description": "End-to-end tests for The Book of Rust",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "codegen": "playwright codegen"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.41.0",
+    "@types/node": "^20.0.0"
+  }
+}

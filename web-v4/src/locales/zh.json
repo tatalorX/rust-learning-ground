@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "home": "首页",
+    "exercises": "练习",
+    "rustBook": "Rust 书籍",
+    "events": "活动",
+    "leaderboard": "排行榜",
+    "achievements": "成就",
+    "documentation": "文档",
+    "settings": "设置",
+    "profile": "个人资料"
+  },
+  "home": {
+    "hero": {
+      "badge": "通过实践掌握 Rust",
+      "title": "学习",
+      "titleHighlight": "Rust 编程",
+      "subtitle": "正确的方式",
+      "description": "互动练习、即时反馈和为现代开发者设计的游戏化学习体验。今天开始你的 Rust 之旅。",
+      "startLearning": "开始学习",
+      "createAccount": "创建账户"
+    },
+    "features": {
+      "exercises": {
+        "title": "300+ 练习",
+        "description": "从基础到高级模式"
+      },
+      "feedback": {
+        "title": "即时反馈",
+        "description": "即时运行和测试你的代码"
+      },
+      "streak": {
+        "title": "连续系统",
+        "description": "通过每日目标建立一致性"
+      },
+      "achievements": {
+        "title": "成就",
+        "description": "在进步过程中解锁徽章"
+      }
+    },
+    "editor": {
+      "title": "交互式代码编辑器",
+      "description": "使用我们的 Monaco 编辑器直接在浏览器中编写 Rust 代码。即时编译、清晰的错误信息和无缝执行。",
+      "features": [
+        "Rust 语法高亮",
+        "自动完成和提示",
+        "实时错误检测",
+        "一键代码执行"
+      ],
+      "tryExercise": "尝试练习 1"
+    },
+    "whyRust": {
+      "title": "为什么学习 Rust？",
+      "description": "Rust 是最受欢迎的编程语言，结合了 C++ 的性能、内存安全性和现代开发者体验。",
+      "features": [
+        {
+          "title": "内存安全",
+          "description": "没有段错误，由编译器保证"
+        },
+        {
+          "title": "高性能",
+          "description": "与 C 和 C++ 相当"
+        },
+        {
+          "title": "现代工具",
+          "description": "Cargo、crates.io 等"
+        }
+      ]
+    },
+    "cta": {
+      "title": "准备好开始你的旅程了吗？",
+      "description": "加入成千上万的开发者，以正确的方式学习 Rust。",
+      "button": "免费开始学习"
+    }
+  },
+  "exercises": {
+    "title": "练习",
+    "subtitle": "个练习可用",
+    "completed": "已完成",
+    "difficulty": {
+      "beginner": "初级",
+      "easy": "简单",
+      "medium": "中等",
+      "hard": "困难",
+      "expert": "专家"
+    },
+    "status": {
+      "completed": "已完成",
+      "inProgress": "进行中",
+      "notStarted": "未开始"
+    },
+    "filters": {
+      "search": "搜索练习...",
+      "difficulty": "难度",
+      "category": "类别",
+      "all": "全部"
+    }
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "retry": "重试",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建",
+    "submit": "提交",
+    "run": "运行",
+    "reset": "重置",
+    "next": "下一个",
+    "previous": "上一个",
+    "continue": "继续",
+    "back": "返回",
+    "close": "关闭",
+    "open": "打开",
+    "success": "成功",
+    "warning": "警告",
+    "info": "信息"
+  },
+  "auth": {
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出",
+    "email": "邮箱",
+    "password": "密码",
+    "username": "用户名",
+    "forgotPassword": "忘记密码？",
+    "noAccount": "还没有账户？",
+    "hasAccount": "已有账户？"
+  },
+  "gamification": {
+    "xp": "经验值",
+    "level": "等级",
+    "streak": "连续天数",
+    "streakDays": "天连续",
+    "focusSessions": "专注时段"
+  }
+}

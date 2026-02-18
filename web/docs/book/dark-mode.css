@@ -1,0 +1,112 @@
+/**
+ * Dark Mode Styles for The Book of Rust
+ */
+
+/* Default (Light) Theme */
+:root {
+  --bg-paper: #faf8f5;
+  --bg-dark: #1a1a2e;
+  --text-ink: #2c3e50;
+  --text-muted: #5d6d7e;
+  --accent-blood: #c0392b;
+  --accent-gold: #f39c12;
+  --accent-rust: #a0522d;
+  --border: #d5d8dc;
+  --code-bg: #1a1a2e;
+  --code-text: #f8f8f2;
+  --box-bg: #f8f9fa;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-paper: #1a1a2e;
+  --bg-dark: #0f0f1a;
+  --text-ink: #e8e8e8;
+  --text-muted: #a0a0b0;
+  --accent-blood: #e74c3c;
+  --accent-gold: #f39c12;
+  --accent-rust: #d35400;
+  --border: #2d2d44;
+  --code-bg: #0f0f1a;
+  --code-text: #f8f8f2;
+  --box-bg: #252540;
+}
+
+/* Apply to common elements */
+[data-theme="dark"] body {
+  background: var(--bg-paper);
+  color: var(--text-ink);
+}
+
+[data-theme="dark"] .content {
+  background: var(--bg-paper);
+}
+
+[data-theme="dark"] .epigraph {
+  background: linear-gradient(135deg, var(--box-bg) 0%, transparent 100%);
+  border-left-color: var(--accent-rust);
+}
+
+[data-theme="dark"] .kernel-wisdom {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+}
+
+[data-theme="dark"] .surgical-note {
+  background: linear-gradient(135deg, #2a1f1f 0%, var(--bg-paper) 100%);
+  border-color: var(--accent-blood);
+}
+
+[data-theme="dark"] pre {
+  background: var(--code-bg);
+  color: var(--code-text);
+}
+
+[data-theme="dark"] code {
+  background: rgba(255,255,255,0.1);
+  color: var(--accent-gold);
+}
+
+[data-theme="dark"] .nav-button {
+  background: var(--bg-dark);
+  color: var(--text-ink);
+}
+
+[data-theme="dark"] .nav-button:hover {
+  opacity: 0.9;
+}
+
+[data-theme="dark"] .memory-diagram {
+  background: var(--box-bg);
+  border-color: var(--border);
+  color: var(--text-ink);
+}
+
+[data-theme="dark"] .legend {
+  background: var(--box-bg);
+}
+
+[data-theme="dark"] .index-section .index-list {
+  color: var(--text-ink);
+}
+
+[data-theme="dark"] .reading-item {
+  border-left-color: var(--accent-rust);
+}
+
+[data-theme="dark"] .glossary-term {
+  border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .solution {
+  background: var(--box-bg);
+}
+
+[data-theme="dark"] .note {
+  background: linear-gradient(135deg, #2a2520 0%, var(--bg-paper) 100%);
+  border-color: var(--accent-gold);
+}
+
+/* Smooth transition */
+body, .content, pre, code, .nav-button, .memory-diagram, .legend, .solution {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

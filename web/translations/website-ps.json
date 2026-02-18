@@ -1,0 +1,286 @@
+{
+  "meta": {
+    "language": "پښتو",
+    "code": "ps",
+    "flag": "🇵🇸",
+    "direction": "rtl"
+  },
+  "nav": {
+    "home": "کور",
+    "exercises": "مشقونه",
+    "book": "کتاب",
+    "progress": "پرمختګ",
+    "settings": "ترتیبات",
+    "login": "ننوتل",
+    "logout": "وتل",
+    "register": "ثبتول",
+    "profile": "پروفایل",
+    "about": "د Rust په اړه",
+    "leaderboard": {
+      "tag": "سیالۍ",
+      "title": "مخکې تلونکي",
+      "subtitle": "وګورئ چا چې Rust ډېر چټک زده کړی. د خورا اغېزمنو حلونو لپاره سیالۍ وکړئ!",
+      "top": "غوره زده‌کوونکي",
+      "efficient": "ډېر اغېزمن الګوریتمونه"
+    },
+    "school": "🏫 ښوونځی"
+  },
+  "hero": {
+    "title": "Rust زده کړئ",
+    "subtitle": "د عملي تمرین له لارې Rust زده کړئ. د اساسي ترکیب څخه تر پرمختللو الګوریتمونو پورې، زموږ د پرمختللې زده‌کړې لارې سره واقعي مهارتونه جوړ کړئ.",
+    "badge": "۱۷۰+ تعاملي مشقونه",
+    "startJourney": "خپله سفر پیل کړئ",
+    "readBook": "📖 کتاب لوستل",
+    "startLearning": "زده‌کړه پیل کړئ",
+    "createAccount": "حساب جوړ کړئ",
+    "stats": {
+      "exercises": "مشقونه",
+      "chapters": "فصلونه",
+      "languages": "ژبې"
+    }
+  },
+  "stats": {
+    "xp": "ټول XP",
+    "completed": "بشپړ شوی",
+    "streak": "په متواتر ډول"
+  },
+  "auth": {
+    "loginTitle": "ښه راغلاست",
+    "registerTitle": "حساب جوړول",
+    "email": "ایمیل",
+    "password": "پټنوم",
+    "confirmPassword": "پټنوم تایید کړئ",
+    "username": "کارن نوم",
+    "forgotPassword": "پټنوم مو هیر دی؟",
+    "noAccount": "حساب نه لرئ؟",
+    "haveAccount": "له مخکې حساب لرئ؟",
+    "loginButton": "ننوتل",
+    "registerButton": "حساب جوړول",
+    "signin": "ننوتل",
+    "signup": "ثبتول"
+  },
+  "joke": {
+    "title": "د ورځې نکته",
+    "loading": "د نن ورځې پروګرامینګ نکته لوډېږي...",
+    "reveal": "د ښودلو لپاره کلیک وکړئ"
+  },
+  "why": {
+    "tag": "ولې Rust؟",
+    "title": "د راتلونکې ژبه",
+    "subtitle": "Rust د سیسټم پروګرامینګ ژبه ده چې په ډېر چټک سره چلېږي، د حافظې له تېروتنو څخه مخنیوي کوي او د thread امنیت تضمینوي."
+  },
+  "features": {
+    "title": "ولې زموږ سره زده‌کړئ؟",
+    "fast": {
+      "title": "⚡ ډېر چټک",
+      "desc": "Rust د فعالیت لپاره طراحي شوی. د بې‌مصرفه انتزاعاتو او بې runtime یا garbage collector سره، دا د Mozilla، Dropbox او Cloudflare په څېر شرکتونو کې حیاتي خدماتو ته ځواک ورکوي."
+    },
+    "safety": {
+      "title": "🛡️ د حافظې امنیت",
+      "desc": "د Rust مالکیت سیسټم د garbage collector پرته د حافظې امنیت تضمینوي. د null اشارې، ځنډېدلو اشارو او د معیارونو سره ښه‌بای چلند."
+    },
+    "concurrency": {
+      "title": "🧫 بې‌ویره هم‌مهاله",
+      "desc": "د معیارونو له ویرې پرته هم‌مهاله کوډ ولیکئ. د Rust ډول سیسټم د thread امنیت تضمینوي او موازي پروګرامینګ اسانوي."
+    },
+    "tooling": {
+      "title": "📦 عالي وسایل",
+      "desc": "Cargo، د Rust بسته مدیر او جوړولو سیسټم، د تړون مدیریت او د پروژو جوړول اسانوي. د rustfmt، clippy او rust-analyzer سره، تاسو نړیواله پرمختیا تجربه لرئ."
+    },
+    "community": {
+      "title": "🎓 د پراختیا کونکو لخوا خوښېدلی",
+      "desc": "Rust په Stack Overflow Developer Survey کې د څو کلونو لپاره 'تر ټولو خوښېدلې پروګرامینګ ژبه' ټاکل شوی. د Rustacean هلې‌بیلې او مېلمه‌پالنې ټولنې سره یوځای شئ!"
+    },
+    "production": {
+      "title": "🚀 د تولید لپاره چمتو",
+      "desc": "د ویب سرورونو څخه تر عملیاتي سیسټمونو، د لوبو انجنونو څخه تر بلاکچین پلیټفارمونو پورې، Rust په تولید کې د سلګونو نړیوالو شرکتونو لخوا کارول کېږي. ستاسو Rust مهارتونه په لوړه کچه غوښتل کېږي."
+    },
+    "handsOn": {
+      "title": "🎯 عملي زده‌کړه",
+      "desc": "۳۲۰ پرمختللي مشقونه د Hello World څخه تر دیتابیسونو جوړولو، شبکې پروټوکولونو او async runtimes پورې"
+    },
+    "archetypes": {
+      "title": "🎭 د ارچیټایپ پر بنسټ",
+      "desc": "د Jung ارچیټایپونو له لارې زده‌کړه: سیوری (unsafe)، انیما (حافظه)، اتل (هم‌مهاله)"
+    },
+    "surgical": {
+      "title": "🔬 جراحي دقت",
+      "desc": "د stack frames، heap تخصیص او د پوښښ اناتومي په اړه ژور تخنیکي مېنځپانګې"
+    },
+    "fearless": {
+      "title": "⚡ بې‌ویره هم‌مهاله",
+      "desc": "د Rust د کمپایل‌وخت امنیت تضمینونو سره موازي او async پروګرامینګ مستقل کړئ"
+    }
+  },
+  "example": {
+    "tag": "مثال",
+    "title": "ښکلی او څرګند",
+    "subtitle": "Rust ټیټ‌کچه کنټرول د لوړ‌کچه ارګونومیک سره یوځای کوي."
+  },
+  "progress": {
+    "title": "📊 ستاسو د زده‌کړې پرمختګ",
+    "overall": "ټولیز پرمختګ",
+    "completed": "بشپړ شوی",
+    "streak": "اوسنی پرله‌پسې",
+    "days": "ورځې"
+  },
+  "filter": {
+    "all": "🎯 ټول",
+    "todo": "📝 پاتې",
+    "solved": "✅ حل شوی",
+    "projects": "📦 پروژې"
+  },
+  "view": {
+    "normal": "نورمال",
+    "compact": "فشرده"
+  },
+  "section": {
+    "beginner": "پیلوونکی (۰۰۱-۰۵۰)",
+    "intermediate": "منځنۍ کچه (۰۵۱-۱۰۰)",
+    "advanced": "پرمختللې الګوریتمونه (۱۰۱-۱۵۰)",
+    "projects": "واقعي پروژې (۱۵۱-۱۷۰)",
+    "realworld": "تولید او واقعي (۱۷۱-۳۲۰)"
+  },
+  "legend": {
+    "exercise": "مشق (۱-۱۵۰)",
+    "project": "پروژه (۱۵۱-۱۷۰)",
+    "solved": "حل شوی"
+  },
+  "leaderboard": {
+    "tag": "سیالۍ",
+    "title": "مخکې تلونکي",
+    "subtitle": "وګورئ چا چې Rust ډېر چټک زده کړی. د خورا اغېزمنو حلونو لپاره سیالۍ وکړئ!",
+    "top": "غوره زده‌کوونکي",
+    "efficient": "ډېر اغېزمن الګوریتمونه"
+  },
+  "modal": {
+    "category": "کټګوري",
+    "difficulty": "سختوالی",
+    "time": "اټکل شوی وخت",
+    "skills": "هغه مهارتونه چې زده‌کړئ",
+    "objective": "💡 د زده‌کړې موخه",
+    "fileLocation": "د فایل ځای:",
+    "cli": "CLI فرمان:",
+    "webEditor": "په ویب ایډیټر کې پرانیزئ",
+    "vscode": "په VS Code کې پرانیزئ",
+    "close": "بندول",
+    "prereqs": "💪 د دې پر بنسټ:",
+    "none": "هیڅ",
+    "esc": "ESC د بندولو لپاره"
+  },
+  "sections": {
+    "basics": "اساسيات (۰۰۱-۱۰۰)",
+    "advanced": "پرمختللي (۱۰۱-۱۵۰)",
+    "projects": "پروژې (۱۵۱-۱۷۰)",
+    "realWorld": "واقعي انجنیري (۱۷۱-۳۲۰)",
+    "systems": "د سیسټم پروګرامینګ",
+    "networking": "شبکه",
+    "dataProcessing": "د معلوماتو پروسس",
+    "concurrency": "هم‌مهاله",
+    "production": "د تولید سیسټمونه"
+  },
+  "exercise": {
+    "difficulty": "سختوالی",
+    "time": "اټکل شوی وخت",
+    "status": "حالت",
+    "completed": "بشپړ شوی",
+    "inProgress": "پروسه کې دی",
+    "notStarted": "پیل نشوی",
+    "start": "مشق پیل کړئ",
+    "continue": "ادامه",
+    "retry": "بیا هڅه وکړئ",
+    "submit": "حل وسپارئ",
+    "hint": "لارښود",
+    "solution": "حل وګورئ",
+    "tests": "ټستونه چل کړئ",
+    "compiling": "کمپایلېږي...",
+    "success": "بریا! ټول ټستونه پاس شول",
+    "failure": "ټستونه ناکام شول. بیا هڅه وکړئ!",
+    "topics": "موضوعات",
+    "prerequisites": "اړتیاوې"
+  },
+  "editor": {
+    "title": "کوډ ایډیټر",
+    "run": "▶ چلول",
+    "test": "🧪 ټست",
+    "reset": "↺ بیا تنظیم",
+    "format": "✨ بڼه",
+    "hint": "💡 لارښود",
+    "solution": "👁 حل",
+    "console": "د کنسول خروجی",
+    "testResults": "د ټست پایلې",
+    "placeholder": "// دلته خپل Rust کوډ ولیکئ..."
+  },
+  "book": {
+    "readOnline": "آنلاین لوستل",
+    "download": "PDF ډاونلوډ",
+    "chapters": "فصلونه",
+    "interludes": "مېنځپانګې",
+    "appendices": "ضمیمې"
+  },
+  "school": {
+    "dashboard": "ډشبورډ",
+    "overview": "لنډه کتنه",
+    "classrooms": "ټولګیونه",
+    "progress": "پرمختګ",
+    "gamification": "لوبه‌کول",
+    "ranks": "رتبې او XP",
+    "titles": "سرلیکونه",
+    "leaderboard": "مخکې تلونکي",
+    "teacher": "ښوونکی",
+    "myClassrooms": "زما ټولګیونه",
+    "availableClassrooms": "شته ټولګیونه",
+    "createClassroom": "ټولګی جوړ کړئ",
+    "joinClassroom": "ټولګي ته یوځای شئ",
+    "createClassroomTitle": "نوی ټولګی جوړ کړئ",
+    "classroomName": "د ټولګي نوم",
+    "description": "توضیحات",
+    "gradeLevel": "د صنف کچه",
+    "maxStudents": "اعظمي زده‌کوونکي",
+    "create": "جوړول",
+    "cancel": "لغوه",
+    "join": "یوځای کېدل",
+    "classroomCode": "د ټولګي کوډ",
+    "enterCode": "د ټولګي کوډ ولیکئ",
+    "overviewTitle": "د ډشبورډ لنډه کتنه",
+    "currentRank": "اوسنی رتبه",
+    "toNextRank": "تر بلې رتبې پورې",
+    "problemsSolved": "حل شوي ستونزې",
+    "currentStreak": "اوسنی پرله‌پسې",
+    "longestStreak": "تر ټولو اوږد پرله‌پسې",
+    "treats": "انعامونه",
+    "ranksTitle": "رتبې او پرمختګ",
+    "leaderboardTitle": "نړیوال مخکې تلونکي",
+    "current": "✓ اوسنی",
+    "problems": "ستونزې",
+    "classroomsITeach": "ټولګي چې زه تدریس کوم",
+    "joinedClassrooms": "یوځای شوي ټولګي",
+    "noClassrooms": "تاسو تر اوسه هیڅ ټولګي ته یوځای نه یاست.",
+    "createFirst": "خپل لومړی ټولګی جوړ کړئ",
+    "joinFirst": "یوې ټولګي ته یوځای شئ",
+    "members": "غړي",
+    "assignments": "دندې",
+    "dueDate": "د سپارنې نېټه",
+    "completed": "بشپړ شوی",
+    "pending": "پاتې"
+  },
+  "footer": {
+    "copyright": "© ۲۰۲۴ د Rust زده‌کړې ډګر",
+    "license": "د MIT لایسنس لاندې",
+    "madeWith": "د 🦀 او ❤️ سره جوړ شوی",
+    "title": "🦀 د Rust زده‌کړې ډګر",
+    "links": "ژر لینکونه",
+    "resources": "سرچینې",
+    "community": "ټولنه"
+  },
+  "language": {
+    "select": "ژبه وټاکئ",
+    "primary": "اصلي ژبې",
+    "secondary": "خپلکار ژباړه"
+  },
+  "errors": {
+    "generic": "ستونزه رامنځته شوه",
+    "network": "د شبکې تېروتنه. مهرباني وکړئ خپل اړیکه وګورئ.",
+    "server": "د سرور تېروتنه. مهرباني وکړئ وروسته بیا هڅه وکړئ."
+  }
+}

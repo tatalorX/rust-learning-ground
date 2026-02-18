@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "exercises": "演習",
+    "rustBook": "Rustブック",
+    "events": "イベント",
+    "leaderboard": "ランキング",
+    "achievements": "実績",
+    "documentation": "ドキュメント",
+    "settings": "設定",
+    "profile": "プロフィール"
+  },
+  "home": {
+    "hero": {
+      "badge": "実践でRustをマスター",
+      "title": "学ぶ",
+      "titleHighlight": "Rustプログラミング",
+      "subtitle": "正しい方法で",
+      "description": "インタラクティブな演習、即時フィードバック、そしてモダンな開発者のためのゲーミフィケーション学習体験。今日からRustの旅を始めましょう。",
+      "startLearning": "学習を開始",
+      "createAccount": "アカウント作成"
+    },
+    "features": {
+      "exercises": {
+        "title": "300+ 演習",
+        "description": "基礎から高度なパターンまで"
+      },
+      "feedback": {
+        "title": "即時フィードバック",
+        "description": "コードを即座に実行してテスト"
+      },
+      "streak": {
+        "title": "ストリークシステム",
+        "description": "毎日の目標で一貫性を構築"
+      },
+      "achievements": {
+        "title": "実績",
+        "description": "進捗に応じてバッジを解除"
+      }
+    },
+    "editor": {
+      "title": "インタラクティブコードエディタ",
+      "description": "Monacoエディタを使用してブラウザで直接Rustコードを記述。即座のコンパイル、明確なエラーメッセージ、シームレスな実行。",
+      "features": [
+        "Rustのシンタックスハイライト",
+        "自動補完とヒント",
+        "リアルタイムエラー検出",
+        "ワンクリックコード実行"
+      ],
+      "tryExercise": "演習1を試す"
+    },
+    "whyRust": {
+      "title": "なぜRustを学ぶのか？",
+      "description": "Rustは最も愛されているプログラミング言語で、C++のパフォーマンスとメモリ安全性、そしてモダンな開発者体験を組み合わせています。",
+      "features": [
+        {
+          "title": "メモリ安全性",
+          "description": "コンパイラが保証するセグメンテーション違反なし"
+        },
+        {
+          "title": "高いパフォーマンス",
+          "description": "CおよびC++に匹敵"
+        },
+        {
+          "title": "モダンなツール",
+          "description": "Cargo、crates.ioなど"
+        }
+      ]
+    },
+    "cta": {
+      "title": "旅を始める準備はできましたか？",
+      "description": "正しい方法でRustを学ぶ何千もの開発者に参加しましょう。",
+      "button": "無料で学習を開始"
+    }
+  },
+  "exercises": {
+    "title": "演習",
+    "subtitle": "の演習が利用可能",
+    "completed": "完了",
+    "difficulty": {
+      "beginner": "初心者",
+      "easy": "簡単",
+      "medium": "中級",
+      "hard": "難しい",
+      "expert": "エキスパート"
+    },
+    "status": {
+      "completed": "完了",
+      "inProgress": "進行中",
+      "notStarted": "未開始"
+    },
+    "filters": {
+      "search": "演習を検索...",
+      "difficulty": "難易度",
+      "category": "カテゴリ",
+      "all": "すべて"
+    }
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "retry": "再試行",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "create": "作成",
+    "submit": "送信",
+    "run": "実行",
+    "reset": "リセット",
+    "next": "次へ",
+    "previous": "前へ",
+    "continue": "続ける",
+    "back": "戻る",
+    "close": "閉じる",
+    "open": "開く",
+    "success": "成功",
+    "warning": "警告",
+    "info": "情報"
+  },
+  "auth": {
+    "login": "ログイン",
+    "register": "登録",
+    "logout": "ログアウト",
+    "email": "メール",
+    "password": "パスワード",
+    "username": "ユーザー名",
+    "forgotPassword": "パスワードを忘れましたか？",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "hasAccount": "すでにアカウントをお持ちですか？"
+  },
+  "gamification": {
+    "xp": "経験値",
+    "level": "レベル",
+    "streak": "ストリーク",
+    "streakDays": "日のストリーク",
+    "focusSessions": "フォーカスセッション"
+  }
+}

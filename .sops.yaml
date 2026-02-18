@@ -1,0 +1,16 @@
+# SOPS configuration for age-encrypted secrets
+# See: https://github.com/getsops/sops
+#
+# Usage:
+#   1. Generate age keypair: age-keygen -o master.key
+#   2. Replace the public key below with your own
+#   3. Encrypt: sops --encrypt --in-place secrets/prod.yaml
+#   4. Decrypt at deploy: sops --decrypt secrets/prod.yaml | install -m 600 /dev/stdin /run/secrets/app_secrets
+#
+# NEVER commit master.key to git. Store it offline or in a password manager.
+
+creation_rules:
+  - path_regex: secrets/.*\.yaml$
+    age: age1ql3z7hjy54pw3hyww5ayyfg7zqgvc7w3j2elw8zmrj2kg5sfn9aqmcac8p
+  - path_regex: secrets/.*\.json$
+    age: age1ql3z7hjy54pw3hyww5ayyfg7zqgvc7w3j2elw8zmrj2kg5sfn9aqmcac8p

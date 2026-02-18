@@ -1,0 +1,4522 @@
+{
+  "exercises": {
+    "001": {
+      "name": "Hello, Rust!",
+      "category": "Basics",
+      "difficulty": 1,
+      "skills": [
+        "println! macro",
+        "main function"
+      ],
+      "time_estimate": "2 min",
+      "prerequisites": []
+    },
+    "002": {
+      "name": "Mutable Variables",
+      "category": "Basics",
+      "difficulty": 1,
+      "skills": [
+        "mut keyword",
+        "variable binding"
+      ],
+      "time_estimate": "3 min",
+      "prerequisites": [
+        "001"
+      ]
+    },
+    "003": {
+      "name": "Data Types",
+      "category": "Basics",
+      "difficulty": 1,
+      "skills": [
+        "scalar types",
+        "type annotations"
+      ],
+      "time_estimate": "5 min",
+      "prerequisites": [
+        "002"
+      ]
+    },
+    "004": {
+      "name": "Type Inference",
+      "category": "Basics",
+      "difficulty": 1,
+      "skills": [
+        "type inference",
+        "numeric literals"
+      ],
+      "time_estimate": "3 min",
+      "prerequisites": [
+        "003"
+      ]
+    },
+    "005": {
+      "name": "Constants",
+      "category": "Basics",
+      "difficulty": 1,
+      "skills": [
+        "const keyword",
+        "static lifetime"
+      ],
+      "time_estimate": "3 min",
+      "prerequisites": [
+        "003"
+      ]
+    },
+    "006": {
+      "name": "Shadowing",
+      "category": "Basics",
+      "difficulty": 2,
+      "skills": [
+        "variable shadowing",
+        "type change"
+      ],
+      "time_estimate": "5 min",
+      "prerequisites": [
+        "002"
+      ]
+    },
+    "007": {
+      "name": "String vs &str",
+      "category": "Ownership",
+      "difficulty": 2,
+      "skills": [
+        "String type",
+        "string slices"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "003"
+      ]
+    },
+    "008": {
+      "name": "Basic Functions",
+      "category": "Functions",
+      "difficulty": 1,
+      "skills": [
+        "fn keyword",
+        "parameters",
+        "return values"
+      ],
+      "time_estimate": "5 min",
+      "prerequisites": [
+        "001"
+      ]
+    },
+    "009": {
+      "name": "Function Return Types",
+      "category": "Functions",
+      "difficulty": 2,
+      "skills": [
+        "return keyword",
+        "tail expressions"
+      ],
+      "time_estimate": "5 min",
+      "prerequisites": [
+        "008"
+      ]
+    },
+    "010": {
+      "name": "Control Flow: if/else",
+      "category": "Control Flow",
+      "difficulty": 1,
+      "skills": [
+        "if expressions",
+        "comparison operators"
+      ],
+      "time_estimate": "5 min",
+      "prerequisites": [
+        "003"
+      ]
+    },
+    "011": {
+      "name": "Conditional Returns",
+      "category": "Control Flow",
+      "difficulty": 2,
+      "skills": [
+        "if as expression",
+        "implicit returns"
+      ],
+      "time_estimate": "7 min",
+      "prerequisites": [
+        "010"
+      ]
+    },
+    "012": {
+      "name": "Loops with loop",
+      "category": "Control Flow",
+      "difficulty": 2,
+      "skills": [
+        "loop keyword",
+        "break",
+        "return from loop"
+      ],
+      "time_estimate": "7 min",
+      "prerequisites": [
+        "010"
+      ]
+    },
+    "013": {
+      "name": "while Loops",
+      "category": "Control Flow",
+      "difficulty": 1,
+      "skills": [
+        "while keyword",
+        "conditional loops"
+      ],
+      "time_estimate": "5 min",
+      "prerequisites": [
+        "010"
+      ]
+    },
+    "014": {
+      "name": "for Loops & Ranges",
+      "category": "Control Flow",
+      "difficulty": 2,
+      "skills": [
+        "for keyword",
+        "range operator"
+      ],
+      "time_estimate": "6 min",
+      "prerequisites": [
+        "013"
+      ]
+    },
+    "015": {
+      "name": "Ownership Basics",
+      "category": "Ownership",
+      "difficulty": 2,
+      "skills": [
+        "ownership rules",
+        "move semantics"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "007"
+      ]
+    },
+    "016": {
+      "name": "Borrowing References",
+      "category": "Ownership",
+      "difficulty": 2,
+      "skills": [
+        "& operator",
+        "borrowing rules"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "015"
+      ]
+    },
+    "017": {
+      "name": "Mutable References",
+      "category": "Ownership",
+      "difficulty": 3,
+      "skills": [
+        "&mut",
+        "exclusive mutation"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "016"
+      ]
+    },
+    "018": {
+      "name": "Reference Scope",
+      "category": "Ownership",
+      "difficulty": 3,
+      "skills": [
+        "scope rules",
+        "NLL"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "017"
+      ]
+    },
+    "019": {
+      "name": "String Slices",
+      "category": "Ownership",
+      "difficulty": 3,
+      "skills": [
+        "string slices",
+        "range notation"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "016",
+        "007"
+      ]
+    },
+    "020": {
+      "name": "Array Slices",
+      "category": "Ownership",
+      "difficulty": 3,
+      "skills": [
+        "array slices",
+        "generic slices"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "019"
+      ]
+    },
+    "021": {
+      "name": "Defining Structs",
+      "category": "Structs",
+      "difficulty": 2,
+      "skills": [
+        "struct keyword",
+        "field definitions"
+      ],
+      "time_estimate": "7 min",
+      "prerequisites": [
+        "003"
+      ]
+    },
+    "022": {
+      "name": "Struct Methods",
+      "category": "Structs",
+      "difficulty": 2,
+      "skills": [
+        "impl block",
+        "self parameter"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "021"
+      ]
+    },
+    "023": {
+      "name": "Associated Functions",
+      "category": "Structs",
+      "difficulty": 3,
+      "skills": [
+        "Self",
+        "constructors"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "022"
+      ]
+    },
+    "024": {
+      "name": "Tuple Structs",
+      "category": "Structs",
+      "difficulty": 2,
+      "skills": [
+        "tuple structs",
+        "newtype pattern"
+      ],
+      "time_estimate": "6 min",
+      "prerequisites": [
+        "021"
+      ]
+    },
+    "025": {
+      "name": "Array Iteration",
+      "category": "Collections",
+      "difficulty": 1,
+      "skills": [
+        "array iteration",
+        "for loops"
+      ],
+      "time_estimate": "5 min",
+      "prerequisites": [
+        "014"
+      ]
+    },
+    "026": {
+      "name": "Vector Basics",
+      "category": "Collections",
+      "difficulty": 2,
+      "skills": [
+        "Vec",
+        "push method"
+      ],
+      "time_estimate": "7 min",
+      "prerequisites": [
+        "025"
+      ]
+    },
+    "027": {
+      "name": "Vector Operations",
+      "category": "Collections",
+      "difficulty": 2,
+      "skills": [
+        "get method",
+        "indexing",
+        "capacity"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "026"
+      ]
+    },
+    "028": {
+      "name": "String Manipulation",
+      "category": "Collections",
+      "difficulty": 2,
+      "skills": [
+        "push_str",
+        "format! macro"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "007"
+      ]
+    },
+    "029": {
+      "name": "UTF-8 Strings",
+      "category": "Collections",
+      "difficulty": 3,
+      "skills": [
+        "UTF-8 handling",
+        "chars() iterator"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "028"
+      ]
+    },
+    "030": {
+      "name": "HashMap Basics",
+      "category": "Collections",
+      "difficulty": 2,
+      "skills": [
+        "HashMap",
+        "insert/get"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "003"
+      ]
+    },
+    "031": {
+      "name": "HashMap Iteration",
+      "category": "Collections",
+      "difficulty": 3,
+      "skills": [
+        "entry API",
+        "iteration patterns"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "030"
+      ]
+    },
+    "032": {
+      "name": "Enums Defined",
+      "category": "Enums",
+      "difficulty": 2,
+      "skills": [
+        "enum keyword",
+        "variants"
+      ],
+      "time_estimate": "7 min",
+      "prerequisites": [
+        "021"
+      ]
+    },
+    "033": {
+      "name": "Enum Data",
+      "category": "Enums",
+      "difficulty": 3,
+      "skills": [
+        "data-carrying enums",
+        "Option<T>"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "032"
+      ]
+    },
+    "034": {
+      "name": "Match Expressions",
+      "category": "Pattern Matching",
+      "difficulty": 2,
+      "skills": [
+        "match keyword",
+        "arms"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "032"
+      ]
+    },
+    "035": {
+      "name": "Match with Bindings",
+      "category": "Pattern Matching",
+      "difficulty": 3,
+      "skills": [
+        "variable binding",
+        "destructuring"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "034"
+      ]
+    },
+    "036": {
+      "name": "if let Syntax",
+      "category": "Pattern Matching",
+      "difficulty": 2,
+      "skills": [
+        "if let",
+        "concise matching"
+      ],
+      "time_estimate": "7 min",
+      "prerequisites": [
+        "034"
+      ]
+    },
+    "037": {
+      "name": "while let",
+      "category": "Pattern Matching",
+      "difficulty": 2,
+      "skills": [
+        "while let",
+        "iterator consumption"
+      ],
+      "time_estimate": "7 min",
+      "prerequisites": [
+        "036"
+      ]
+    },
+    "038": {
+      "name": "Option<T> Type",
+      "category": "Error Handling",
+      "difficulty": 2,
+      "skills": [
+        "Some/None",
+        "null safety"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "033"
+      ]
+    },
+    "039": {
+      "name": "Result<T,E> Type",
+      "category": "Error Handling",
+      "difficulty": 2,
+      "skills": [
+        "Ok/Err",
+        "error propagation"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "038"
+      ]
+    },
+    "040": {
+      "name": "? Operator",
+      "category": "Error Handling",
+      "difficulty": 3,
+      "skills": [
+        "error bubbling",
+        "From trait"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "039"
+      ]
+    },
+    "041": {
+      "name": "unwrap & expect",
+      "category": "Error Handling",
+      "difficulty": 2,
+      "skills": [
+        "unwrap",
+        "error messages"
+      ],
+      "time_estimate": "6 min",
+      "prerequisites": [
+        "038"
+      ]
+    },
+    "042": {
+      "name": "match on Result",
+      "category": "Error Handling",
+      "difficulty": 2,
+      "skills": [
+        "error matching",
+        "Result patterns"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "039",
+        "034"
+      ]
+    },
+    "043": {
+      "name": "Generic Functions",
+      "category": "Generics",
+      "difficulty": 3,
+      "skills": [
+        "generic parameters",
+        "monomorphization"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "008"
+      ]
+    },
+    "044": {
+      "name": "Generic Structs",
+      "category": "Generics",
+      "difficulty": 3,
+      "skills": [
+        "<T> syntax",
+        "generic fields"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "043",
+        "021"
+      ]
+    },
+    "045": {
+      "name": "Generic Enums",
+      "category": "Generics",
+      "difficulty": 3,
+      "skills": [
+        "Option/Result generics",
+        "type parameters"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "044",
+        "033"
+      ]
+    },
+    "046": {
+      "name": "Trait Basics",
+      "category": "Traits",
+      "difficulty": 3,
+      "skills": [
+        "trait keyword",
+        "behavior abstraction"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "022"
+      ]
+    },
+    "047": {
+      "name": "Trait Implementation",
+      "category": "Traits",
+      "difficulty": 3,
+      "skills": [
+        "impl Trait for Type"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "046"
+      ]
+    },
+    "048": {
+      "name": "Default Implementations",
+      "category": "Traits",
+      "difficulty": 3,
+      "skills": [
+        "default methods",
+        "override"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "047"
+      ]
+    },
+    "049": {
+      "name": "Trait Bounds",
+      "category": "Traits",
+      "difficulty": 4,
+      "skills": [
+        "where clauses",
+        "constraint syntax"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "047",
+        "043"
+      ]
+    },
+    "050": {
+      "name": "Trait Objects",
+      "category": "Traits",
+      "difficulty": 4,
+      "skills": [
+        "dyn keyword",
+        "dynamic dispatch"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "049"
+      ]
+    },
+    "051": {
+      "name": "Lifetime Annotation",
+      "category": "Lifetimes",
+      "difficulty": 4,
+      "skills": [
+        "'a syntax",
+        "lifetime parameters"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "050",
+        "016"
+      ]
+    },
+    "052": {
+      "name": "Lifetime in Functions",
+      "category": "Lifetimes",
+      "difficulty": 4,
+      "skills": [
+        "input/output lifetimes",
+        "elision"
+      ],
+      "time_estimate": "18 min",
+      "prerequisites": [
+        "051"
+      ]
+    },
+    "053": {
+      "name": "Lifetime in Structs",
+      "category": "Lifetimes",
+      "difficulty": 4,
+      "skills": [
+        "struct lifetimes",
+        "reference fields"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "052",
+        "021"
+      ]
+    },
+    "054": {
+      "name": "Static Lifetime",
+      "category": "Lifetimes",
+      "difficulty": 3,
+      "skills": [
+        "'static",
+        "string literals"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "051"
+      ]
+    },
+    "055": {
+      "name": "Closures Intro",
+      "category": "Functional",
+      "difficulty": 3,
+      "skills": [
+        "closure syntax",
+        "environment capture"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "014"
+      ]
+    },
+    "056": {
+      "name": "Closure Types",
+      "category": "Functional",
+      "difficulty": 4,
+      "skills": [
+        "Fn traits",
+        "move closures"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "055"
+      ]
+    },
+    "057": {
+      "name": "Iterator Basics",
+      "category": "Functional",
+      "difficulty": 3,
+      "skills": [
+        "Iterator trait",
+        "next method"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "025"
+      ]
+    },
+    "058": {
+      "name": "Iterator Adapters",
+      "category": "Functional",
+      "difficulty": 3,
+      "skills": [
+        "map",
+        "filter",
+        "collect"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "057"
+      ]
+    },
+    "059": {
+      "name": "Iterator Consumers",
+      "category": "Functional",
+      "difficulty": 3,
+      "skills": [
+        "sum",
+        "fold",
+        "any/all"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "058"
+      ]
+    },
+    "060": {
+      "name": "Iterator Chains",
+      "category": "Functional",
+      "difficulty": 4,
+      "skills": [
+        "method chaining",
+        "lazy evaluation"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "059"
+      ]
+    },
+    "061": {
+      "name": "Box<T> Pointer",
+      "category": "Smart Pointers",
+      "difficulty": 3,
+      "skills": [
+        "heap allocation",
+        "Box"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "015"
+      ]
+    },
+    "062": {
+      "name": "Recursive Types",
+      "category": "Smart Pointers",
+      "difficulty": 4,
+      "skills": [
+        "cons list",
+        "recursive enums"
+      ],
+      "time_estimate": "18 min",
+      "prerequisites": [
+        "061",
+        "045"
+      ]
+    },
+    "063": {
+      "name": "Deref Trait",
+      "category": "Smart Pointers",
+      "difficulty": 4,
+      "skills": [
+        "deref coercion",
+        "custom pointers"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "061",
+        "046"
+      ]
+    },
+    "064": {
+      "name": "Drop Trait",
+      "category": "Smart Pointers",
+      "difficulty": 3,
+      "skills": [
+        "destructors",
+        "cleanup code"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "046"
+      ]
+    },
+    "065": {
+      "name": "Rc<T> Reference Counting",
+      "category": "Smart Pointers",
+      "difficulty": 4,
+      "skills": [
+        "shared ownership",
+        "Rc"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "061"
+      ]
+    },
+    "066": {
+      "name": "RefCell<T>",
+      "category": "Smart Pointers",
+      "difficulty": 5,
+      "skills": [
+        "interior mutability",
+        "borrow rules at runtime"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "065",
+        "017"
+      ]
+    },
+    "067": {
+      "name": "Reference Cycles",
+      "category": "Smart Pointers",
+      "difficulty": 5,
+      "skills": [
+        "memory leaks",
+        "weak references"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "066"
+      ]
+    },
+    "068": {
+      "name": "Threads Spawn",
+      "category": "Concurrency",
+      "difficulty": 3,
+      "skills": [
+        "thread::spawn",
+        "join handles"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "014"
+      ]
+    },
+    "069": {
+      "name": "move Closures",
+      "category": "Concurrency",
+      "difficulty": 3,
+      "skills": [
+        "ownership transfer",
+        "thread boundaries"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "068",
+        "056"
+      ]
+    },
+    "070": {
+      "name": "Message Passing",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "mpsc channels",
+        "send/recv"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "069"
+      ]
+    },
+    "071": {
+      "name": "Shared State",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "Mutex",
+        "Arc"
+      ],
+      "time_estimate": "18 min",
+      "prerequisites": [
+        "070",
+        "065"
+      ]
+    },
+    "072": {
+      "name": "Sync & Send",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "marker traits",
+        "thread safety"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "071"
+      ]
+    },
+    "073": {
+      "name": "Modules Intro",
+      "category": "Modules",
+      "difficulty": 2,
+      "skills": [
+        "mod keyword",
+        "hierarchy"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "008"
+      ]
+    },
+    "074": {
+      "name": "Module Visibility",
+      "category": "Modules",
+      "difficulty": 3,
+      "skills": [
+        "pub keyword",
+        "private by default"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "073"
+      ]
+    },
+    "075": {
+      "name": "use Keyword",
+      "category": "Modules",
+      "difficulty": 2,
+      "skills": [
+        "bringing into scope",
+        "idiomatic paths"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "074"
+      ]
+    },
+    "076": {
+      "name": "Super & Self",
+      "category": "Modules",
+      "difficulty": 3,
+      "skills": [
+        "relative paths",
+        "super keyword"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "075"
+      ]
+    },
+    "077": {
+      "name": "Separating Modules",
+      "category": "Modules",
+      "difficulty": 3,
+      "skills": [
+        "file modules",
+        "directory modules"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "076"
+      ]
+    },
+    "078": {
+      "name": "use Statements",
+      "category": "Modules",
+      "difficulty": 3,
+      "skills": [
+        "re-exporting",
+        "glob operator"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "075"
+      ]
+    },
+    "079": {
+      "name": "Tests: Basics",
+      "category": "Testing",
+      "difficulty": 2,
+      "skills": [
+        "#[test]",
+        "assert!"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "008"
+      ]
+    },
+    "080": {
+      "name": "Tests: Assertions",
+      "category": "Testing",
+      "difficulty": 2,
+      "skills": [
+        "assert_eq!",
+        "assert_ne!"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "079"
+      ]
+    },
+    "081": {
+      "name": "Tests: Results",
+      "category": "Testing",
+      "difficulty": 3,
+      "skills": [
+        "returning Result",
+        "? in tests"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "080",
+        "039"
+      ]
+    },
+    "082": {
+      "name": "Tests: Organization",
+      "category": "Testing",
+      "difficulty": 3,
+      "skills": [
+        "unit tests",
+        "integration tests"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "080"
+      ]
+    },
+    "083": {
+      "name": "should_panic",
+      "category": "Testing",
+      "difficulty": 3,
+      "skills": [
+        "panic testing",
+        "expected messages"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "079"
+      ]
+    },
+    "084": {
+      "name": "Documentation Tests",
+      "category": "Testing",
+      "difficulty": 3,
+      "skills": [
+        "doctests",
+        "/// examples"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "082"
+      ]
+    },
+    "085": {
+      "name": "panic! Macro",
+      "category": "Error Handling",
+      "difficulty": 2,
+      "skills": [
+        "unrecoverable errors",
+        "panic messages"
+      ],
+      "time_estimate": "6 min",
+      "prerequisites": [
+        "039"
+      ]
+    },
+    "086": {
+      "name": "Custom Error Types",
+      "category": "Error Handling",
+      "difficulty": 4,
+      "skills": [
+        "Error trait",
+        "Display"
+      ],
+      "time_estimate": "18 min",
+      "prerequisites": [
+        "040",
+        "046"
+      ]
+    },
+    "087": {
+      "name": "Combining Errors",
+      "category": "Error Handling",
+      "difficulty": 4,
+      "skills": [
+        "map_err",
+        "error conversion"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "086"
+      ]
+    },
+    "088": {
+      "name": "Type Aliases",
+      "category": "Advanced Types",
+      "difficulty": 2,
+      "skills": [
+        "type keyword",
+        "code readability"
+      ],
+      "time_estimate": "8 min",
+      "prerequisites": [
+        "003"
+      ]
+    },
+    "089": {
+      "name": "Never Type",
+      "category": "Advanced Types",
+      "difficulty": 4,
+      "skills": [
+        "! type",
+        "diverging functions"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "088"
+      ]
+    },
+    "090": {
+      "name": "Sized Trait",
+      "category": "Advanced Types",
+      "difficulty": 5,
+      "skills": [
+        "?Sized",
+        "DSTs"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "089",
+        "049"
+      ]
+    },
+    "091": {
+      "name": "Function Pointers",
+      "category": "Advanced Types",
+      "difficulty": 3,
+      "skills": [
+        "fn types",
+        "higher-order functions"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "046"
+      ]
+    },
+    "092": {
+      "name": "Return Closures",
+      "category": "Advanced Types",
+      "difficulty": 4,
+      "skills": [
+        "impl Trait",
+        "closure returns"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "091",
+        "056"
+      ]
+    },
+    "093": {
+      "name": "Macros: Basics",
+      "category": "Macros",
+      "difficulty": 4,
+      "skills": [
+        "macro_rules!",
+        "declarative macros"
+      ],
+      "time_estimate": "18 min",
+      "prerequisites": [
+        "043"
+      ]
+    },
+    "094": {
+      "name": "Macro Patterns",
+      "category": "Macros",
+      "difficulty": 5,
+      "skills": [
+        "pattern matching",
+        "repetition"
+      ],
+      "time_estimate": "25 min",
+      "prerequisites": [
+        "093"
+      ]
+    },
+    "095": {
+      "name": "Procedural Macros",
+      "category": "Macros",
+      "difficulty": 5,
+      "skills": [
+        "derive macros",
+        "proc-macro crate"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "094"
+      ]
+    },
+    "096": {
+      "name": "Attributes",
+      "category": "Macros",
+      "difficulty": 3,
+      "skills": [
+        "metadata",
+        "conditional compilation"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "093"
+      ]
+    },
+    "097": {
+      "name": "cfg Attribute",
+      "category": "Macros",
+      "difficulty": 3,
+      "skills": [
+        "conditional compilation",
+        "platform detection"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "096"
+      ]
+    },
+    "098": {
+      "name": "Unsafe Rust",
+      "category": "Unsafe",
+      "difficulty": 5,
+      "skills": [
+        "unsafe keyword",
+        "raw pointers"
+      ],
+      "time_estimate": "25 min",
+      "prerequisites": [
+        "090"
+      ]
+    },
+    "099": {
+      "name": "FFI Basics",
+      "category": "Unsafe",
+      "difficulty": 5,
+      "skills": [
+        "extern blocks",
+        "C interoperability"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "098"
+      ]
+    },
+    "100": {
+      "name": "Union Types",
+      "category": "Unsafe",
+      "difficulty": 5,
+      "skills": [
+        "union keyword",
+        "memory sharing"
+      ],
+      "time_estimate": "25 min",
+      "prerequisites": [
+        "098"
+      ]
+    }
+  },
+  "advanced": {
+    "101": {
+      "name": "Bubble Sort",
+      "category": "Sorting",
+      "difficulty": 2,
+      "skills": [
+        "basic sorting",
+        "nested loops"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "025"
+      ]
+    },
+    "102": {
+      "name": "Selection Sort",
+      "category": "Sorting",
+      "difficulty": 2,
+      "skills": [
+        "in-place sorting",
+        "min finding"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "101"
+      ]
+    },
+    "103": {
+      "name": "Insertion Sort",
+      "category": "Sorting",
+      "difficulty": 3,
+      "skills": [
+        "shifting elements",
+        "partial sorting"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "102"
+      ]
+    },
+    "104": {
+      "name": "Merge Sort",
+      "category": "Sorting",
+      "difficulty": 3,
+      "skills": [
+        "divide & conquer",
+        "merging"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "103"
+      ]
+    },
+    "105": {
+      "name": "Quick Sort",
+      "category": "Sorting",
+      "difficulty": 4,
+      "skills": [
+        "pivot selection",
+        "partitioning"
+      ],
+      "time_estimate": "25 min",
+      "prerequisites": [
+        "104"
+      ]
+    },
+    "106": {
+      "name": "Heap Sort",
+      "category": "Sorting",
+      "difficulty": 4,
+      "skills": [
+        "heap structure",
+        "heapify"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "105"
+      ]
+    },
+    "107": {
+      "name": "Linear Search",
+      "category": "Searching",
+      "difficulty": 1,
+      "skills": [
+        "sequential search",
+        "O(n)"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "025"
+      ]
+    },
+    "108": {
+      "name": "Binary Search",
+      "category": "Searching",
+      "difficulty": 3,
+      "skills": [
+        "sorted data",
+        "O(log n)"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "107"
+      ]
+    },
+    "109": {
+      "name": "Depth-First Search",
+      "category": "Graph",
+      "difficulty": 4,
+      "skills": [
+        "graph traversal",
+        "recursion/stack"
+      ],
+      "time_estimate": "25 min",
+      "prerequisites": [
+        "108"
+      ]
+    },
+    "110": {
+      "name": "Breadth-First Search",
+      "category": "Graph",
+      "difficulty": 4,
+      "skills": [
+        "level-order",
+        "queue"
+      ],
+      "time_estimate": "25 min",
+      "prerequisites": [
+        "109"
+      ]
+    },
+    "111": {
+      "name": "Dijkstra's Algorithm",
+      "category": "Graph",
+      "difficulty": 5,
+      "skills": [
+        "shortest path",
+        "priority queue"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "110"
+      ]
+    },
+    "112": {
+      "name": "A* Search",
+      "category": "Graph",
+      "difficulty": 5,
+      "skills": [
+        "heuristics",
+        "pathfinding"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "111"
+      ]
+    },
+    "113": {
+      "name": "Topological Sort",
+      "category": "Graph",
+      "difficulty": 4,
+      "skills": [
+        "DAG",
+        "dependency ordering"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "110"
+      ]
+    },
+    "114": {
+      "name": "Kruskal's MST",
+      "category": "Graph",
+      "difficulty": 5,
+      "skills": [
+        "minimum spanning tree",
+        "union-find"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "113"
+      ]
+    },
+    "115": {
+      "name": "Fibonacci DP",
+      "category": "Dynamic Programming",
+      "difficulty": 3,
+      "skills": [
+        "memoization",
+        "bottom-up"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "104"
+      ]
+    },
+    "116": {
+      "name": "Knapsack Problem",
+      "category": "Dynamic Programming",
+      "difficulty": 4,
+      "skills": [
+        "0/1 knapsack",
+        "optimization"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "115"
+      ]
+    },
+    "117": {
+      "name": "Longest Common Subsequence",
+      "category": "Dynamic Programming",
+      "difficulty": 4,
+      "skills": [
+        "LCS",
+        "string DP"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "116"
+      ]
+    },
+    "118": {
+      "name": "Edit Distance",
+      "category": "Dynamic Programming",
+      "difficulty": 4,
+      "skills": [
+        "Levenshtein",
+        "string transformation"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "117"
+      ]
+    },
+    "119": {
+      "name": "Coin Change",
+      "category": "Dynamic Programming",
+      "difficulty": 4,
+      "skills": [
+        "unbounded knapsack",
+        "combinatorics"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "116"
+      ]
+    },
+    "120": {
+      "name": "Maximum Subarray",
+      "category": "Dynamic Programming",
+      "difficulty": 3,
+      "skills": [
+        "Kadane's algorithm",
+        "subarrays"
+      ],
+      "time_estimate": "25 min",
+      "prerequisites": [
+        "115"
+      ]
+    },
+    "121": {
+      "name": "Singly Linked List",
+      "category": "Data Structures",
+      "difficulty": 4,
+      "skills": [
+        "Box<Node>",
+        "pointer chasing"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "061",
+        "062"
+      ]
+    },
+    "122": {
+      "name": "Doubly Linked List",
+      "category": "Data Structures",
+      "difficulty": 5,
+      "skills": [
+        "Rc<RefCell>",
+        "bidirectional"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "121",
+        "066"
+      ]
+    },
+    "123": {
+      "name": "Binary Tree",
+      "category": "Data Structures",
+      "difficulty": 4,
+      "skills": [
+        "recursive structure",
+        "traversal"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "062"
+      ]
+    },
+    "124": {
+      "name": "Binary Search Tree",
+      "category": "Data Structures",
+      "difficulty": 4,
+      "skills": [
+        "BST property",
+        "insert/search"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "123"
+      ]
+    },
+    "125": {
+      "name": "AVL Tree",
+      "category": "Data Structures",
+      "difficulty": 5,
+      "skills": [
+        "self-balancing",
+        "rotations"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "124"
+      ]
+    },
+    "126": {
+      "name": "Trie (Prefix Tree)",
+      "category": "Data Structures",
+      "difficulty": 4,
+      "skills": [
+        "string storage",
+        "prefix search"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "123",
+        "029"
+      ]
+    },
+    "127": {
+      "name": "Heap Data Structure",
+      "category": "Data Structures",
+      "difficulty": 4,
+      "skills": [
+        "priority queue",
+        "heapify"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "123"
+      ]
+    },
+    "128": {
+      "name": "Hash Table",
+      "category": "Data Structures",
+      "difficulty": 4,
+      "skills": [
+        "hashing",
+        "collision handling"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "030",
+        "126"
+      ]
+    },
+    "129": {
+      "name": "Stack Implementation",
+      "category": "Data Structures",
+      "difficulty": 3,
+      "skills": [
+        "LIFO",
+        "Vec operations"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "026"
+      ]
+    },
+    "130": {
+      "name": "Queue Implementation",
+      "category": "Data Structures",
+      "difficulty": 3,
+      "skills": [
+        "FIFO",
+        "VecDeque"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "026"
+      ]
+    },
+    "131": {
+      "name": "LRU Cache",
+      "category": "Data Structures",
+      "difficulty": 5,
+      "skills": [
+        "cache eviction",
+        "HashMap + LinkedList"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "122",
+        "128"
+      ]
+    },
+    "132": {
+      "name": "KMP Algorithm",
+      "category": "Strings",
+      "difficulty": 5,
+      "skills": [
+        "pattern matching",
+        "prefix function"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "118",
+        "107"
+      ]
+    },
+    "133": {
+      "name": "Rabin-Karp",
+      "category": "Strings",
+      "difficulty": 4,
+      "skills": [
+        "rolling hash",
+        "fingerprinting"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "128",
+        "107"
+      ]
+    },
+    "134": {
+      "name": "String Reversal",
+      "category": "Strings",
+      "difficulty": 2,
+      "skills": [
+        "chars iterator",
+        "collect"
+      ],
+      "time_estimate": "10 min",
+      "prerequisites": [
+        "029"
+      ]
+    },
+    "135": {
+      "name": "Palindrome Check",
+      "category": "Strings",
+      "difficulty": 2,
+      "skills": [
+        "two pointers",
+        "unicode aware"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "134"
+      ]
+    },
+    "136": {
+      "name": "Anagram Detection",
+      "category": "Strings",
+      "difficulty": 3,
+      "skills": [
+        "frequency counting",
+        "HashMap"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "135",
+        "030"
+      ]
+    },
+    "137": {
+      "name": "Longest Palindrome",
+      "category": "Strings",
+      "difficulty": 4,
+      "skills": [
+        "expand around center",
+        "manacher's algorithm"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "135"
+      ]
+    },
+    "138": {
+      "name": "Substring Search",
+      "category": "Strings",
+      "difficulty": 3,
+      "skills": [
+        "naive search",
+        "find methods"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "029"
+      ]
+    },
+    "139": {
+      "name": "String Tokenization",
+      "category": "Strings",
+      "difficulty": 2,
+      "skills": [
+        "split",
+        "whitespace handling"
+      ],
+      "time_estimate": "12 min",
+      "prerequisites": [
+        "029"
+      ]
+    },
+    "140": {
+      "name": "Base64 Encoding",
+      "category": "Encoding",
+      "difficulty": 3,
+      "skills": [
+        "binary encoding",
+        "bit manipulation"
+      ],
+      "time_estimate": "25 min",
+      "prerequisites": [
+        "028"
+      ]
+    },
+    "141": {
+      "name": "URL Encoding",
+      "category": "Encoding",
+      "difficulty": 3,
+      "skills": [
+        "percent-encoding",
+        "hex representation"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "029"
+      ]
+    },
+    "142": {
+      "name": "JSON Serializer",
+      "category": "Encoding",
+      "difficulty": 4,
+      "skills": [
+        "serialization",
+        "recursive types"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "062",
+        "046"
+      ]
+    },
+    "143": {
+      "name": "Bit Manipulation",
+      "category": "Low Level",
+      "difficulty": 3,
+      "skills": [
+        "bitwise ops",
+        "masks"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "003"
+      ]
+    },
+    "144": {
+      "name": "Byte Order",
+      "category": "Low Level",
+      "difficulty": 3,
+      "skills": [
+        "endianness",
+        "byte conversion"
+      ],
+      "time_estimate": "15 min",
+      "prerequisites": [
+        "143"
+      ]
+    },
+    "145": {
+      "name": "Memory Layout",
+      "category": "Low Level",
+      "difficulty": 4,
+      "skills": [
+        "size_of",
+        "alignment"
+      ],
+      "time_estimate": "20 min",
+      "prerequisites": [
+        "098",
+        "090"
+      ]
+    },
+    "146": {
+      "name": "Custom Allocator",
+      "category": "Low Level",
+      "difficulty": 5,
+      "skills": [
+        "GlobalAlloc",
+        "unsafe memory"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "145"
+      ]
+    },
+    "147": {
+      "name": "SIMD Operations",
+      "category": "Low Level",
+      "difficulty": 5,
+      "skills": [
+        "portable SIMD",
+        "vectorization"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "143"
+      ]
+    },
+    "148": {
+      "name": "Arena Allocator",
+      "category": "Low Level",
+      "difficulty": 4,
+      "skills": [
+        "bump allocation",
+        "region-based"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "145"
+      ]
+    },
+    "149": {
+      "name": "Ring Buffer",
+      "category": "Low Level",
+      "difficulty": 4,
+      "skills": [
+        "circular buffer",
+        "modular arithmetic"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "130",
+        "143"
+      ]
+    },
+    "150": {
+      "name": "Memory Pool",
+      "category": "Low Level",
+      "difficulty": 5,
+      "skills": [
+        "object pool",
+        "reuse strategy"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "146"
+      ]
+    }
+  },
+  "projects": {
+    "151": {
+      "name": "Calculator CLI",
+      "category": "CLI Tool",
+      "difficulty": 2,
+      "skills": [
+        "argument parsing",
+        "arithmetic ops"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "041",
+        "008"
+      ]
+    },
+    "152": {
+      "name": "Todo List App",
+      "category": "CLI Tool",
+      "difficulty": 3,
+      "skills": [
+        "file I/O",
+        "CRUD operations"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "030",
+        "077"
+      ]
+    },
+    "153": {
+      "name": "Temperature Converter",
+      "category": "CLI Tool",
+      "difficulty": 2,
+      "skills": [
+        "user input",
+        "formula conversion"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "008",
+        "010"
+      ]
+    },
+    "154": {
+      "name": "File Reader/Writer",
+      "category": "CLI Tool",
+      "difficulty": 2,
+      "skills": [
+        "fs module",
+        "error handling"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "039",
+        "077"
+      ]
+    },
+    "155": {
+      "name": "Guess the Number",
+      "category": "Game",
+      "difficulty": 2,
+      "skills": [
+        "random numbers",
+        "loops"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "013",
+        "010"
+      ]
+    },
+    "156": {
+      "name": "Word Counter",
+      "category": "CLI Tool",
+      "difficulty": 2,
+      "skills": [
+        "file reading",
+        "iterator patterns"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "058",
+        "154"
+      ]
+    },
+    "157": {
+      "name": "Fibonacci Generator",
+      "category": "Library",
+      "difficulty": 3,
+      "skills": [
+        "generators",
+        "Iterator trait"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "115",
+        "057"
+      ]
+    },
+    "158": {
+      "name": "Password Generator",
+      "category": "CLI Tool",
+      "difficulty": 3,
+      "skills": [
+        "random generation",
+        "character sets"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "155",
+        "058"
+      ]
+    },
+    "159": {
+      "name": "URL Shortener",
+      "category": "Web Service",
+      "difficulty": 4,
+      "skills": [
+        "hashing",
+        "in-memory storage"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "128",
+        "030"
+      ]
+    },
+    "160": {
+      "name": "JSON Parser",
+      "category": "Library",
+      "difficulty": 5,
+      "skills": [
+        "recursive descent",
+        "parsing"
+      ],
+      "time_estimate": "120 min",
+      "prerequisites": [
+        "033",
+        "123"
+      ]
+    },
+    "161": {
+      "name": "HTTP Client",
+      "category": "Network",
+      "difficulty": 4,
+      "skills": [
+        "HTTP requests",
+        "JSON handling"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "039",
+        "046"
+      ]
+    },
+    "162": {
+      "name": "Echo Web Server",
+      "category": "Web Service",
+      "difficulty": 4,
+      "skills": [
+        "TCP sockets",
+        "HTTP basics"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "068",
+        "077"
+      ]
+    },
+    "163": {
+      "name": "Chat Server",
+      "category": "Network",
+      "difficulty": 5,
+      "skills": [
+        "WebSockets",
+        "broadcasting"
+      ],
+      "time_estimate": "120 min",
+      "prerequisites": [
+        "070",
+        "162"
+      ]
+    },
+    "164": {
+      "name": "SQLite CRUD",
+      "category": "Database",
+      "difficulty": 4,
+      "skills": [
+        "SQL",
+        "rusqlite crate"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "030",
+        "152"
+      ]
+    },
+    "165": {
+      "name": "Thread Pool",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "worker threads",
+        "job queue"
+      ],
+      "time_estimate": "120 min",
+      "prerequisites": [
+        "071",
+        "129"
+      ]
+    },
+    "166": {
+      "name": "LRU Cache Library",
+      "category": "Library",
+      "difficulty": 5,
+      "skills": [
+        "cache algorithm",
+        "unsafe optional"
+      ],
+      "time_estimate": "150 min",
+      "prerequisites": [
+        "131",
+        "165"
+      ]
+    },
+    "167": {
+      "name": "Async Runtime",
+      "category": "Async",
+      "difficulty": 5,
+      "skills": [
+        "futures",
+        "Waker"
+      ],
+      "time_estimate": "180 min",
+      "prerequisites": [
+        "072",
+        "092"
+      ]
+    },
+    "168": {
+      "name": "Redis Protocol",
+      "category": "Network",
+      "difficulty": 5,
+      "skills": [
+        "RESP protocol",
+        "parsing"
+      ],
+      "time_estimate": "150 min",
+      "prerequisites": [
+        "160",
+        "162"
+      ]
+    },
+    "169": {
+      "name": "Maze Solver",
+      "category": "Algorithm",
+      "difficulty": 4,
+      "skills": [
+        "pathfinding",
+        "visualization"
+      ],
+      "time_estimate": "120 min",
+      "prerequisites": [
+        "112",
+        "109"
+      ]
+    },
+    "170": {
+      "name": "Mini Redis",
+      "category": "System",
+      "difficulty": 5,
+      "skills": [
+        "server architecture",
+        "commands"
+      ],
+      "time_estimate": "200 min",
+      "prerequisites": [
+        "168",
+        "166"
+      ]
+    }
+  },
+  "real_world": {
+    "171": {
+      "name": "Log Analyzer",
+      "category": "Systems Programming",
+      "difficulty": 3,
+      "skills": [
+        "file reading",
+        "pattern matching",
+        "streaming"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "154",
+        "058"
+      ]
+    },
+    "172": {
+      "name": "System Monitor",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "/proc filesystem",
+        "system calls",
+        "real-time data"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "171",
+        "068"
+      ]
+    },
+    "173": {
+      "name": "Directory Sync Tool",
+      "category": "Systems Programming",
+      "difficulty": 3,
+      "skills": [
+        "directory traversal",
+        "file comparison",
+        "hashing"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "154",
+        "136"
+      ]
+    },
+    "174": {
+      "name": "Environment Config Loader",
+      "category": "Systems Programming",
+      "difficulty": 3,
+      "skills": [
+        ".env files",
+        "environment variables",
+        "configuration"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "030",
+        "088"
+      ]
+    },
+    "175": {
+      "name": "Cron Expression Parser",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "parsing",
+        "time handling",
+        "scheduling"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "034",
+        "139"
+      ]
+    },
+    "176": {
+      "name": "Process Manager",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "process spawning",
+        "signals",
+        "daemon processes"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "068",
+        "085"
+      ]
+    },
+    "177": {
+      "name": "File Watcher",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "inotify/kqueue",
+        "events",
+        "hot reload"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "068",
+        "070"
+      ]
+    },
+    "178": {
+      "name": "Disk Usage Analyzer",
+      "category": "Systems Programming",
+      "difficulty": 3,
+      "skills": [
+        "recursive traversal",
+        "size calculation",
+        "tree display"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "154",
+        "058"
+      ]
+    },
+    "179": {
+      "name": "TOML Configuration Parser",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "recursive parsing",
+        "nested structures",
+        "Cargo.toml"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "033",
+        "123"
+      ]
+    },
+    "180": {
+      "name": "Build Script Generator",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "template engine",
+        "dependency resolution",
+        "file generation"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "028",
+        "031"
+      ]
+    },
+    "181": {
+      "name": "Parallel Grep",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "parallel processing",
+        " Rayon",
+        "text search"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "068",
+        "138"
+      ]
+    },
+    "182": {
+      "name": "Terminal UI Framework",
+      "category": "Systems Programming",
+      "difficulty": 5,
+      "skills": [
+        "crossterm",
+        "event handling",
+        "rendering loop"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "068",
+        "070"
+      ]
+    },
+    "183": {
+      "name": "SQLite CLI Client",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "REPL",
+        "SQL parsing",
+        "tabular display"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "164",
+        "013"
+      ]
+    },
+    "184": {
+      "name": "Compression Tool",
+      "category": "Systems Programming",
+      "difficulty": 5,
+      "skills": [
+        "LZ77",
+        "Huffman coding",
+        "bitwise I/O"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "143",
+        "154"
+      ]
+    },
+    "185": {
+      "name": "Package Manager Cache",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "content-addressable",
+        "deduplication",
+        "storage"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "128",
+        "173"
+      ]
+    },
+    "186": {
+      "name": "JSON Log Formatter",
+      "category": "Systems Programming",
+      "difficulty": 3,
+      "skills": [
+        "structured logging",
+        "jq-like queries",
+        "formatting"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "142",
+        "058"
+      ]
+    },
+    "187": {
+      "name": "Git Hook Manager",
+      "category": "Systems Programming",
+      "difficulty": 3,
+      "skills": [
+        "git hooks",
+        "subprocess",
+        "exit codes"
+      ],
+      "time_estimate": "30 min",
+      "prerequisites": [
+        "176",
+        "042"
+      ]
+    },
+    "188": {
+      "name": "TCP Port Scanner",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "async I/O",
+        "connection pooling",
+        "rate limiting"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "068",
+        "058"
+      ]
+    },
+    "189": {
+      "name": "Binary Patch Tool",
+      "category": "Systems Programming",
+      "difficulty": 5,
+      "skills": [
+        "binary I/O",
+        "diff algorithms",
+        "patch application"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "143",
+        "144"
+      ]
+    },
+    "190": {
+      "name": "Container Image Inspector",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "tar parsing",
+        "JSON layers",
+        "Docker/OCI"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "154",
+        "142"
+      ]
+    },
+    "191": {
+      "name": "Secure Password Hasher",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "Argon2",
+        "salting",
+        "key derivation"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "158",
+        "086"
+      ]
+    },
+    "192": {
+      "name": "Certificate Authority Tool",
+      "category": "Systems Programming",
+      "difficulty": 5,
+      "skills": [
+        "X.509",
+        "RSA/EC keys",
+        "PKI"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "191",
+        "046"
+      ]
+    },
+    "193": {
+      "name": "ELF Binary Parser",
+      "category": "Systems Programming",
+      "difficulty": 5,
+      "skills": [
+        "binary formats",
+        "memory layout",
+        "parsing"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "144",
+        "145"
+      ]
+    },
+    "194": {
+      "name": "Benchmark Harness",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "timing",
+        "statistics",
+        "reporting"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "068",
+        "079"
+      ]
+    },
+    "195": {
+      "name": "Memory Profiler",
+      "category": "Systems Programming",
+      "difficulty": 5,
+      "skills": [
+        "allocation tracking",
+        "stack traces",
+        "reporting"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "194",
+        "146"
+      ]
+    },
+    "196": {
+      "name": "Fuzzy Finder",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "fuzzy matching",
+        "scoring",
+        "real-time filtering"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "181",
+        "138"
+      ]
+    },
+    "197": {
+      "name": "Static Site Generator",
+      "category": "Systems Programming",
+      "difficulty": 4,
+      "skills": [
+        "Markdown",
+        "templates",
+        "file generation"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "173",
+        "028"
+      ]
+    },
+    "198": {
+      "name": "Code Linter",
+      "category": "Systems Programming",
+      "difficulty": 5,
+      "skills": [
+        "AST parsing",
+        "visitor pattern",
+        "diagnostics"
+      ],
+      "time_estimate": "80 min",
+      "prerequisites": [
+        "160",
+        "046"
+      ]
+    },
+    "199": {
+      "name": "Virtual Filesystem",
+      "category": "Systems Programming",
+      "difficulty": 5,
+      "skills": [
+        "in-memory storage",
+        "path resolution",
+        "FUSE"
+      ],
+      "time_estimate": "75 min",
+      "prerequisites": [
+        "190",
+        "128"
+      ]
+    },
+    "200": {
+      "name": "Container Runtime",
+      "category": "Systems Programming",
+      "difficulty": 5,
+      "skills": [
+        "Linux namespaces",
+        "cgroups",
+        "chroot"
+      ],
+      "time_estimate": "100 min",
+      "prerequisites": [
+        "190",
+        "176"
+      ]
+    },
+    "201": {
+      "name": "HTTP Router",
+      "category": "Web Development",
+      "difficulty": 3,
+      "skills": [
+        "routing",
+        "path matching",
+        "middleware"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "162",
+        "046"
+      ]
+    },
+    "202": {
+      "name": "REST API Server",
+      "category": "Web Development",
+      "difficulty": 4,
+      "skills": [
+        "JSON API",
+        "CRUD",
+        "state management"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "201",
+        "030"
+      ]
+    },
+    "203": {
+      "name": "JWT Authentication",
+      "category": "Web Development",
+      "difficulty": 4,
+      "skills": [
+        "JWT",
+        "HS256/RS256",
+        "auth middleware"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "202",
+        "191"
+      ]
+    },
+    "204": {
+      "name": "WebSocket Server",
+      "category": "Web Development",
+      "difficulty": 4,
+      "skills": [
+        "WebSocket protocol",
+        "frame parsing",
+        "broadcast"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "163",
+        "144"
+      ]
+    },
+    "205": {
+      "name": "Rate Limiter Middleware",
+      "category": "Web Development",
+      "difficulty": 4,
+      "skills": [
+        "token bucket",
+        "sliding window",
+        "Redis"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "202",
+        "131"
+      ]
+    },
+    "206": {
+      "name": "GraphQL Server",
+      "category": "Web Development",
+      "difficulty": 5,
+      "skills": [
+        "GraphQL schema",
+        "resolvers",
+        "introspection"
+      ],
+      "time_estimate": "80 min",
+      "prerequisites": [
+        "202",
+        "123"
+      ]
+    },
+    "207": {
+      "name": "HTTP Client with Retries",
+      "category": "Web Development",
+      "difficulty": 3,
+      "skills": [
+        "exponential backoff",
+        "circuit breaker",
+        "timeouts"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "161",
+        "040"
+      ]
+    },
+    "208": {
+      "name": "Reverse Proxy",
+      "category": "Web Development",
+      "difficulty": 4,
+      "skills": [
+        "request forwarding",
+        "load balancing",
+        "headers"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "162",
+        "058"
+      ]
+    },
+    "209": {
+      "name": "gRPC Server",
+      "category": "Web Development",
+      "difficulty": 5,
+      "skills": [
+        "Protocol Buffers",
+        "HTTP/2",
+        "streaming"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "206",
+        "144"
+      ]
+    },
+    "210": {
+      "name": "CORS Handler",
+      "category": "Web Development",
+      "difficulty": 3,
+      "skills": [
+        "CORS headers",
+        "preflight",
+        "origin validation"
+      ],
+      "time_estimate": "35 min",
+      "prerequisites": [
+        "201",
+        "058"
+      ]
+    },
+    "211": {
+      "name": "API Gateway",
+      "category": "Web Development",
+      "difficulty": 5,
+      "skills": [
+        "routing",
+        "aggregation",
+        "protocol translation"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "208",
+        "206"
+      ]
+    },
+    "212": {
+      "name": "OAuth2 Provider",
+      "category": "Web Development",
+      "difficulty": 5,
+      "skills": [
+        "OAuth2 flows",
+        "PKCE",
+        "token management"
+      ],
+      "time_estimate": "100 min",
+      "prerequisites": [
+        "203",
+        "192"
+      ]
+    },
+    "213": {
+      "name": "Webhook Receiver",
+      "category": "Web Development",
+      "difficulty": 3,
+      "skills": [
+        "HMAC verification",
+        "idempotency",
+        "queueing"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "202",
+        "191"
+      ]
+    },
+    "214": {
+      "name": "Server-Sent Events",
+      "category": "Web Development",
+      "difficulty": 4,
+      "skills": [
+        "SSE protocol",
+        "streaming",
+        "reconnection"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "204",
+        "070"
+      ]
+    },
+    "215": {
+      "name": "HTTP Cache Middleware",
+      "category": "Web Development",
+      "difficulty": 4,
+      "skills": [
+        "Cache-Control",
+        "ETags",
+        "conditional requests"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "202",
+        "185"
+      ]
+    },
+    "216": {
+      "name": "Load Balancer",
+      "category": "Web Development",
+      "difficulty": 5,
+      "skills": [
+        "health checks",
+        "sticky sessions",
+        "algorithms"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "208",
+        "188"
+      ]
+    },
+    "217": {
+      "name": "Request Validator",
+      "category": "Web Development",
+      "difficulty": 3,
+      "skills": [
+        "JSON Schema",
+        "validation",
+        "error messages"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "202",
+        "179"
+      ]
+    },
+    "218": {
+      "name": "API Versioning",
+      "category": "Web Development",
+      "difficulty": 4,
+      "skills": [
+        "URL versioning",
+        "header versioning",
+        "adapters"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "202",
+        "046"
+      ]
+    },
+    "219": {
+      "name": "OpenAPI Generator",
+      "category": "Web Development",
+      "difficulty": 4,
+      "skills": [
+        "OpenAPI/Swagger",
+        "codegen",
+        "documentation"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "202",
+        "179"
+      ]
+    },
+    "220": {
+      "name": "WebAssembly Bridge",
+      "category": "Web Development",
+      "difficulty": 5,
+      "skills": [
+        "WASM",
+        "wasm-bindgen",
+        "JS interop"
+      ],
+      "time_estimate": "80 min",
+      "prerequisites": [
+        "209",
+        "099"
+      ]
+    },
+    "221": {
+      "name": "TCP Echo Server Async",
+      "category": "Networking",
+      "difficulty": 4,
+      "skills": [
+        "Tokio",
+        "async/await",
+        "framing"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "162",
+        "167"
+      ]
+    },
+    "222": {
+      "name": "DNS Resolver",
+      "category": "Networking",
+      "difficulty": 4,
+      "skills": [
+        "DNS protocol",
+        "UDP sockets",
+        "caching"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "162",
+        "128"
+      ]
+    },
+    "223": {
+      "name": "TLS Termination",
+      "category": "Networking",
+      "difficulty": 5,
+      "skills": [
+        "rustls",
+        "certificate management",
+        "ALPN"
+      ],
+      "time_estimate": "75 min",
+      "prerequisites": [
+        "192",
+        "208"
+      ]
+    },
+    "224": {
+      "name": "HTTP/2 Server",
+      "category": "Networking",
+      "difficulty": 5,
+      "skills": [
+        "HTTP/2 frames",
+        "multiplexing",
+        "flow control"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "221",
+        "144"
+      ]
+    },
+    "225": {
+      "name": "Connection Pool",
+      "category": "Networking",
+      "difficulty": 4,
+      "skills": [
+        "pool management",
+        "idle timeout",
+        "max connections"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "207",
+        "131"
+      ]
+    },
+    "226": {
+      "name": "Network Packet Capture",
+      "category": "Networking",
+      "difficulty": 5,
+      "skills": [
+        "pcap",
+        "raw sockets",
+        "packet parsing"
+      ],
+      "time_estimate": "80 min",
+      "prerequisites": [
+        "188",
+        "144"
+      ]
+    },
+    "227": {
+      "name": "NAT Traversal",
+      "category": "Networking",
+      "difficulty": 5,
+      "skills": [
+        "STUN",
+        "hole punching",
+        "ICE"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "222",
+        "162"
+      ]
+    },
+    "228": {
+      "name": "MQTT Broker",
+      "category": "Networking",
+      "difficulty": 5,
+      "skills": [
+        "MQTT protocol",
+        "pub/sub",
+        "QoS levels"
+      ],
+      "time_estimate": "95 min",
+      "prerequisites": [
+        "204",
+        "128"
+      ]
+    },
+    "229": {
+      "name": "DHT Implementation",
+      "category": "Networking",
+      "difficulty": 5,
+      "skills": [
+        "Kademlia",
+        "distributed hash table",
+        "XOR metric"
+      ],
+      "time_estimate": "100 min",
+      "prerequisites": [
+        "228",
+        "128"
+      ]
+    },
+    "230": {
+      "name": "QUIC Protocol",
+      "category": "Networking",
+      "difficulty": 5,
+      "skills": [
+        "QUIC",
+        "UDP",
+        "0-RTT",
+        "multiplexing"
+      ],
+      "time_estimate": "120 min",
+      "prerequisites": [
+        "224",
+        "191"
+      ]
+    },
+    "231": {
+      "name": "CSV Parser",
+      "category": "Data Processing",
+      "difficulty": 3,
+      "skills": [
+        "streaming parser",
+        "escaping",
+        "headers"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "154",
+        "058"
+      ]
+    },
+    "232": {
+      "name": "JSON Streaming Parser",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "SAX-style parsing",
+        "tokenization",
+        "streaming"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "160",
+        "231"
+      ]
+    },
+    "233": {
+      "name": "SQL Query Builder",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "fluent API",
+        "type safety",
+        "SQL generation"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "046",
+        "028"
+      ]
+    },
+    "234": {
+      "name": "Excel Reader",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "XLSX format",
+        "ZIP parsing",
+        "XML parsing"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "154",
+        "190"
+      ]
+    },
+    "235": {
+      "name": "Data Migration Tool",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "ETL",
+        "schema mapping",
+        "batch processing"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "231",
+        "233"
+      ]
+    },
+    "236": {
+      "name": "Avro Serializer",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "Avro format",
+        "schema evolution",
+        "binary encoding"
+      ],
+      "time_estimate": "75 min",
+      "prerequisites": [
+        "232",
+        "144"
+      ]
+    },
+    "237": {
+      "name": "Parquet Reader",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "columnar storage",
+        "Thrift",
+        "compression"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "236",
+        "184"
+      ]
+    },
+    "238": {
+      "name": "Regex Engine",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "NFA/DFA",
+        "Thompson's construction",
+        "backtracking"
+      ],
+      "time_estimate": "100 min",
+      "prerequisites": [
+        "132",
+        "109"
+      ]
+    },
+    "239": {
+      "name": "Template Engine",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "parsing",
+        "AST",
+        "rendering"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "094",
+        "028"
+      ]
+    },
+    "240": {
+      "name": "YAML Parser",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "recursive parsing",
+        "anchors/aliases",
+        "multi-document"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "179",
+        "066"
+      ]
+    },
+    "241": {
+      "name": "Protocol Buffers Parser",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "proto files",
+        "code generation",
+        "binary format"
+      ],
+      "time_estimate": "95 min",
+      "prerequisites": [
+        "209",
+        "236"
+      ]
+    },
+    "242": {
+      "name": "Data Validator",
+      "category": "Data Processing",
+      "difficulty": 3,
+      "skills": [
+        "validation rules",
+        "derive macros",
+        "error collection"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "217",
+        "095"
+      ]
+    },
+    "243": {
+      "name": "Diff Tool",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "Myers diff",
+        "LCS",
+        "unified format"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "118",
+        "154"
+      ]
+    },
+    "244": {
+      "name": "Pagination Cursor",
+      "category": "Data Processing",
+      "difficulty": 3,
+      "skills": [
+        "cursor pagination",
+        "encoding",
+        "stable sorting"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "140",
+        "058"
+      ]
+    },
+    "245": {
+      "name": "Full-Text Search",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "inverted index",
+        "tokenization",
+        "ranking"
+      ],
+      "time_estimate": "80 min",
+      "prerequisites": [
+        "238",
+        "128"
+      ]
+    },
+    "246": {
+      "name": "Time Series Database",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "compression",
+        "aggregation",
+        "retention"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "237",
+        "149"
+      ]
+    },
+    "247": {
+      "name": "GeoJSON Parser",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "spatial data",
+        "GeoJSON",
+        "coordinate systems"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "232",
+        "046"
+      ]
+    },
+    "248": {
+      "name": "Data Anonymizer",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "PII detection",
+        "hashing",
+        "k-anonymity"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "242",
+        "191"
+      ]
+    },
+    "249": {
+      "name": "Bloom Filter",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "probabilistic structures",
+        "hash functions",
+        "false positives"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "128",
+        "143"
+      ]
+    },
+    "250": {
+      "name": "HyperLogLog",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "cardinality estimation",
+        "probabilistic",
+        "mergeable"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "249",
+        "144"
+      ]
+    },
+    "251": {
+      "name": "Data Pipeline DAG",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "directed acyclic graph",
+        "topological sort",
+        "execution"
+      ],
+      "time_estimate": "75 min",
+      "prerequisites": [
+        "113",
+        "235"
+      ]
+    },
+    "252": {
+      "name": "Windowed Aggregations",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "tumbling windows",
+        "sliding windows",
+        "session windows"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "246",
+        "131"
+      ]
+    },
+    "253": {
+      "name": "Change Data Capture",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "CDC",
+        "WAL parsing",
+        "event sourcing"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "164",
+        "251"
+      ]
+    },
+    "254": {
+      "name": "Graph Database",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "property graphs",
+        "Cypher queries",
+        "traversal"
+      ],
+      "time_estimate": "95 min",
+      "prerequisites": [
+        "245",
+        "113"
+      ]
+    },
+    "255": {
+      "name": "Real-time Aggregator",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "streaming",
+        "approximation",
+        "sliding windows"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "252",
+        "250"
+      ]
+    },
+    "256": {
+      "name": "Schema Registry",
+      "category": "Data Processing",
+      "difficulty": 4,
+      "skills": [
+        "Avro/Protobuf",
+        "compatibility",
+        "versioning"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "236",
+        "218"
+      ]
+    },
+    "257": {
+      "name": "Data Lineage Tracker",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "provenance",
+        "graph tracking",
+        "impact analysis"
+      ],
+      "time_estimate": "80 min",
+      "prerequisites": [
+        "254",
+        "251"
+      ]
+    },
+    "258": {
+      "name": "Incremental View Maintenance",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "materialized views",
+        "delta computation",
+        "differential"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "252",
+        "243"
+      ]
+    },
+    "259": {
+      "name": "Conflict-Free Replicated Data Type",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "CRDTs",
+        "eventual consistency",
+        "merge semantics"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "258",
+        "251"
+      ]
+    },
+    "260": {
+      "name": "Stream Join Engine",
+      "category": "Data Processing",
+      "difficulty": 5,
+      "skills": [
+        "stream joins",
+        "event time",
+        "watermarks"
+      ],
+      "time_estimate": "95 min",
+      "prerequisites": [
+        "252",
+        "254"
+      ]
+    },
+    "261": {
+      "name": "Async HTTP Client",
+      "category": "Async",
+      "difficulty": 4,
+      "skills": [
+        "hyper",
+        "request pooling",
+        "backpressure"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "207",
+        "221"
+      ]
+    },
+    "262": {
+      "name": "Actor Framework",
+      "category": "Async",
+      "difficulty": 5,
+      "skills": [
+        "Actor model",
+        "message passing",
+        "supervision"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "070",
+        "167"
+      ]
+    },
+    "263": {
+      "name": "Async Channel with Backpressure",
+      "category": "Async",
+      "difficulty": 4,
+      "skills": [
+        "bounded channels",
+        "Waker",
+        "Semaphore"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "070",
+        "167"
+      ]
+    },
+    "264": {
+      "name": "Select! Macro",
+      "category": "Async",
+      "difficulty": 4,
+      "skills": [
+        "Future::poll",
+        "biased/unbiased",
+        "cancellation"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "263",
+        "167"
+      ]
+    },
+    "265": {
+      "name": "Async Mutex and RwLock",
+      "category": "Async",
+      "difficulty": 4,
+      "skills": [
+        "async locks",
+        "fairness",
+        "deadlock prevention"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "263",
+        "071"
+      ]
+    },
+    "266": {
+      "name": "Timeout and Deadline",
+      "category": "Async",
+      "difficulty": 3,
+      "skills": [
+        "Sleep",
+        "timeout",
+        "deadline propagation"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "264",
+        "167"
+      ]
+    },
+    "267": {
+      "name": "Stream Processing",
+      "category": "Async",
+      "difficulty": 4,
+      "skills": [
+        "Stream trait",
+        "StreamExt",
+        "buffered/concurrent"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "264",
+        "057"
+      ]
+    },
+    "268": {
+      "name": "Async Trait Methods",
+      "category": "Async",
+      "difficulty": 4,
+      "skills": [
+        "RPITIT",
+        "async-trait",
+        "object safety"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "046",
+        "261"
+      ]
+    },
+    "269": {
+      "name": "IO Uring Interface",
+      "category": "Async",
+      "difficulty": 5,
+      "skills": [
+        "io_uring",
+        "Linux async I/O",
+        "submission/completion"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "263",
+        "167"
+      ]
+    },
+    "270": {
+      "name": "Coroutine Scheduler",
+      "category": "Async",
+      "difficulty": 5,
+      "skills": [
+        "green threads",
+        "M:N scheduling",
+        "work stealing"
+      ],
+      "time_estimate": "100 min",
+      "prerequisites": [
+        "262",
+        "269"
+      ]
+    },
+    "271": {
+      "name": "Lock-Free Queue",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "CAS operations",
+        "ABA problem",
+        "memory ordering"
+      ],
+      "time_estimate": "80 min",
+      "prerequisites": [
+        "263",
+        "098"
+      ]
+    },
+    "272": {
+      "name": "Read-Copy-Update",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "RCU",
+        "grace periods",
+        "read-mostly"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "271",
+        "054"
+      ]
+    },
+    "273": {
+      "name": "Structured Concurrency",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "nurseries",
+        "task scopes",
+        "cancellation trees"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "262",
+        "266"
+      ]
+    },
+    "274": {
+      "name": "Pipeline Parallelism",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "channels",
+        "stage parallelism",
+        "backpressure"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "070",
+        "058"
+      ]
+    },
+    "275": {
+      "name": "Fork-Join Pool",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "work stealing",
+        "task splitting",
+        "join"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "068",
+        "165"
+      ]
+    },
+    "276": {
+      "name": "Barrier Synchronization",
+      "category": "Concurrency",
+      "difficulty": 3,
+      "skills": [
+        "CyclicBarrier",
+        "phase coordination",
+        "reset"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "071",
+        "068"
+      ]
+    },
+    "277": {
+      "name": "Semaphore and CountdownLatch",
+      "category": "Concurrency",
+      "difficulty": 3,
+      "skills": [
+        "permits",
+        "resource limiting",
+        "coordination"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "071",
+        "276"
+      ]
+    },
+    "278": {
+      "name": "Exchanger",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "two-party exchange",
+        "slot matching",
+        "timeouts"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "277",
+        "068"
+      ]
+    },
+    "279": {
+      "name": "StampedLock Optimistic",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "optimistic reads",
+        "stamps",
+        "upgrade"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "265",
+        "071"
+      ]
+    },
+    "280": {
+      "name": "Transactional Memory",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "STM",
+        "atomic blocks",
+        "retry/orElse"
+      ],
+      "time_estimate": "95 min",
+      "prerequisites": [
+        "271",
+        "066"
+      ]
+    },
+    "281": {
+      "name": "Disruptor Pattern",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "ring buffer",
+        "event sourcing",
+        "wait strategies"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "271",
+        "149"
+      ]
+    },
+    "282": {
+      "name": "Cache-Coherent State Machine",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "state replication",
+        "event log",
+        "snapshotting"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "272",
+        "281"
+      ]
+    },
+    "283": {
+      "name": "Reactive Streams",
+      "category": "Async",
+      "difficulty": 5,
+      "skills": [
+        "Publisher/Subscriber",
+        "backpressure",
+        "dynamic push/pull"
+      ],
+      "time_estimate": "80 min",
+      "prerequisites": [
+        "267",
+        "263"
+      ]
+    },
+    "284": {
+      "name": "Async FS with io_uring",
+      "category": "Async",
+      "difficulty": 5,
+      "skills": [
+        "async fs",
+        "direct I/O",
+        "buffer pool"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "269",
+        "154"
+      ]
+    },
+    "285": {
+      "name": "Priority Executor",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "priority queue",
+        "thread pool",
+        "preemption"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "165",
+        "127"
+      ]
+    },
+    "286": {
+      "name": "Delay Queue",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "timing wheel",
+        "delayed execution",
+        "efficiency"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "175",
+        "130"
+      ]
+    },
+    "287": {
+      "name": "Sharded Counter",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "sharding",
+        "false sharing",
+        "aggregation"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "271",
+        "143"
+      ]
+    },
+    "288": {
+      "name": "Event Sourcing Journal",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "append-only log",
+        "event ordering",
+        "snapshots"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "281",
+        "282"
+      ]
+    },
+    "289": {
+      "name": "Parallel Matrix Multiply",
+      "category": "Concurrency",
+      "difficulty": 4,
+      "skills": [
+        "parallel algorithms",
+        "cache optimization",
+        "tiling"
+      ],
+      "time_estimate": "70 min",
+      "prerequisites": [
+        "275",
+        "147"
+      ]
+    },
+    "290": {
+      "name": "Distributed Lock",
+      "category": "Concurrency",
+      "difficulty": 5,
+      "skills": [
+        "Redlock",
+        "fencing tokens",
+        "clock skew"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "279",
+        "227"
+      ]
+    },
+    "291": {
+      "name": "Structured Logger",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "tracing",
+        "log levels",
+        "context propagation"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "186",
+        "046"
+      ]
+    },
+    "292": {
+      "name": "Metrics Collection",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "counters/gauges/histograms",
+        "prometheus",
+        "aggregation"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "291",
+        "287"
+      ]
+    },
+    "293": {
+      "name": "Health Check Endpoint",
+      "category": "Production",
+      "difficulty": 3,
+      "skills": [
+        "deep health",
+        "dependencies",
+        "graceful degradation"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "202",
+        "291"
+      ]
+    },
+    "294": {
+      "name": "Graceful Shutdown",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "signal handling",
+        "drain",
+        "cleanup"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        [
+          "176",
+          "266"
+        ]
+      ]
+    },
+    "295": {
+      "name": "Circuit Breaker",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "failure detection",
+        "half-open state",
+        "recovery"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "207",
+        "276"
+      ]
+    },
+    "296": {
+      "name": "Bulkhead Isolation",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "resource isolation",
+        "thread pools",
+        "rejection"
+      ],
+      "time_estimate": "50 min",
+      "prerequisites": [
+        "295",
+        "285"
+      ]
+    },
+    "297": {
+      "name": "Feature Flags",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "dynamic config",
+        "targeting rules",
+        "gradual rollout"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "174",
+        "242"
+      ]
+    },
+    "298": {
+      "name": "Configuration Hot-Reload",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "file watching",
+        "atomic updates",
+        "validation"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "177",
+        "174"
+      ]
+    },
+    "299": {
+      "name": "Secret Manager",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "encryption at rest",
+        "key rotation",
+        "audit logging"
+      ],
+      "time_estimate": "75 min",
+      "prerequisites": [
+        "191",
+        "298"
+      ]
+    },
+    "300": {
+      "name": "Request ID Propagation",
+      "category": "Production",
+      "difficulty": 3,
+      "skills": [
+        "distributed tracing",
+        "context",
+        "headers"
+      ],
+      "time_estimate": "40 min",
+      "prerequisites": [
+        "291",
+        "210"
+      ]
+    },
+    "301": {
+      "name": "Profanity Filter",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "Aho-Corasick",
+        "text normalization",
+        "unicode"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "238",
+        "196"
+      ]
+    },
+    "302": {
+      "name": "API Throttling",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "token bucket",
+        "leaky bucket",
+        "distributed"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "205",
+        "277"
+      ]
+    },
+    "303": {
+      "name": "Content Security Policy",
+      "category": "Production",
+      "difficulty": 3,
+      "skills": [
+        "CSP headers",
+        "nonce generation",
+        "violation reporting"
+      ],
+      "time_estimate": "45 min",
+      "prerequisites": [
+        "210",
+        "158"
+      ]
+    },
+    "304": {
+      "name": "SQL Injection Sanitizer",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "query parsing",
+        "parameterization",
+        "whitelist"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "233",
+        "301"
+      ]
+    },
+    "305": {
+      "name": "Memory Safety Auditor",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "unsafe audit",
+        "MIRI",
+        "pointer analysis"
+      ],
+      "time_estimate": "80 min",
+      "prerequisites": [
+        "195",
+        "098"
+      ]
+    },
+    "306": {
+      "name": "Cross-Compilation Toolchain",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "target triples",
+        "linker configuration",
+        "CI integration"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "097",
+        "180"
+      ]
+    },
+    "307": {
+      "name": "Docker Image Optimizer",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "multi-stage builds",
+        "layer caching",
+        "image analysis"
+      ],
+      "time_estimate": "60 min",
+      "prerequisites": [
+        "190",
+        "178"
+      ]
+    },
+    "308": {
+      "name": "Test Flake Detector",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "statistical analysis",
+        "test running",
+        "reporting"
+      ],
+      "time_estimate": "55 min",
+      "prerequisites": [
+        "194",
+        "082"
+      ]
+    },
+    "309": {
+      "name": "Chaos Engineering Tool",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "failure injection",
+        "network partitions",
+        "monkey patching"
+      ],
+      "time_estimate": "85 min",
+      "prerequisites": [
+        "308",
+        "295"
+      ]
+    },
+    "310": {
+      "name": "Zero-Downtime Deployment",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "blue-green",
+        "health checks",
+        "traffic shifting"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "293",
+        "294"
+      ]
+    },
+    "311": {
+      "name": "WASM Plugin System",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "WASM runtime",
+        "sandboxing",
+        "plugin API"
+      ],
+      "time_estimate": "95 min",
+      "prerequisites": [
+        "220",
+        "200"
+      ]
+    },
+    "312": {
+      "name": "gRPC Reflection",
+      "category": "Production",
+      "difficulty": 4,
+      "skills": [
+        "service discovery",
+        "schema introspection",
+        "dynamic"
+      ],
+      "time_estimate": "65 min",
+      "prerequisites": [
+        "209",
+        "219"
+      ]
+    },
+    "313": {
+      "name": "S3-Compatible Storage",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "S3 API",
+        "multipart uploads",
+        "signed URLs"
+      ],
+      "time_estimate": "100 min",
+      "prerequisites": [
+        "202",
+        "237"
+      ]
+    },
+    "314": {
+      "name": "Kubernetes Operator",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "CRDs",
+        "reconciliation loop",
+        "finalizers"
+      ],
+      "time_estimate": "110 min",
+      "prerequisites": [
+        "175",
+        "282"
+      ]
+    },
+    "315": {
+      "name": "LLVM IR Generator",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "LLVM IR",
+        "code generation",
+        "optimization"
+      ],
+      "time_estimate": "120 min",
+      "prerequisites": [
+        "198",
+        "241"
+      ]
+    },
+    "316": {
+      "name": "Embedded HAL Driver",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "no_std",
+        "embedded-hal",
+        "register access"
+      ],
+      "time_estimate": "100 min",
+      "prerequisites": [
+        "098",
+        "145"
+      ]
+    },
+    "317": {
+      "name": "Real-Time Scheduler",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "EDF",
+        "rate-monotonic",
+        "priority inversion"
+      ],
+      "time_estimate": "95 min",
+      "prerequisites": [
+        "285",
+        "175"
+      ]
+    },
+    "318": {
+      "name": "Formal Verification Helper",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "Kani",
+        "model checking",
+        "safety proofs"
+      ],
+      "time_estimate": "90 min",
+      "prerequisites": [
+        "305",
+        "280"
+      ]
+    },
+    "319": {
+      "name": "Distributed Consensus",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "Raft",
+        "leader election",
+        "log replication"
+      ],
+      "time_estimate": "120 min",
+      "prerequisites": [
+        "282",
+        "290"
+      ]
+    },
+    "320": {
+      "name": "Database Storage Engine",
+      "category": "Production",
+      "difficulty": 5,
+      "skills": [
+        "LSM-tree",
+        "WAL",
+        "MVCC"
+      ],
+      "time_estimate": "150 min",
+      "prerequisites": [
+        "319",
+        "237"
+      ]
+    }
+  }
+}

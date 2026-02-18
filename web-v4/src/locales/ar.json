@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "exercises": "التمارين",
+    "rustBook": "كتاب Rust",
+    "events": "الفعاليات",
+    "leaderboard": "لوحة المتصدرين",
+    "achievements": "الإنجازات",
+    "documentation": "التوثيق",
+    "settings": "الإعدادات",
+    "profile": "الملف الشخصي"
+  },
+  "home": {
+    "hero": {
+      "badge": "أتقن Rust من خلال التدريب",
+      "title": "تعلم",
+      "titleHighlight": "برمجة Rust",
+      "subtitle": "الطريقة الصحيحة",
+      "description": "تمارين تفاعلية، وردود فعل فورية، وتجربة تعلم ممتعة مصممة للمطورين الحديثين. ابدأ رحلتك مع Rust اليوم.",
+      "startLearning": "ابدأ التعلم",
+      "createAccount": "إنشاء حساب"
+    },
+    "features": {
+      "exercises": {
+        "title": "300+ تمرين",
+        "description": "من الأساسيات إلى الأنماط المتقدمة"
+      },
+      "feedback": {
+        "title": "ردود فعل فورية",
+        "description": "شغل واختبر كودك على الفور"
+      },
+      "streak": {
+        "title": "نظام التتابع",
+        "description": "ابنِ الاستمرارية مع الأهداف اليومية"
+      },
+      "achievements": {
+        "title": "الإنجازات",
+        "description": "افتح الشارات مع تقدمك"
+      }
+    },
+    "editor": {
+      "title": "محرر الكود التفاعلي",
+      "description": "اكتب كود Rust مباشرة في متصفحك مع محرر Monaco. تجميع فوري، رسائل خطأ واضحة، وتنفيذ سلس.",
+      "features": [
+        "تمييز بناء الجملة لـ Rust",
+        "الإكمال التلقائي والتلميحات",
+        "اكتشاف الأخطاء في الوقت الفعلي",
+        "تشغيل الكود بنقرة واحدة"
+      ],
+      "tryExercise": "جرب التمرين 1"
+    },
+    "whyRust": {
+      "title": "لماذا تتعلم Rust؟",
+      "description": "Rust هي لغة البرمجة الأكثر حباً، تجمع بين أداء C++ وأمان الذاكرة وتجربة المطور الحديثة.",
+      "features": [
+        {
+          "title": "أمان الذاكرة",
+          "description": "لا أخطاء تجزئة، مضمونة من قبل المترجم"
+        },
+        {
+          "title": "أداء عالي",
+          "description": "مقارنة بـ C و C++"
+        },
+        {
+          "title": "أدوات حديثة",
+          "description": "Cargo و crates.io وأكثر"
+        }
+      ]
+    },
+    "cta": {
+      "title": "هل أنت مستعد لبدء رحلتك؟",
+      "description": "انضم إلى آلاف المطورين الذين يتعلمون Rust بالطريقة الصحيحة.",
+      "button": "ابدأ التعلم مجاناً"
+    }
+  },
+  "exercises": {
+    "title": "التمارين",
+    "subtitle": "تمرين متاح",
+    "completed": "مكتمل",
+    "difficulty": {
+      "beginner": "مبتدئ",
+      "easy": "سهل",
+      "medium": "متوسط",
+      "hard": "صعب",
+      "expert": "خبير"
+    },
+    "status": {
+      "completed": "مكتمل",
+      "inProgress": "قيد التنفيذ",
+      "notStarted": "لم يبدأ"
+    },
+    "filters": {
+      "search": "البحث في التمارين...",
+      "difficulty": "الصعوبة",
+      "category": "الفئة",
+      "all": "الكل"
+    }
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "retry": "إعادة المحاولة",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "create": "إنشاء",
+    "submit": "إرسال",
+    "run": "تشغيل",
+    "reset": "إعادة تعيين",
+    "next": "التالي",
+    "previous": "السابق",
+    "continue": "متابعة",
+    "back": "رجوع",
+    "close": "إغلاق",
+    "open": "فتح",
+    "success": "نجاح",
+    "warning": "تحذير",
+    "info": "معلومات"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "التسجيل",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "username": "اسم المستخدم",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟"
+  },
+  "gamification": {
+    "xp": "نقاط الخبرة",
+    "level": "المستوى",
+    "streak": "التتابع",
+    "streakDays": "أيام التتابع",
+    "focusSessions": "جلسات التركيز"
+  }
+}
